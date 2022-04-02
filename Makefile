@@ -1,4 +1,4 @@
-BASE=main
+BASE=10-main
 
 default: all clean
 

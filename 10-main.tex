@@ -1,0 +1,117 @@
+
+\documentclass{LU}
+
+\title{Digitālās aparatūras projektēšanas tiešsaistes platforma}	   
+\thesistype{Bakalaura darbs}
+\author{Krišjānis Veinbahs}
+\studentid{kv18042}
+\supervisor{prof., Dr. Dat. Leo Seļāvo}
+\university{Latvijas Universitāte}
+\faculty{Datorikas Fakultāte}
+\location{Rīga}
+
+
+% apzīmējumu saraksts
+\input{20-apzimejumi}
+
+\begin{document}
+
+\maketitle
+
+\renewcommand{\abstractname}{}
+\begin{abstract}
+    \begin{center}
+    \Large\textbf{ANOTĀCIJA}\\
+    \end{center}
+    \vspace{1.5\baselineskip}
+
+    Darba mērķis ir izstrādāt un analizēt tiešsaistes platformu digitālās aparatūras attīstītājrīku
+    attālinātai pārvaldībai, programmaparatūras jeb projektējumu glabāšanai un šīs programmaparatūras testēšanai
+    platformā pieejamajos attīstītājrīkos.
+
+    Darbā tiek apskatīta platformas darbības mehānismu modelēšana, sarežģījumi šādas
+    platformas izstrādē, izmantotie risinājumi un to arhitektūra.
+
+    Precīzāk, darbā tiek apskatīta vāja reāllaika attālinātas mijiedarbības
+    realizācija starp platformas lietotājiem un digitālo aparatūru, tai skaitā attālināta
+    noprogrammēšana, testēšana un izmantošana. Tiek apskatītas, analizētas un
+    izstrādātas arī dažādas papildus funkcionalitātes, kas uzlabo šo platformas pieredzi.
+
+    \textbf{Atslēgas vārdi}: FPGA, UART, reāllaiks, notikumu sistēma, aktieru modelis.
+\end{abstract}
+ 
+
+\selectlanguage{english}
+\renewcommand{\abstractname}{}
+\begin{abstract}
+    \begin{center}
+    \Large\textbf{ABSTRACT}\\
+    \Large\text{AN ONLINE PLATFORM FOR HARDWARE}\\
+    \Large\text{DESIGN, ENGINEERING AND TESTING}\\
+    \end{center}
+    \vspace{1.5\baselineskip}
+
+    This work contains details regarding the development and analysis of an online platform for
+    managing digital hardware development boards and for managing and testing prototype firmware on these boards.
+
+    Also this work encompasses process modelling of such a platform, complications encountered in development and
+    the solutions and architecture for solving these complications.  
+
+    More specifically this work describes a soft realtime system for remote interaction between platform users and 
+    available digital hardware development boards i.e. board programming, prototype firmware testing and information exchange.
+    In addition some extra features for better user experience in the platform are implemented and described.  
+
+    \textbf{Keywords}: FPGA, UART, realtime, event system, actor model.
+\end{abstract}
+\selectlanguage{latvian}
+
+\pagenumbering{gobble} 
+
+\tableofcontents
+
+%------------------------------------------------APZĪMĒJUMI---------------------------------------------------------
+
+\printglossary[type=main,title={APZĪMĒJUMU SARAKSTS},toctitle={Apzīmējumu saraksts}]
+
+\pagenumbering{arabic} % sākam numurēt lapas no apzīmējumu saraksta (3. pielikums iekš LU 03.02.2012, 1/38 ) 
+
+\chapter*{Ievads} % * nepieliks numuru pie nosaukuma
+\addcontentsline{toc}{chapter}{Ievads}
+\pagestyle{plain}
+\input{30-ievads}
+
+%------------------------------------------------DARBS--------------------------------------------------------------
+
+\chapter{Teorija}
+\input{40-teorija}
+
+\chapter{Praktiskā daļa}
+\input{50-risinajums}
+
+%----------------------------------------------SECINĀJUMI----------------------------------------------------------
+
+\chapter*{Secinājumi}
+\addcontentsline{toc}{chapter}{Secinājumi}
+\input{60-secinajumi}
+
+%---------------------------------------------LIETERATŪRA----------------------------------------------------------
+\renewcommand{\bibname}{Izmantotā literatūra un avoti}
+\bibliographystyle{abbrv}
+\bibliography{70-main}
+\addcontentsline{toc}{chapter}{Izmantotā literatūra un avoti}
+
+
+%----------------------------------------------PIELIKUMS----------------------------------------------------------
+
+\begin{appendices}
+\chapter*{Pielikums}
+\input{80-pielikums}
+\end{appendices}
+
+%---------------------------------------------REĢISTRĀCIJAS LAPA (TODO)-------------------------------------------
+
+\chapter*{Reģistrācijas lapa}
+\input{90-registracijaslapa}
+
+
+\end{document}
