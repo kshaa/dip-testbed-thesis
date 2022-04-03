@@ -1,17 +1,128 @@
-\section{Motivācija}	
-Motivācija risinājumam?
+\section{Motivācija}
+Kādēļ es taisīju to, ko es taisīju?  
 
-\section{Analīze}
+Kā tas ir labāk par to, kas eksistē tagad?  
+
+\section{Risinājums}
+
+Ko tad es īsti uztaisīju - lielos un mazos vilcienos?
+  
+No kādām detaļām sastāv mans risinājums?
+
+Šeit mēs aprakstam pāris rindkopās to, kamā mēs izpletīsimies nākamajās nodaļās
+
+Aptuvena ideja: Es uztaisīju aktieru modelī balstītu sistēmu, kas nodrošina centralizētu klientu un aģentu pārvaldību
+ar pieņēmumu, ka gan klienti, gan aģenti jebkurā brīdī varētu atslēgties no sistēmas. Aktieru modelis nosaka, ka sistēma
+ir arī notikumu sistēma, tātad visas izmaiņas sistēmā tiek padotas apkārt izmantojot ziņas jeb vēstules. Notikumu sistēma
+nozīmē, ka ir ļoti viegli klientu un aģentu darbībai paralēli arī žurnalēt to stāvokli piem. datubāzē. Papildus šeit jāpiemin
+kādi tad ir tie aktieri, kas tiek izmantoti šajā sistēmā. 
+
+Jāpiemin, ko tad tā sistēma īsti nodrošina - ar Scala Play Framework un HTTP REST un Twirl un Slick tā nodrošina biznesa datu CRUD pārvaldību un
+basic auth autentifikāciju, savukārt, ar Scala Play Framework un WebSocket un JSON un aktieriem tā nodrošina vāja reāllaika starpkomunikāciju.  
+
+Vēl jāpiemin, kāda jēga no šīs CRUD pārvaldības, autentifikācijas un vāja reāllaika komunikāciju. CRUD mums ļauj pārvaldīt lietotājus, dzelžus,
+programmaparatūru. Vājā reāllaika komunikācija ļauj augšupielādēt mums programmatūru dzelžos, tad sūtīt un saņemt informāciju starp klientu un dzelzi, 
+kurā darbinās programmaparatūra, tātad ļauj mums mijiedarboties ar dzelzi. Autentifikācija ļauj pārvaldīt piekļuvi CRUD datiem un
+komunikācijai ar dzelžiem.
+
+Vēl vajadzētu pieminēt, neskaitot iepriekšminētās salīdzinoši tehniskās detaļas, kā šī sistēma atrisina biznesa problēmu jeb izstrādes procesa
+digitalizāciju. Kā ar šo sistēmu var iesūtīt programmaparatūru, dabūt to dzelzī, mijiedarboties ar programmaparatūru, kas darbinās dzelzī, izmantojot
+"virtuālās saskarnes".  
+
+\subsection{DIP platforma}
+
+Šeit varbūt varētu pārkopēt "Piedāvātais risinājums" saturu, lai būtu viena skaidra, īsa, kodolīga sekcija par platformu. 
+
+\subsection{Komunikācijas protokoli}
+
+1. HTTP REST - Biznesa entītiju pārvaldība centrālajā serverī
+2. HTTP WebSocket - Vāja reāllaika komunikācija starp centrālo serveri un klientiem/aģentiem
+3. Akka - Centrālā servera aktieru vāja reāllaika komunikācija
+4. Basic auth un session cookies - autentifikācija iepriekšminētajiem (var pieminēt, var nepieminēt)
+5. USB serial - Izmantots komunikācijai starp aģentu un dzelzi
+
+\subsection{Notikumu sistēmas algoritma realizācija}
+
+Notikumu dzinējs ar blakusefektiem - notikumu sistēmas realizācija gan klientā, gan aģentā, gan serverī.
+
 Actor model (every actor defines its inputs)
+
 Message passing.
+
 Event engines.
+
 Event sourcing.
+
 Purity and side-effects.
-Docker cross-platform w/ buildx i.e. buildkit
-CICD deployment procesi
-OGG video streaming
-Waveform recordings
-WASM testing
-Board management w/ Ansible
+
+\subsection{Aģenti un klienti un to starpkomunikācija}
+
+Kā strādā aģenti, kā tie klausās komandas no platformas, kā tie veic programmēšanu,
+kā tie uztur virtuālās saskarnes komunikācijas?
+
+Kā strādā klienti? Kā tie sūta CRUD izmaiņas? Kā tie sūta aģentiem komandas? Kā tie
+komunicē ar aģentu programmaparatūru izmantojot seriālo portu.
+
 UART, Virtual Interfaces (webcam, serial connection)
-Improvements using Scala.js and Scala Native (client, agent, web)
+
+\subsection{Virtuālā saskarne "tīmekļkamera"}
+
+Visi veidi kā es mēģināju realizēt tīmekļkameras virtuālo saskarni.
+
+Cik labi tas strādā?
+
+Kā to varētu izdarīt vēl labāk?
+
+Īsumā - OGG video streaming
+
+\subsection{Virtuālās saskarnes "hexbytes" un "buttonleds"}
+
+Apraksts dažādu veidu 1-pret-1 baitu ziņapmaiņas virtuālajām saskarnēm.
+
+Ko ar tām var panākt?
+
+Ko ar tām nevar panākt?
+
+\subsection{Virtuālā saskarne "MinOS"}
+
+Apraksts chunk-to-chunk jeb uz seriālā porta paketēm balstītu ziņapmaiņas saskarni.
+
+Pielikums teksts: Protokola sintakse https://github.com/kshaa/dip-testbed-dist/blob/master/prototypes/06-anvyl-min-os/syntax.bnf  
+
+Pielikums attēls: TUI saskarne https://github.com/kshaa/dip-testbed-dist/blob/master/docs/assets/UHuU1Ur8e0CgoTmsm5khLuOJH.png
+
+Pielikums attēls: 
+
+Ko ar šo saskarni var panākt?
+
+Ko ar šo saskarni nevar panākt?
+
+\subsection{Infrastruktūras pārvaldība}
+
+Kā laboratorijas īpašnieki pieslēdz savus dzelžus platformai?
+
+Kā klienti pieslēdzas sistēmai un gūst iespēju izmantot dzelžus?
+
+Kā izstrādātājs jeb darba autors jeb es automatizē versionēšanu, artefaktu pārvaldību?
+
+Docker cross-platform w/ buildx i.e. buildkit
+
+Board management w/ Ansible
+
+CICD deployment procesi
+
+\subsection{Testēšana un uzturēšana}
+
+Šo es praktiski neesmu paspējis izdarīt, bet šis būtu interesanti:
+
+Waveform recordings
+
+WASM testing
+
+Heartbeats
+
+\subsection{Potenciāli uzlabojumi}
+
+Improvements using Scala.js and Scala Native (client, agent, web)?
+
+Improvements w/ WASM virtual interfaces?
