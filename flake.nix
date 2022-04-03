@@ -62,7 +62,7 @@
           '';
           installPhase = ''
             mkdir -p $out
-            cp out/10-main.pdf $out/
+            cp out/main.pdf $out/
           '';
         };
       };
