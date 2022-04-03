@@ -3,6 +3,7 @@
 Šis repozitorijs satur bakalaura darba rakstisko daļa.  
 Programmatūras pirmkodu skatīt [kshaa/dip-testbed](https://github.com/kshaa/dip-testbed).  
 Programmatūras artefaktus skatīt [kshaa/dip-testbed-dist](https://github.com/kshaa/dip-testbed-dist).  
+Darba izstrādei un formatēšanai LaTeX pierakstā, pamatā ir izmantots [jzaikovs/lu-latex](https://github.com/jzaikovs/lu-latex) šablons.
   
 ## Izmantošana
 Komandas, kas jāizpilda, lai kompilētu LaTeX dokumentu.  
