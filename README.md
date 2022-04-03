@@ -1,6 +1,8 @@
-# LU LaTeX šablons
+# Digitālās aparatūras projektēšanas tiešsaistes platforma
 
-LaTeX šablons akadēmiskiem Latvijas Universitātes darbiem.  
+Šis repozitorijs satur bakalaura darba rakstisko daļa.  
+Programmatūras pirmkodu skatīt [kshaa/dip-testbed](https://github.com/kshaa/dip-testbed).  
+Programmatūras artefaktus skatīt [kshaa/dip-testbed-dist](https://github.com/kshaa/dip-testbed-dist).  
   
 ## Izmantošana
 Komandas, kas jāizpilda, lai kompilētu LaTeX dokumentu.  
