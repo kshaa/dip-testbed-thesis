@@ -108,6 +108,12 @@
 % pielikumiem
 \usepackage[toc]{appendix}
 
+% piezīmēm
+\newcommand\todo[1]{\textcolor{red}{TODO: #1}}
+
+% attēlu novietošanai
+\usepackage{float}
+
 % šis paredzēts, lai darbā varētu ievietot programmas koda fragmentus.
 \usepackage{listings} 
 \lstnewenvironment{code}[1][] % Koda pieraksta bloks \begin{code}[options] \end{code}. Labā lieta, ka šis bloks nedalās pa lapām, lai nebūtu puse vienā un puse otrā lapā.

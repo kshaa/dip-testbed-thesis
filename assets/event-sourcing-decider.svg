@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="269"
+   height="209.14679"
+   version="1.1"
+   id="svg109"
+   sodipodi:docname="event-sourcing-decider.svg"
+   inkscape:export-filename="/home/kveinbahs/Code/dip-testbed-thesis/assets/event-sourcing-decider.png"
+   inkscape:export-xdpi="1000"
+   inkscape:export-ydpi="1000"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
+  <metadata
+     id="metadata113">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1848"
+     inkscape:window-height="1016"
+     id="namedview111"
+     showgrid="false"
+     inkscape:pagecheckerboard="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="2.4583333"
+     inkscape:cx="60.763253"
+     inkscape:cy="104.38272"
+     inkscape:window-x="72"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg109" />
+  <style
+     id="style2">line, path, circle,rect,polygon {
+                          stroke: #d1d1d1;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        /* This fix the spacing bug in svg text*/
+                        #212d30-space: pre;
+                        fill: #d1d1d1;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: #212d30;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: #d1d1d1;
+                        }
+                        .bg_filled{
+                            fill: #212d30;
+                        }
+                        .nofill{
+                            fill: #212d30;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+  <defs
+     id="defs19">
+    <marker
+       id="arrow"
+       viewBox="-2 -2 8 8"
+       refX="4"
+       refY="2"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto-start-reverse">
+      <polygon
+         points="0,0 0,4 4,2 "
+         id="polygon4" />
+    </marker>
+    <marker
+       id="diamond"
+       viewBox="-2 -2 8 8"
+       refX="4"
+       refY="2"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto-start-reverse">
+      <polygon
+         points="2,4 0,2 2,0 4,2 "
+         id="polygon7" />
+    </marker>
+    <marker
+       id="circle"
+       viewBox="0 0 8 8"
+       refX="4"
+       refY="4"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto-start-reverse">
+      <circle
+         cx="4"
+         cy="4"
+         r="2"
+         class="filled"
+         id="circle10" />
+    </marker>
+    <marker
+       id="open_circle"
+       viewBox="0 0 8 8"
+       refX="4"
+       refY="4"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto-start-reverse">
+      <circle
+         cx="4"
+         cy="4"
+         r="2"
+         class="bg_filled"
+         id="circle13" />
+    </marker>
+    <marker
+       id="big_open_circle"
+       viewBox="0 0 8 8"
+       refX="4"
+       refY="4"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto-start-reverse">
+      <circle
+         cx="4"
+         cy="4"
+         r="3"
+         class="bg_filled"
+         id="circle16" />
+    </marker>
+  </defs>
+  <text
+     x="16"
+     y="9.1171875"
+     id="text23">Komanda</text>
+  <text
+     x="208"
+     y="23.117188"
+     id="text25">Notikums</text>
+  <text
+     x="16"
+     y="39.117188"
+     id="text27">Stāvoklis</text>
+  <text
+     x="208"
+     y="87.117188"
+     id="text29">Notikums</text>
+  <text
+     x="18"
+     y="103.11719"
+     id="text31">Stāvoklis</text>
+  <text
+     x="210"
+     y="121.11719"
+     id="text33">Stāvoklis</text>
+  <text
+     x="116"
+     y="39.117188"
+     id="text35">Validācija</text>
+  <text
+     x="120"
+     y="119.11719"
+     id="text37">Attīstība</text>
+  <g
+     id="g63"
+     style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     transform="translate(0,-4.8828125)">
+    <path
+       d="m 88,8 a 4,4 0 0 0 -4,4"
+       class="nofill"
+       id="path39"
+       style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <line
+       x1="84"
+       y1="12"
+       x2="84"
+       y2="68"
+       class="solid"
+       id="line41"
+       style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <line
+       x1="88"
+       y1="8"
+       x2="200"
+       y2="8"
+       class="solid"
+       id="line43"
+       style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       d="m 200,8 a 4,4 0 0 1 4,4"
+       class="nofill"
+       id="path45"
+       style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <line
+       x1="204"
+       y1="12"
+       x2="204"
+       y2="68"
+       class="solid"
+       id="line47"
+       style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <line
+       x1="204"
+       y1="40"
+       x2="268"
+       y2="40"
+       class="solid"
+       id="line49"
+       style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <line
+       x1="268"
+       y1="40"
+       x2="268"
+       y2="104"
+       class="solid"
+       id="line51"
+       style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       d="m 84,68 a 4,4 0 0 0 4,4"
+       class="nofill"
+       id="path53"
+       style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <line
+       x1="88"
+       y1="72"
+       x2="200"
+       y2="72"
+       class="solid"
+       id="line55"
+       style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       d="m 204,68 a 4,4 0 0 1 -4,4"
+       class="nofill"
+       id="path57"
+       style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <polygon
+       points="216,100 208,104 216,108 "
+       class="filled"
+       id="polygon59"
+       style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <line
+       x1="216"
+       y1="104"
+       x2="268"
+       y2="104"
+       class="solid"
+       id="line61"
+       style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+  <g
+     id="g69"
+     style="fill:#000000;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     transform="translate(0,-4.8828125)">
+    <line
+       x1="0"
+       y1="24"
+       x2="72"
+       y2="24"
+       class="solid"
+       id="line65"
+       style="fill:#000000;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <polygon
+       points="72,20 80,24 72,28 "
+       class="filled"
+       id="polygon67"
+       style="fill:#000000;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+  <line
+     id="line71"
+     class="solid"
+     y2="51.117188"
+     x2="72"
+     y1="51.117188"
+     x1="4"
+     style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <line
+     id="line73"
+     class="solid"
+     y2="163.11719"
+     x2="4"
+     y1="51.117188"
+     x1="4"
+     style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <polygon
+     id="polygon75"
+     class="filled"
+     points="72,60 72,52 80,56 "
+     transform="translate(0,-4.8828125)" />
+  <line
+     id="line77"
+     class="solid"
+     y2="115.11719"
+     x2="32"
+     y1="115.11719"
+     x1="4"
+     style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <polygon
+     id="polygon79"
+     class="filled"
+     points="40,124 40,116 32,120 "
+     transform="translate(0,-4.8828125)" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path81"
+     class="nofill"
+     d="m 88,83.117187 a 4,4 0 0 0 -4,4"
+     style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <line
+     id="line83"
+     class="solid"
+     y2="143.11719"
+     x2="84"
+     y1="87.117188"
+     x1="84"
+     style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <line
+     id="line85"
+     class="solid"
+     y2="83.117188"
+     x2="200"
+     y1="83.117188"
+     x1="88"
+     style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path87"
+     class="nofill"
+     d="m 200,83.117187 a 4,4 0 0 1 4,4"
+     style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <line
+     id="line89"
+     class="solid"
+     y2="143.11719"
+     x2="204"
+     y1="87.117188"
+     x1="204"
+     style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <line
+     id="line91"
+     class="solid"
+     y2="115.11719"
+     x2="84"
+     y1="115.11719"
+     x1="40"
+     style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path93"
+     class="nofill"
+     d="m 84,143.11719 a 4,4 0 0 0 4,4"
+     style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <line
+     id="line95"
+     class="solid"
+     y2="147.11719"
+     x2="200"
+     y1="147.11719"
+     x1="88"
+     style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path97"
+     class="nofill"
+     d="m 204,143.11719 a 4,4 0 0 1 -4,4"
+     style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <polygon
+     id="polygon99"
+     class="filled"
+     points="216,140 216,132 208,136 "
+     transform="translate(0,-4.8828125)" />
+  <line
+     id="line101"
+     class="solid"
+     y2="131.11719"
+     x2="268"
+     y1="131.11719"
+     x1="216"
+     style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <line
+     id="line103"
+     class="solid"
+     y2="163.11719"
+     x2="268"
+     y1="131.11719"
+     x1="268"
+     style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <line
+     id="line105"
+     class="solid"
+     y2="163.11719"
+     x2="268"
+     y1="163.11719"
+     x1="4"
+     style="stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <polygon
+     transform="rotate(-90,123.98232,104.05011)"
+     id="polygon79-3"
+     class="filled"
+     points="40,124 40,116 32,120 "
+     inkscape:transform-center-x="17.491525"
+     inkscape:transform-center-y="-1.593218" />
+  <line
+     id="line91-6"
+     class="solid"
+     y2="146.06635"
+     x2="139.93221"
+     y1="188.03244"
+     x1="139.93221"
+     style="stroke:#000000;stroke-width:1.95322812;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     inkscape:transform-center-x="17.491523"
+     inkscape:transform-center-y="-26.317724" />
+  <text
+     x="104.38097"
+     y="208.97687"
+     id="text31-7">Blakusefekti</text>
+</svg>

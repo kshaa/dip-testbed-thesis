@@ -1,6 +1,6 @@
 BASE=main
 
-default: all clean
+default: clean all
 
 all: 
 	mkdir -p ./out

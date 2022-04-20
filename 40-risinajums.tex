@@ -1,11 +1,8 @@
-\section{Motivācija}
-Kādēļ es taisīju to, ko es taisīju?  
-
-Kā tas ir labāk par to, kas eksistē tagad?  
-
-\section{Risinājums}
+\section{Darba tvērums}
 
 Ko tad es īsti uztaisīju - lielos un mazos vilcienos?
+
+Ko es neuztaisīju!
   
 No kādām detaļām sastāv mans risinājums?
 
@@ -29,11 +26,11 @@ Vēl vajadzētu pieminēt, neskaitot iepriekšminētās salīdzinoši tehniskās
 digitalizāciju. Kā ar šo sistēmu var iesūtīt programmaparatūru, dabūt to dzelzī, mijiedarboties ar programmaparatūru, kas darbinās dzelzī, izmantojot
 "virtuālās saskarnes".  
 
-\subsection{DIP platforma}
+\section{DIP platforma}
 
 Šeit varbūt varētu pārkopēt "Piedāvātais risinājums" saturu, lai būtu viena skaidra, īsa, kodolīga sekcija par platformu. 
 
-\subsection{Komunikācijas protokoli}
+\section{Komunikācijas protokoli}
 
 1. HTTP REST - Biznesa entītiju pārvaldība centrālajā serverī
 2. HTTP WebSocket - Vāja reāllaika komunikācija starp centrālo serveri un klientiem/aģentiem
@@ -41,7 +38,7 @@ digitalizāciju. Kā ar šo sistēmu var iesūtīt programmaparatūru, dabūt to
 4. Basic auth un session cookies - autentifikācija iepriekšminētajiem (var pieminēt, var nepieminēt)
 5. USB serial - Izmantots komunikācijai starp aģentu un dzelzi
 
-\subsection{Notikumu sistēmas algoritma realizācija}
+\section{Notikumu sistēmas algoritma realizācija}
 
 Notikumu dzinējs ar blakusefektiem - notikumu sistēmas realizācija gan klientā, gan aģentā, gan serverī.
 
@@ -55,7 +52,7 @@ Event sourcing.
 
 Purity and side-effects.
 
-\subsection{Aģenti un klienti un to starpkomunikācija}
+\section{Aģenti un klienti un to starpkomunikācija}
 
 Kā strādā aģenti, kā tie klausās komandas no platformas, kā tie veic programmēšanu,
 kā tie uztur virtuālās saskarnes komunikācijas?
@@ -65,7 +62,7 @@ komunicē ar aģentu programmaparatūru izmantojot seriālo portu.
 
 UART, Virtual Interfaces (webcam, serial connection)
 
-\subsection{Virtuālā saskarne "tīmekļkamera"}
+\section{Virtuālā saskarne "tīmekļkamera"}
 
 Visi veidi kā es mēģināju realizēt tīmekļkameras virtuālo saskarni.
 
@@ -75,7 +72,7 @@ Kā to varētu izdarīt vēl labāk?
 
 Īsumā - OGG video streaming
 
-\subsection{Virtuālās saskarnes "hexbytes" un "buttonleds"}
+\section{Virtuālās saskarnes "hexbytes" un "buttonleds"}
 
 Apraksts dažādu veidu 1-pret-1 baitu ziņapmaiņas virtuālajām saskarnēm.
 
@@ -83,7 +80,7 @@ Ko ar tām var panākt?
 
 Ko ar tām nevar panākt?
 
-\subsection{Virtuālā saskarne "MinOS"}
+\section{Virtuālā saskarne "MinOS"}
 
 Apraksts chunk-to-chunk jeb uz seriālā porta paketēm balstītu ziņapmaiņas saskarni.
 
@@ -97,7 +94,7 @@ Ko ar šo saskarni var panākt?
 
 Ko ar šo saskarni nevar panākt?
 
-\subsection{Infrastruktūras pārvaldība}
+\section{Infrastruktūras pārvaldība}
 
 Kā laboratorijas īpašnieki pieslēdz savus dzelžus platformai?
 
@@ -111,7 +108,7 @@ Board management w/ Ansible
 
 CICD deployment procesi
 
-\subsection{Testēšana un uzturēšana}
+\section{Testēšana un uzturēšana}
 
 Šo es praktiski neesmu paspējis izdarīt, bet šis būtu interesanti:
 
@@ -121,4 +118,4 @@ WASM testing
 
 Ko reāli varētu izdarīt (drīzumā uzkodēšu, šim vajadzētu būt ātri):
 
-MinOS request & response
+MinOS request and response
