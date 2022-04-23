@@ -3,8 +3,8 @@
 Aktieru modelis apraksta veidu kā realizēt vienotu atteikumnoturīgu informācijas
 sistēmu, kas sastāv no vairākām atsevišķām, paralēli darbinātām mazākām
 informācijas sistēmām - aktieriem. Aktieru modelī aktieri var 1) sūtīt ziņas, 2)
-izveidot jaunus aktierus un 3) definēt kā reaģēt uz ziņām kas tiek adresētas
-tiem pašiem. \cite[p. 1]{CarlHewitt2010}
+izveidot jaunus \glslink{actor}{aktierus} un 3) definēt kā reaģēt uz ziņām kas
+tiek adresētas tiem pašiem. \cite[p. 1]{CarlHewitt2010}
 
 Svarīga īpatnība aktieru modelī, kas ļauj tam labi aprakstīt reālu, fizisku
 infrastruktūru (kas ir svarīgi šī darba ietvaros, jo ir nepieciešams modelēt
@@ -23,7 +23,8 @@ valodā Actix, Haskell valodā Cloud Haskell, utml.
 \begin{figure}[H]
     \includegraphics[width=0.5\linewidth]{assets/akka-actor-hierarchy-gray.png}
     \centering
-    \caption{Aktieru modeļa sistēmas hierarhija. \cite[sl. 34]{MarkusJuraAkka}}
+    \caption{\glslink{actorsystem}{Aktieru modeļa sistēmas} hierarhija.
+    \cite[sl. 34]{MarkusJuraAkka}}
     \label{fig:actorsystem}
 \end{figure}
 
@@ -74,16 +75,17 @@ video straumēšanu, programmatūras augšupielādi, seriālā porta monitorēš
 viss tiek realizēts izmantojot komandas, notikumus un blakusefektus. Tai skaitā
 arī platformas lietotāji attālināti mijiedarbojoties ar attīstītājrīkiem izmanto
 virtuālās saskarnes, piem. MinOS., kas arī ir realizētas kā notikumu sistēmas.
-Pašā platformā, centralizētajā serverī, lietotāju un aģentu apkalpošanas
-mehānismi ir realizēti izmantojot notikumu sistēmas un aktieru modeli. 
+Pašā platformā, centralizētajā \glslink{server}{serverī}, lietotāju un aģentu
+apkalpošanas mehānismi ir realizēti izmantojot notikumu sistēmas un aktieru
+modeli. 
 
 \section{Digitālas aparatūras projektēšana}
 
 Lai digitalizētu mijiedarbību ar attīstītājrīku aparatūru, ir nepieciešams, lai
 aparatūra ir spējīga kooperēties ar mūsu platformu, kas nozīmē, ka to ir jāprot
 korekti noprogrammēt jeb, precīzāk, tajā jāaugšupielādē atbilstoši projektēta
-loģisko elementu konfigurācija, kas nodrošinās mūsu vēlamo mijiedarbību ar
-platformu.
+loģisko elementu konfigurācija jeb programmaparatūra, kas nodrošinās mūsu vēlamo
+mijiedarbību ar platformu.
 
 Ir dažādi veidi kā attīstājrīka aparatūra varētu mijiedarboties ar izstrādāto
 platformu, kas vēlākās nodaļās tiek arī detalizētāk apskatīti, bet pamatā ir
@@ -104,17 +106,61 @@ atmiņu, piem. flip-flop. \cite[para 1.1]{LarryMassengale2018}
 \end{figure}
 
 Attēlā \ref{fig:counter} redzama tipiska loģisko elementu konfigurācija, kas
-ilustrē visus iepriekšminētos projektēšanas pamatelementus. Konfigurācijā ir
-divi ievadsignāli "BTN0" un "BTN1", astoņu bitu flip-flop elementi saukti par
-"1", un astoņi "LD{0-7}" izvadsignāli. Kad "BTN0" signāls top no 0 par 1,
-reģistrā "1" tiek atņemts vieninieks. Kad "BTN1" signāls top no 0 par 1,
-reģistrā "0" tiek pieskaitīts vieninieks. Astoņu bitu reģistra "1" bitu vērtība
-tiek izvadīta izvadsignālos "LD{0-7}". Vērts pieminēt, ka "+" un "-" šajā
-ilustrācijā ir abstrakcijas, ar kurām patiesībā domāti elementi 1) astoņu bitu
-"full adder" un 2) astoņu bitu "full subtractor".
+ilustrē visus iepriekšminētos projektēšanas pamatelementus. Konfigurācijā
+redzami divi ievadsignāli "BTN0" un "BTN1" un astoņi "LD{0-7}" izvadsignāli.
+Papildus konfigurācijā izmantots astoņu bitu atmiņas flip-flop reģistrs
+(taisnstūris ar trijstūri), signālu multipleksors, kas atkarībā no "nosacījuma"
+signāla ārā izvada vai nu vienu signālu vai otru (trapece), konstants astoņu
+bitu signāls ar vieninieka vērtību (taisntūris ar "1"). Kad "BTN0" signāls top
+no 0 par 1, reģistrā "1" tiek atņemts vieninieks. Kad "BTN1" signāls top no 0
+par 1, reģistrā "0" tiek pieskaitīts vieninieks. Astoņu bitu reģistra "1" bitu
+vērtība tiek izvadīta izvadsignālos "LD{0-7}". Vērts pieminēt, ka "+" un "-"
+šajā ilustrācijā ir abstrakcijas, ar kurām patiesībā domāti elementi 1) astoņu
+bitu "full adder" un 2) astoņu bitu "full subtractor".
 
 Šī ilustrācija ir izveidota izmantojot "yosys" un "netlistsvg" atvērtos rīkus.
 Šīs digitālās aparatūras Verilog projekta avota kods un ilustrācijas kods ir
 pieejams šī projekta avota koda repozitorijā. \cite{VeinbahsKrisjanisTestbed}
-Papildus arī pielikumā \ref{att:counter} ir pievienots šīs digitālās aparatūras
-Verilog kods.
+Papildus tas ir pieejams arī pielikumā \ref{att:counter}.
+
+\section{Seriālā komunikācija}
+
+Pieņemot, ka ir iespējama centralizēta platforma, kas aprakstīta vēlākās
+nodaļās, kas nodrošina datu apmaiņu starp lietotājiem un aparatūru, ir jāņem
+vērā, ka, projektējot elektroniku, tomēr ir ļoti skaidri jādefinē, ko īsti
+nozīmē datu apmaiņa ar aparatūru.
+
+Šī darba ietvaros datu apmaiņa ar attīstājrīku aparatūru ir realizēta izmantojot
+\glslink{serialport}{seriālo komunikāciju}. Precīzāk, \gls{fpga} tiek
+augšupielādēta programmaparatūra, lai seriāli komunicētu ar attīstītājrīkā esošu
+\gls{uart} kontrolieri ar diviem "RX" un "TX" signāliem, savukārt,
+\gls{uart} kontrolieris šo visu pārraida pāri \gls{usb} savienojumam
+\cite[para. USB-UART Bridge]{DigilentAnvylReference}, un šos datus saņem
+attīstītājrīkam ar \gls{usb} vadu pievienots mikrokontrolieris, kas satur
+platformas programmatūru, ko savukārt sauc par "\glslink{agent}{aģentu}". Šo
+mehānismu ar \gls{ttl}, \gls{usb}, \gls{uart} komunikāciju var
+apskatīt attēlā \ref{fig:agentcomms}.
+
+
+\begin{figure}[H]
+    \includegraphics[width=0.3\linewidth]{assets/agentcomms-grey.png}
+    \centering
+    \caption{Datu apmaiņa starp attīstītājrīku un platformas "\glslink{agent}{aģentu}"}
+    \label{fig:agentcomms}
+\end{figure}
+
+Ņemot vērā, šo attīstītājrīkā pieņemto komunikācijas modeli, vienīgais, ko
+atliek realizēt pašam, ir projektēt \gls{ttl} seriālo komunikāciju, izmantojot
+\gls{uart} mehānismu, lai nodrošinātu baitu apmaiņu starp ierīcēm. Attēlā
+\ref{fig:serialframe} redzams seriālās komunikācijas kadrs iekodēts spriegumā,
+ko attiecīgi var jau noprojektēt Verilog valodā, tādējādi nodrošinot
+\glslink{fullduplex}{pilndupleksa} \gls{uart} baitu datu apmaiņu starp ierīcēm.
+Šī darba ietvaros tika izmantota seriālā komunikācija "8-N-1" jeb ar 8 datu
+bitiem, bez paritātes bita un ar vienu "stop" bitu.
+
+\begin{figure}[H]
+    \includegraphics[width=0.7\linewidth]{assets/ttl-serial-gray.png}
+    \centering
+    \caption{Seriālās komunikācijas kadrs iekodēts fiziskā signālā}
+    \label{fig:serialframe}
+\end{figure}

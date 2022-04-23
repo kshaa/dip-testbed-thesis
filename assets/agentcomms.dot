@@ -1,0 +1,23 @@
+digraph G {
+
+  subgraph cluster_1 {
+    a [label="FPGA čips"];
+    b [label="UART kontrolieris"];
+    c [label="USB kontrolieris"];
+
+    label="Attīstītājrīks";
+    b -> a [label="TTL RX signāls"];
+    a -> b [label="TTL TX signāls"];
+    b -> c [dir="both",label="TTL signāl(s/i)"];
+  }
+  
+  c -> d [dir="both",label="USB protokols"];
+  
+  subgraph cluster_2 {
+    d [label="USB kontrolieris"];
+    e [label="Procesors"];
+    label="Mikrokontrolieris";
+    d -> e [dir="both",label="TTL signāl(s/i)"];
+  }
+
+}

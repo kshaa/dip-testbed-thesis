@@ -1,30 +1,41 @@
 \section{Darba tvērums}
 
-Ko tad es īsti uztaisīju - lielos un mazos vilcienos?
+Darba ietvaros tika izstrādāta vāja reāllaika komunikācijas platforma, kas
+nodrošina 1) iespēju reģistrēt un uzskaitīt, pārvaldīt fizisku attīstītājrīku
+vai mikrokontrolieru aparatūru, 2) veikt programmaparatūras augšupielādi
+aparatūrā, 3) mijiedarboties ar aparatūru, izmantojot vizuālu saskarni, kas
+līdzinās noklusētajai aparatūrā fiziski pieejamajai saskarnei, 4) ierobežoti
+testēt aparatūras funkcionalitāti.
 
-Ko es neuztaisīju!
+Šis darbs izstrādāts atvērti - platformas pirmkods un šī dokumenta pirmkods ir
+publiski pieejams GitHub platformā brīvai apskatei un izmantošanai.
+\cite{VeinbahsKrisjanisTestbed} \cite{VeinbahsKrisjanisThesis}
+
+% TODO - Ko tad es īsti uztaisīju - lielos un mazos vilcienos?
+
+% TODO - Ko es neuztaisīju!
   
-No kādām detaļām sastāv mans risinājums?
+% TODO - No kādām detaļām sastāv mans risinājums?
 
-Šeit mēs aprakstam pāris rindkopās to, kamā mēs izpletīsimies nākamajās nodaļās
+% TODO - Šeit mēs aprakstam pāris rindkopās to, kamā mēs izpletīsimies nākamajās nodaļās
 
-Aptuvena ideja: Es uztaisīju aktieru modelī balstītu sistēmu, kas nodrošina centralizētu klientu un aģentu pārvaldību
-ar pieņēmumu, ka gan klienti, gan aģenti jebkurā brīdī varētu atslēgties no sistēmas. Aktieru modelis nosaka, ka sistēma
-ir arī notikumu sistēma, tātad visas izmaiņas sistēmā tiek padotas apkārt izmantojot ziņas jeb vēstules. Notikumu sistēma
-nozīmē, ka ir ļoti viegli klientu un aģentu darbībai paralēli arī žurnalēt to stāvokli piem. datubāzē. Papildus šeit jāpiemin
-kādi tad ir tie aktieri, kas tiek izmantoti šajā sistēmā. 
+% Aptuvena ideja: Es uztaisīju aktieru modelī balstītu sistēmu, kas nodrošina centralizētu klientu un aģentu pārvaldību
+% ar pieņēmumu, ka gan klienti, gan aģenti jebkurā brīdī varētu atslēgties no sistēmas. Aktieru modelis nosaka, ka sistēma
+% ir arī notikumu sistēma, tātad visas izmaiņas sistēmā tiek padotas apkārt izmantojot ziņas jeb vēstules. Notikumu sistēma
+% nozīmē, ka ir ļoti viegli klientu un aģentu darbībai paralēli arī žurnalēt to stāvokli piem. datubāzē. Papildus šeit jāpiemin
+% kādi tad ir tie aktieri, kas tiek izmantoti šajā sistēmā. 
 
-Jāpiemin, ko tad tā sistēma īsti nodrošina - ar Scala Play Framework un HTTP REST un Twirl un Slick tā nodrošina biznesa datu CRUD pārvaldību un
-basic auth autentifikāciju, savukārt, ar Scala Play Framework un WebSocket un JSON un aktieriem tā nodrošina vāja reāllaika starpkomunikāciju.  
+% Jāpiemin, ko tad tā sistēma īsti nodrošina - ar Scala Play Framework un HTTP REST un Twirl un Slick tā nodrošina biznesa datu CRUD pārvaldību un
+% basic auth autentifikāciju, savukārt, ar Scala Play Framework un WebSocket un JSON un aktieriem tā nodrošina vāja reāllaika starpkomunikāciju.  
 
-Vēl jāpiemin, kāda jēga no šīs CRUD pārvaldības, autentifikācijas un vāja reāllaika komunikāciju. CRUD mums ļauj pārvaldīt lietotājus, dzelžus,
-programmaparatūru. Vājā reāllaika komunikācija ļauj augšupielādēt mums programmatūru dzelžos, tad sūtīt un saņemt informāciju starp klientu un dzelzi, 
-kurā darbinās programmaparatūra, tātad ļauj mums mijiedarboties ar dzelzi. Autentifikācija ļauj pārvaldīt piekļuvi CRUD datiem un
-komunikācijai ar dzelžiem.
+% Vēl jāpiemin, kāda jēga no šīs CRUD pārvaldības, autentifikācijas un vāja reāllaika komunikāciju. CRUD mums ļauj pārvaldīt lietotājus, dzelžus,
+% programmaparatūru. Vājā reāllaika komunikācija ļauj augšupielādēt mums programmatūru dzelžos, tad sūtīt un saņemt informāciju starp klientu un dzelzi, 
+% kurā darbinās programmaparatūra, tātad ļauj mums mijiedarboties ar dzelzi. Autentifikācija ļauj pārvaldīt piekļuvi CRUD datiem un
+% komunikācijai ar dzelžiem.
 
-Vēl vajadzētu pieminēt, neskaitot iepriekšminētās salīdzinoši tehniskās detaļas, kā šī sistēma atrisina biznesa problēmu jeb izstrādes procesa
-digitalizāciju. Kā ar šo sistēmu var iesūtīt programmaparatūru, dabūt to dzelzī, mijiedarboties ar programmaparatūru, kas darbinās dzelzī, izmantojot
-"virtuālās saskarnes".  
+% Vēl vajadzētu pieminēt, neskaitot iepriekšminētās salīdzinoši tehniskās detaļas, kā šī sistēma atrisina biznesa problēmu jeb izstrādes procesa
+% digitalizāciju. Kā ar šo sistēmu var iesūtīt programmaparatūru, dabūt to dzelzī, mijiedarboties ar programmaparatūru, kas darbinās dzelzī, izmantojot
+% "virtuālās saskarnes".  
 
 \section{DIP platforma}
 
