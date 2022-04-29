@@ -1,0 +1,10 @@
+Izstrādātājs -> Serveris: `panelī` Izveido lietotāju
+Administrators -> Serveris: `panelī` Dod izstrādātājam izstrādātāja tiesības
+Laboratorijas īpašnieks -> Serveris: `panelī` Dod izstrādātājam aparatūras lietošanas tiesības
+Izstrādātājs -> Izstrādātājs: Projektē un kompilē jaunu programmaparatūru
+Izstrādātājs -> Serveris: `klientā` Augšupielādē programmaparatūru
+Izstrādātājs -> Serveris: `klientā` Pieprasa programmaparatūras augšupielādi attīstītājrīkā
+Serveris -> Aģents: `aģentā` Pieprasa programmaparatūras augšupielādi attīstītājrīkā
+Aģents -> Aparatūra: Programmaparatūras dati
+Izstrādātājs <-> Aparatūra: `aģentā` un `klientā` Seriālās komunikācijas dati
+note: Aģenta un aparatūras seriālā komunikācija notiek ar servera un aģenta starpniecību

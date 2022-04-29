@@ -1,0 +1,5 @@
+Laboratorijas īpašnieks -> Serveris: `panelī` Izveido lietotāju 
+Administrators -> Serveris: `panelī` Dod laboratorijas īpašniekam aparatūras pārvaldības tiesības
+Laboratorijas īpašnieks -> Serveris: `klientā` Reģistrē jaunu aparatūru
+Laboratorijas īpašnieks -> Aģents: Fiziski pieslēdz `aģentam` aparatūru, nokonfigurē un uzstāda `aģentā` aktieri `Aparatūra` 
+

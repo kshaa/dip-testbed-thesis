@@ -1,29 +1,3 @@
-% TODO - Ko tad es īsti uztaisīju - lielos un mazos vilcienos?
-
-% TODO - Ko es neuztaisīju!
-  
-% TODO - No kādām detaļām sastāv mans risinājums?
-
-% TODO - Šeit mēs aprakstam pāris rindkopās to, kamā mēs izpletīsimies nākamajās nodaļās
-
-% Aptuvena ideja: Es uztaisīju aktieru modelī balstītu sistēmu, kas nodrošina centralizētu klientu un aģentu pārvaldību
-% ar pieņēmumu, ka gan klienti, gan aģenti jebkurā brīdī varētu atslēgties no sistēmas. Aktieru modelis nosaka, ka sistēma
-% ir arī notikumu sistēma, tātad visas izmaiņas sistēmā tiek padotas apkārt izmantojot ziņas jeb vēstules. Notikumu sistēma
-% nozīmē, ka ir ļoti viegli klientu un aģentu darbībai paralēli arī žurnalēt to stāvokli piem. datubāzē. Papildus šeit jāpiemin
-% kādi tad ir tie aktieri, kas tiek izmantoti šajā sistēmā. 
-
-% Jāpiemin, ko tad tā sistēma īsti nodrošina - ar Scala Play Framework un HTTP REST un Twirl un Slick tā nodrošina biznesa datu CRUD pārvaldību un
-% basic auth autentifikāciju, savukārt, ar Scala Play Framework un WebSocket un JSON un aktieriem tā nodrošina vāja reāllaika starpkomunikāciju.  
-
-% Vēl jāpiemin, kāda jēga no šīs CRUD pārvaldības, autentifikācijas un vāja reāllaika komunikāciju. CRUD mums ļauj pārvaldīt lietotājus, dzelžus,
-% programmaparatūru. Vājā reāllaika komunikācija ļauj augšupielādēt mums programmatūru dzelžos, tad sūtīt un saņemt informāciju starp klientu un dzelzi, 
-% kurā darbinās programmaparatūra, tātad ļauj mums mijiedarboties ar dzelzi. Autentifikācija ļauj pārvaldīt piekļuvi CRUD datiem un
-% komunikācijai ar dzelžiem.
-
-% Vēl vajadzētu pieminēt, neskaitot iepriekšminētās salīdzinoši tehniskās detaļas, kā šī sistēma atrisina biznesa problēmu jeb izstrādes procesa
-% digitalizāciju. Kā ar šo sistēmu var iesūtīt programmaparatūru, dabūt to dzelzī, mijiedarboties ar programmaparatūru, kas darbinās dzelzī, izmantojot
-% "virtuālās saskarnes".  
-
 \section{DIP platforma}
 
 Izstrādātā platforma sastāv no \glslink{server}{servera}, \glslink{agent}{aģentiem}
@@ -135,35 +109,38 @@ nemaina izmantojot vājā reāllaika komunikācijas kanālus, kas aprakstīti sa
 
 Attēlā \ref{fig:staticdata} redzama platformas izstrādes laikā izveidotā
 datubāzes fiziskā līmeņa relāciju diagramma, kurā redzamas tabulas lietotājiem
-"user", programmaparatūrai "software", aparatūrai "hardware" un aparatūras
-piekļuvei "hardware\_access", kā arī papildus tabula datubāzes migrāciju
-vēstures pārvaldībai "play\_evolutions", kas ir noklusēts tabulas nosaukums
-projektā izmantotajam Scala programmēšanas valodas tīmekļa lapu izstrādes
-ietvaram "Play Framework".
+\lstinline!user!, programmaparatūrai \lstinline!software!, aparatūrai
+\lstinline!hardware! un aparatūras piekļuvei \lstinline!hardware_access!, kā arī
+papildus tabula datubāzes migrāciju vēstures pārvaldībai
+\lstinline!play_evolutions!, kas ir noklusēts tabulas nosaukums projektā
+izmantotajam Scala programmēšanas valodas tīmekļa lapu izstrādes ietvaram "Play
+Framework".
 
 Lielākoties visām biznesa loģikas entītijām ir piesaistīts \gls{uuid}
-identifikators "uuid" un nosaukums "name", papildus dažām entītijām ir dažādi
-piekļuves dati formātā "is\_*", programmaparatūrai ir arī tās saturs "content"
-un lietotājam ir paroles ar jaucējvērtību datiem "hashed\_password".
+identifikators \lstinline!uuid! un nosaukums \lstinline!name!, papildus dažām
+entītijām ir dažādi piekļuves dati formātā \lstinline!is_*!, programmaparatūrai
+ir arī tās saturs \lstinline!content! un lietotājam ir paroles ar jaucējvērtību
+datiem \lstinline!hashed_password!.
 
-Programmaparatūras tabulu varētu arī saukt "firmware", taču platformas izstrādes
-laikā tika eksperimentēts platformā arī reģistrēt ne tikai attīstītājrīku
-aparatūru, bet arī programmējamus mikrokontrolierus, kuros augšupielādē
-programmatūru.
+Programmaparatūras tabulu varētu arī saukt \lstinline!firmware!, taču platformas
+izstrādes laikā tika eksperimentēts platformā arī reģistrēt ne tikai
+attīstītājrīku aparatūru, bet arī programmējamus mikrokontrolierus, kuros
+augšupielādē programmatūru.
 
-Darba ietvaros tika arī apsvērta tabula "hardware\_messages", lai glabātu vēsturi
-par notikušo vājā reāllaika komunikāciju, taču laika ierobežojumu dēļ šī
-funkcionalitāte netika realizēta, jo nebija kritiska platformas
-funkcionētspējai.
+Darba ietvaros tika arī apsvērta tabula \lstinline!hardware_messages!, lai
+glabātu vēsturi par notikušo vājā reāllaika komunikāciju, taču laika
+ierobežojumu dēļ šī funkcionalitāte netika realizēta, jo nebija kritiska
+platformas funkcionētspējai.
 
 \section{Lietotāju datu pārvaldība}
 \label{sec:usermgmt}
 
-Lietotāju uzskaitei izmantota attēlā \ref{fig:staticdata} redzamā tabula "user".
-Lietotājam ir iespējamas trīs iespējamas lomas pārvaldnieks "manager",
-laboratorijas īpašnieks "lab\_owner" un izstrādātājs "developer", atkarībā no
-kuras lietotājam platforma piedēvē attiecīgas tiesības veikt dažādas darbības,
-kuras skatāmas tabulā \ref{table:permissions}.
+Lietotāju uzskaitei izmantota attēlā \ref{fig:staticdata} redzamā tabula
+\lstinline!user!. Lietotājam ir iespējamas trīs iespējamas lomas pārvaldnieks
+\lstinline!manager!, laboratorijas īpašnieks \lstinline!lab_owner! un
+izstrādātājs \lstinline!developer!, atkarībā no kuras lietotājam platforma
+piedēvē attiecīgas tiesības veikt dažādas darbības, kuras skatāmas tabulā
+\ref{table:permissions}.
 
 \begin{table}[H]
     \newcounter{permissioncounter}
@@ -174,27 +151,32 @@ kuras skatāmas tabulā \ref{table:permissions}.
     \hline
     \rownumber & Lietotāja bez tiesībām izveide & - & Lietotājvārds nevar būt aizņemts \\
     \hline
-    \rownumber & Lietotāju datu uzskaite & is\_manager vai is\_lab\_owner & Jebkurš var lasīt savus datus \\
+    \rownumber & Lietotāju datu uzskaite & \lstinline!is_manager! vai \lstinline!is_lab_owner! & Jebkurš var lasīt savus datus \\
     \hline
-    \rownumber & Lietotāja tiesību maiņa & is\_manager & - \\
+    \rownumber & Lietotāja tiesību maiņa & \lstinline!is_manager! & - \\
     \hline
-    \rownumber & Programmaparatūras augšupielāde & is\_developer & - \\
+    \rownumber & Programmaparatūras augšupielāde & \lstinline!is_developer! & - \\
     \hline
-    \rownumber & Programmaparatūras piekļuve & is\_developer vai is\_manager & Jebkurš var lasīt savu vai publicētu (is\_public) programmaparatūru \\
+    \rownumber & Programmaparatūras piekļuve & \lstinline!is_developer! vai
+        \lstinline!is_manager! & Jebkurš var lasīt savu vai publicētu
+        (\lstinline!is_public!) programmaparatūru \\
     \hline
-    \rownumber & Programmaparatūras publicēšana & is\_manager & - \\
+    \rownumber & Programmaparatūras publicēšana & \lstinline!is_manager! & - \\
     \hline
-    \rownumber & Aparatūras izveide & is\_lab\_owner & - \\
+    \rownumber & Aparatūras izveide & \lstinline!is_lab_owner! & - \\
     \hline
-    \rownumber & Aparatūras publicēšana & is\_manager vai is\_lab\_owner &
-        Pārvaldnieks var publicēt visu, citi tikai savu \\
+    \rownumber & Aparatūras publicēšana & \lstinline!is_manager! vai
+        \lstinline!is_lab_owner! & Pārvaldnieks var publicēt visu, citi tikai
+        savu \\
     \hline
-    \rownumber & Aparatūras uzskaite & is\_manager vai is\_developer, vai
-        is\_lab\_owner & Pārvaldnieks var uzskaitīt visu, citi tikai savu vai
-        "hardware\_access" tabulā piesaistīto \\
+    \rownumber & Aparatūras uzskaite & \lstinline!is_manager! vai
+        \lstinline!is_developer!, vai \lstinline!is_lab_owner! & Pārvaldnieks
+        var uzskaitīt visu, citi tikai savu vai \lstinline!hardware_access!
+        tabulā piesaistīto \\
     \hline
-    \rownumber & Aparatūras tiesību maiņa & is\_manager vai is\_developer, vai
-        is\_lab\_owner & Pārvaldnieks var pārvaldīt visu, citi tikai savu \\
+    \rownumber & Aparatūras tiesību maiņa & \lstinline!is_manager! vai
+        \lstinline!is_developer!, vai \lstinline!is_lab_owner! & Pārvaldnieks
+        var pārvaldīt visu, citi tikai savu \\
     \hline
     \end{tabular}
     \centering
@@ -346,7 +328,60 @@ abi realizēti vienā Python koda bāzē.
 \section{Aparatūras pārvaldība}
 \label{sec:hwmgmt}
 
-Komandrindas rīki, Scala, Play, JSON API, header auth.
+Iepriekšējās nodaļās ir aprakstīta platformas datu pārvaldība un aktieru
+hierarhija, šī nodaļa apraksta kā šī arhitektūra sasaistas kopā, lai realizētu
+digitāli pārvaldāmu aparatūru.
+
+Attēlā \ref{fig:labsetup} aprakstīts kā izskatītos platformas sākotnēja
+uzstādīšana, lai digitalizētu jeb padarītu pieejamu tiešsaistē laboratorijā
+pieejamo aparatūru. Tiek pieņemts, ka katrs servera pieprasījums rezultē
+veiksmīgā atbildē.
+
+\begin{figure}[H]
+    \includegraphics[width=1.0\linewidth]{assets/lab.png}
+    \centering
+    \caption{Platformas uzstādīšana laboratorijas digitalizācijai.}
+    \label{fig:labsetup}
+\end{figure}
+
+Lai sajustu, kāda ir lietotāja pieredze, ir vērts novērtēt aģenta uzstādīšanas
+komandu \ref{lst:agentconfig}, kas izveido aktieri \lstinline!Aparatura!,
+izveido savienojumu ar serveri un veic aparatūras pārvaldību pēc servera
+komandām. Minētā komanda informē komandu rindas rīku, ka aparatūra ir Digilent
+Anvyl paveida \lstinline!agent-anvyl!, platformā aparatūra ir reģistrēta ar noteiktu
+identifikatoru \lstinline!-b ...!, fiziski piesaistītā aparatūra ir ar noteiktiem
+konfigurēšanas/programmēšanas parametriem \lstinline!-n ... -s ...! un ka aparatūrai ir
+pieejams noteikts seriālās komunikācijas ports \lstinline!-f ...!.
+
+\begin{lstlisting}[caption={Aģenta uzstādīšana komandu rindā},label={lst:agentconfig},captionpos=b]
+dip_client agent-anvyl -b 5b17a393-9004-40ec-a9db-e0bb1e77a0e6 -n Anvyl \
+    -s 0 -f /dev/serial/by-id/usb-Digilent_...-if01-port0
+\end{lstlisting}
+
+Attēlā \ref{fig:development} aprakstīts kā izskatītos izstrādātāja platformas
+izmantošana, lai digitāli un attālināti bez tiešas, fiziskas aparatūras
+piekļuves veiktu aparatūras programmēšanu, testēšanu un izmantošanu. Kā arī
+komandā \ref{lst:quickrun} ir redzams, ka, lai gan programmēšanas mehānisms
+pamatā ir sarežģīts, no izstrādātāja skatpunkta aparatūras attālināta
+programmēšana un seriālā komunikācija var tikt abstrahēta gana, lai tas šķistu
+diezgan intuitīvi. Komandā redzams norādījums izpildīt programmatūras
+augšupielādi serverī un aparatūrā, un uzsākt seriālo komunikāciju
+\lstinline!quick-run!, aparatūras identifikators platformā \lstinline!-b ...!,
+sakompilētas programmaparatūras faila ceļš izstrādātāja datorā \lstinline!-f ...!
+un vēlamās izmantojamās \glslink{vinterface}{virtuālās saskarnes} veids
+\lstinline!-t ...!.
+
+\begin{lstlisting}[caption={Programmaparatūras augšupielāde un seriālās komunikācijas klienta komanda},label={lst:quickrun},captionpos=b]
+dip_client quick-run -b f65e4276-2d72-4471-b5de-bddbc833d2ea \ 
+    -f ./main.bit -t minos
+\end{lstlisting}
+
+\begin{figure}[H]
+    \includegraphics[width=1.0\linewidth]{assets/agent.png}
+    \centering
+    \caption{Attīstītājrīka aparatūras attālināta programmēšana.}
+    \label{fig:development}
+\end{figure}
 
 \section{Tīmekļa kameras virtuālā saskarne}
 \label{sec:vinweb}
