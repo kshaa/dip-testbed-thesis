@@ -68,7 +68,10 @@ nodrošina 1) iespēju reģistrēt un uzskaitīt, pārvaldīt fizisku attīstīt
 vai mikrokontrolieru aparatūru, 2) veikt programmaparatūras augšupielādi
 aparatūrā, 3) mijiedarboties ar aparatūru, izmantojot vizuālu saskarni, kas
 līdzinās noklusētajai aparatūrā fiziski pieejamajai saskarnei, 4) ierobežoti
-testēt aparatūras funkcionalitāti.
+testēt aparatūras funkcionalitāti. Papildus platforma tika arī testēšanas
+nolūkiem izveidota publiskā mākoņpakalpojumu serverī, kas aprakstīts avota koda
+repozitorijā un nodaļā \ref{sec:ops}. \cite{VeinbahsKrisjanisTestbed}
+\cite{VeinbahsKrisjanisProduction}
 
 Šis darbs izstrādāts atvērti - platformas pirmkods un šī dokumenta pirmkods ir
 publiski pieejams GitHub platformā brīvai apskatei un izmantošanai.
@@ -115,15 +118,110 @@ realizēta virtuālā saskarne MinOS formālā protokolā, klientā un attīstī
 6) tika dokumentēta sistēmas darbība un arhitektūra, tai skaitā arī šī dokumenta
 izstrāde.
 
+\section{Statisku datu pārvaldība}
+\label{sec:staticdata}
+
+Šī platforma pamatā sastāv no reāllaika datu starpniecības un statisku datu
+pārvaldības. Par statiskajiem datiem tiek uzskatīti tādi dati, kurus lietotājs
+nemaina izmantojot vājā reāllaika komunikācijas kanālus, kas aprakstīti sadaļā
+\ref{sec:dipactorsystem}. 
+
+\begin{figure}[H]
+    \includegraphics[width=0.7\linewidth]{assets/physical-er-diagram-gray.png}
+    \centering
+    \caption{Platformas fiziskā līmeņa datubāzes relāciju diagramma.}
+    \label{fig:staticdata}
+\end{figure}
+
+Attēlā \ref{fig:staticdata} redzama platformas izstrādes laikā izveidotā
+datubāzes fiziskā līmeņa relāciju diagramma, kurā redzamas tabulas lietotājiem
+"user", programmaparatūrai "software", aparatūrai "hardware" un aparatūras
+piekļuvei "hardware\_access", kā arī papildus tabula datubāzes migrāciju
+vēstures pārvaldībai "play\_evolutions", kas ir noklusēts tabulas nosaukums
+projektā izmantotajam Scala programmēšanas valodas tīmekļa lapu izstrādes
+ietvaram "Play Framework".
+
+Lielākoties visām biznesa loģikas entītijām ir piesaistīts \gls{uuid}
+identifikators "uuid" un nosaukums "name", papildus dažām entītijām ir dažādi
+piekļuves dati formātā "is\_*", programmaparatūrai ir arī tās saturs "content"
+un lietotājam ir paroles ar jaucējvērtību datiem "hashed\_password".
+
+Programmaparatūras tabulu varētu arī saukt "firmware", taču platformas izstrādes
+laikā tika eksperimentēts platformā arī reģistrēt ne tikai attīstītājrīku
+aparatūru, bet arī programmējamus mikrokontrolierus, kuros augšupielādē
+programmatūru.
+
+Darba ietvaros tika arī apsvērta tabula "hardware\_messages", lai glabātu vēsturi
+par notikušo vājā reāllaika komunikāciju, taču laika ierobežojumu dēļ šī
+funkcionalitāte netika realizēta, jo nebija kritiska platformas
+funkcionētspējai.
+
 \section{Lietotāju pārvaldības realizācija}
 \label{sec:usermgmt}
 
-Tīmekļa lietotne, Scala, Play, cookie auth, HTTP formas.
+Lietotāju uzskaitei izmantota attēlā \ref{fig:staticdata} redzamā tabula "user".
+Lietotājam ir iespējamas trīs iespējamas lomas pārvaldnieks "manager",
+laboratorijas īpašnieks "lab\_owner" un izstrādātājs "developer", atkarībā no
+kuras lietotājam platforma piedēvē attiecīgas tiesības veikt dažādas darbības,
+kuras skatāmas tabulā \ref{table:permissions}.
 
-\section{Aparatūras pārvaldības realizācija}
-\label{sec:hwmgmt}
+\begin{table}[H]
+    \newcounter{counter}
+    \newcommand\rownumber{\stepcounter{counter}\arabic{counter}.}
+    \begin{tabular}{ |p{1cm}|p{5cm}|p{3cm}|p{6cm}| }
+    \hline
+    N.p.k.&Darbība&Nepieciešamās tiesības&Papildus nosacījumi \\
+    \hline
+    \rownumber & Lietotāja bez tiesībām izveide & - & Lietotājvārds nevar būt aizņemts \\
+    \hline
+    \rownumber & Lietotāju datu uzskaite & is\_manager vai is\_lab\_owner & Jebkurš var lasīt savus datus \\
+    \hline
+    \rownumber & Lietotāja tiesību maiņa & is\_manager & - \\
+    \hline
+    \rownumber & Programmaparatūras augšupielāde & is\_developer & - \\
+    \hline
+    \rownumber & Programmaparatūras piekļuve & is\_developer vai is\_manager & Jebkurš var lasīt savu vai publicētu (is\_public) programmaparatūru \\
+    \hline
+    \rownumber & Programmaparatūras publicēšana & is\_manager & - \\
+    \hline
+    \rownumber & Aparatūras izveide & is\_lab\_owner & - \\
+    \hline
+    \rownumber & Aparatūras publicēšana & is\_manager vai is\_lab\_owner &
+        Pārvaldnieks var publicēt visu, citi tikai savu \\
+    \hline
+    \rownumber & Aparatūras uzskaite & is\_manager vai is\_developer, vai
+        is\_lab\_owner & Pārvaldnieks var uzskaitīt visu, citi tikai savu vai
+        "hardware\_access" tabulā piesaistīto \\
+    \hline
+    \rownumber & Aparatūras tiesību maiņa & is\_manager vai is\_developer, vai
+        is\_lab\_owner & Pārvaldnieks var pārvaldīt visu, citi tikai savu \\
+    \hline
+    \end{tabular}
+    \centering
+    \captionsetup{justification=centering}
+    \caption{Lietotāju tiesības un pieejamās darbības}
+    \label{table:permissions}
+\end{table}
 
-Komandrindas rīki, Scala, Play, JSON API, header auth.
+Platformā projekta programmatūras konfigurācijā ir konfigurējams administratora
+lietotājs ar visām trīs iepriekšminētajām tiesībām, lai izveidotu sākotnējos
+pārvaldības lietotājus.
+
+Platformā lietotājus un to piekļuves datus var konfigurēt no
+\glslink{mgmtpanel}{pārvaldības paneļa}, kas ir atšķirīgi no pārējām platformas
+darbībām, kas lielākoties norit komandu rindā jeb terminālī, jo šos datus
+pārsvarā pārvalda pasniedzējs vai laboratorijas īpašnieks, kuram visvieglāk būtu
+no jebkura datora atvērt pārlūku un veikt šīs darbības. Savukārt, izstrādātājam,
+kas pārsvarā savu darbu veic komandurindā, lielākā daļa darbības ir pieejamas
+izmantojot komandu rindas rīku jeb \glslink{client}{klientu}. Skats no
+pārvaldības paneļa lietotāju sadaļas skatāms attēlā \ref{fig:mgmtpanelusr}.
+
+\begin{figure}[H]
+    \includegraphics[width=0.9\linewidth]{assets/mgmt-panel-usr-gray.png}
+    \centering
+    \caption{Platformas pārvaldības paneļa lietotāju pārvaldības skats.}
+    \label{fig:mgmtpanelusr}
+\end{figure}
 
 \section{Notikumu sistēmas algoritma realizācija}
 \label{sec:dipactorsystem}
@@ -145,6 +243,11 @@ Event engines.
 Event sourcing.
 
 Purity and side-effects.
+
+\section{Aparatūras pārvaldības realizācija}
+\label{sec:hwmgmt}
+
+Komandrindas rīki, Scala, Play, JSON API, header auth.
 
 \section{Aģenti un klienti un to starpkomunikācija}
 \label{sec:agentclient}
