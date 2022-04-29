@@ -35,6 +35,7 @@
           titlesec
           appendix
           bookmark
+          ehhline
           soul;
       };
     in rec {

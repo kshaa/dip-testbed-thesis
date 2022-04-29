@@ -91,6 +91,7 @@
 \usepackage[font=small,labelfont=normal,textfont=it]{subcaption} % apakšvirsrakstiem - nav nekur aprakstīts tāpēc konfigurācija pēc gaumes
 
 \usepackage{xcolor}
+\usepackage{hhline}
 
 
 \patchcmd{\abstract}{\null\vfil}{}{}{}

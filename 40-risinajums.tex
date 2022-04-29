@@ -1,16 +1,3 @@
-\section{Darba tvērums}
-
-Darba ietvaros tika izstrādāta vāja reāllaika komunikācijas platforma, kas
-nodrošina 1) iespēju reģistrēt un uzskaitīt, pārvaldīt fizisku attīstītājrīku
-vai mikrokontrolieru aparatūru, 2) veikt programmaparatūras augšupielādi
-aparatūrā, 3) mijiedarboties ar aparatūru, izmantojot vizuālu saskarni, kas
-līdzinās noklusētajai aparatūrā fiziski pieejamajai saskarnei, 4) ierobežoti
-testēt aparatūras funkcionalitāti.
-
-Šis darbs izstrādāts atvērti - platformas pirmkods un šī dokumenta pirmkods ir
-publiski pieejams GitHub platformā brīvai apskatei un izmantošanai.
-\cite{VeinbahsKrisjanisTestbed} \cite{VeinbahsKrisjanisThesis}
-
 % TODO - Ko tad es īsti uztaisīju - lielos un mazos vilcienos?
 
 % TODO - Ko es neuztaisīju!
@@ -39,17 +26,113 @@ publiski pieejams GitHub platformā brīvai apskatei un izmantošanai.
 
 \section{DIP platforma}
 
-Šeit varbūt varētu pārkopēt "Piedāvātais risinājums" saturu, lai būtu viena skaidra, īsa, kodolīga sekcija par platformu. 
+Izstrādātā platforma sastāv no \glslink{server}{servera}, \glslink{agent}{aģentiem}
+jeb aparatūras starpniekiem, pašas fiziskās attīstītājrīku aparatūras,
+\glslink{client}{klientiem} jeb gala lietotājiem ar komandrindas rīkiem, un
+pārvaldības paneļa jeb datu pārvaldības tīmekļa lietotnes. Attēlā
+\ref{fig:dipdpd0} redzama 0. līm. datu plūsmas diagramma minētai platformai. 
 
-\section{Komunikācijas protokoli}
+\begin{figure}[H]
+    \includegraphics[width=0.7\linewidth]{assets/DPD0.drawio.png}
+    \centering
+    \caption{DIP platformas 0. līmeņa datu plūsmas diagramma}
+    \label{fig:dipdpd0}
+\end{figure}
+
+Attēlā \ref{fig:dipdpd0} redzamās apakšsistēmas ir aprakstītas šajā dokumentā
+sekojoši. 
+
+Pašā platformas centrā ir centralizēts tīmekļa serveris, kas funkcionē
+kā pārvaldības datu avots un platformas lietotāju komunikācijas starpnieks, tā
+datu pārvaldības ir aprakstīta nodaļās \ref{sec:usermgmt} un \ref{sec:hwmgmt},
+savukārt, tā dalība komunikācijas mehānismos ir aprakstīta \ref{sec:dipactorsystem}.
+
+Nodaļā \ref{sec:dipactorsystem} aprakstītā vājo reāllaika komunikācijas sistēmu,
+savukārt, izmanto komandrindas rīki - klients un aģents - lai ļautu lietotājiem
+mijiedarboties ar attīstītājrīku aparatūru. Šis mehānisms ir aprakstīts nodaļā
+\ref{sec:agentclient}. Un izmantojot šo klienta - aģenta mehānismu, platformā
+lietotājam tiek realizētas trīs saskarnes, lai mijiedarbotos ar attīstītājrīku
+aparatūru, kuras aprakstītas nodaļās \ref{sec:vinweb}, \ref{sec:vinbytes} un
+\ref{sec:vinminos}.
+
+Par šīs platformas, tai skaitā aparatūras laboratoriju, uzstādīšanu un
+administrēšanu ir aprakstīts nodaļā \ref{sec:ops}. Par programmaparatūras
+izstrādi un testēšanu platformā mazliet aprakstīts nodaļā \ref{sec:usage}. Par
+šī darba veikumu un tvērumu aprakstīts nākamajā nodaļā \ref{sec:scope}.
+
+\section{Darba tvērums}
+\label{sec:scope}
+
+Darba ietvaros tika izstrādāta vāja reāllaika komunikācijas platforma, kas
+nodrošina 1) iespēju reģistrēt un uzskaitīt, pārvaldīt fizisku attīstītājrīku
+vai mikrokontrolieru aparatūru, 2) veikt programmaparatūras augšupielādi
+aparatūrā, 3) mijiedarboties ar aparatūru, izmantojot vizuālu saskarni, kas
+līdzinās noklusētajai aparatūrā fiziski pieejamajai saskarnei, 4) ierobežoti
+testēt aparatūras funkcionalitāti.
+
+Šis darbs izstrādāts atvērti - platformas pirmkods un šī dokumenta pirmkods ir
+publiski pieejams GitHub platformā brīvai apskatei un izmantošanai.
+\cite{VeinbahsKrisjanisTestbed} \cite{VeinbahsKrisjanisThesis}.
+
+\begin{table}[H]
+    \begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}| }
+    \hline
+    Programmēšanas valoda&Faili&Tukšās rindiņas&Komentāru rindiņas&Koda rindiņas\\
+    \hline
+    Python & 101 & 1551 & 717 & 7424\\
+    Scala & 101 & 593 & 120 & 4088\\
+    Verilog & 34 & 409 & 676 & 2496\\
+    HTML & 11 & 3 & 0 & 492\\
+    Bourne Shell & 17 & 91 & 85 & 378\\
+    make & 2 & 36 & 30 & 80\\
+    SQL & 2 & 33 & 28 & 70\\
+    XML & 1 & 14 & 8 & 40\\
+    YAML & 2 & 0 & 1 & 33\\
+    C++ & 1 & 4 & 14 & 14\\
+    \hhline{|=|=|=|=|=|}
+    Kopā & 272 & 2734 & 1679 & 15115\\
+    \hline
+    \end{tabular}
+    \centering
+    \captionsetup{justification=centering}
+    \caption{Koda rindiņu skaita analīze projekta pirmkodā}
+    \label{table:cloc}
+\end{table}
+
+Aptuvenai sapratnei par izstrādāto koda apjomu, projekta pirmkodā tika izpildīts
+koda rindiņu analīzes rīks \cite{AlDanialCloc}, kura rezultāti redzami gan projekta
+pirmkoda versiju kontroles repozitorijā \cite{VeinbahsKrisjanisTestbed}, gan tabulā
+\ref{table:cloc}.
+
+Platformas pamata funkcionalitāte, lai lietotājs augšupielādētu programmatūru un
+veiktu baitu līmeņa datu apmaiņu ar aparatūru, tika realizēta kursa darba laikā.
+
+Bakalaura darba laikā, 1) platformai tika pievienota autentifikācija, 2)
+izstrādāts pārvaldības panelis, 3) pārrakstīts klients no tīras grafiskas
+saskarnes par termināļa grafisko saskarni, 4) pārrakstīta klienta virtuālā
+saskarne kā notikumu sistēma nevis nestrukturizēts kods, 5) izplānota un
+realizēta virtuālā saskarne MinOS formālā protokolā, klientā un attīstītājrīkā,
+6) tika dokumentēta sistēmas darbība un arhitektūra, tai skaitā arī šī dokumenta
+izstrāde.
+
+\section{Lietotāju pārvaldības realizācija}
+\label{sec:usermgmt}
+
+Tīmekļa lietotne, Scala, Play, cookie auth, HTTP formas.
+
+\section{Aparatūras pārvaldības realizācija}
+\label{sec:hwmgmt}
+
+Komandrindas rīki, Scala, Play, JSON API, header auth.
+
+\section{Notikumu sistēmas algoritma realizācija}
+\label{sec:dipactorsystem}
 
 1. HTTP REST - Biznesa entītiju pārvaldība centrālajā serverī
 2. HTTP WebSocket - Vāja reāllaika komunikācija starp centrālo serveri un klientiem/aģentiem
 3. Akka - Centrālā servera aktieru vāja reāllaika komunikācija
-4. Basic auth un session cookies - autentifikācija iepriekšminētajiem (var pieminēt, var nepieminēt)
-5. USB serial - Izmantots komunikācijai starp aģentu un dzelzi
 
-\section{Notikumu sistēmas algoritma realizācija}
+Agent JSON protocol
 
 Notikumu dzinējs ar blakusefektiem - notikumu sistēmas realizācija gan klientā, gan aģentā, gan serverī.
 
@@ -64,6 +147,7 @@ Event sourcing.
 Purity and side-effects.
 
 \section{Aģenti un klienti un to starpkomunikācija}
+\label{sec:agentclient}
 
 Kā strādā aģenti, kā tie klausās komandas no platformas, kā tie veic programmēšanu,
 kā tie uztur virtuālās saskarnes komunikācijas?
@@ -74,6 +158,7 @@ komunicē ar aģentu programmaparatūru izmantojot seriālo portu.
 UART, Virtual Interfaces (webcam, serial connection)
 
 \section{Virtuālā saskarne "tīmekļkamera"}
+\label{sec:vinweb}
 
 Visi veidi kā es mēģināju realizēt tīmekļkameras virtuālo saskarni.
 
@@ -84,6 +169,10 @@ Kā to varētu izdarīt vēl labāk?
 Īsumā - OGG video streaming
 
 \section{Virtuālās saskarnes "hexbytes" un "buttonleds"}
+\label{sec:vinbytes}
+
+5. USB serial - Izmantots komunikācijai starp aģentu un dzelzi
+
 
 Apraksts dažādu veidu 1-pret-1 baitu ziņapmaiņas virtuālajām saskarnēm.
 
@@ -92,10 +181,43 @@ Ko ar tām var panākt?
 Ko ar tām nevar panākt?
 
 \section{Virtuālā saskarne "MinOS"}
+\label{sec:vinminos}
 
-Apraksts chunk-to-chunk jeb uz seriālā porta paketēm balstītu ziņapmaiņas saskarni.
+MinOS ir virtuāla saskarne, lai mijiedarbotos ar attīstītājrīku aparatūru, kas
+ir realizēta kā termināļa grafiskā saskarne, kas redzama attēlā
+\ref{fig:minosgui}, taču vizuāli tā līdzinās tai pašai saskarnei, kas pieejama
+uz Anvyl attīstītājrīka fiziski, kas redzama attēlā \ref{fig:anvyl}. 
 
-Pielikums teksts: Protokola sintakse https://github.com/kshaa/dip-testbed-dist/blob/master/prototypes/06-anvyl-min-os/syntax.bnf  
+Skatoties attēla \ref{fig:minosgui} saskarnē, ir redzams 8x8 RGB displejs (skat.
+kreiso daļu), 8 sarkanas LED gaismas (skat. labās puses 1. rindu), 8 sarkani LED
+slēdži (skat. labās puses 2. rindu), 3x8 pelēkas spiedpogas (skat. labās puses
+3.-5. rindu), teksta lauki (skat. labās puses 6.-7. rindu). 
+
+\begin{figure}[H]
+    \includegraphics[width=0.7\linewidth]{assets/min-os-execution.png}
+    \centering
+    \caption{MinOS termināļa grafiskā saskarne.}
+    \label{fig:minosgui}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=0.7\linewidth]{assets/anvyl.png}
+    \centering
+    \caption{Anvyl attīstītājrīks.}
+    \label{fig:anvyl}
+\end{figure}
+
+Lai realizētu MinOS virtuālo saskarni tika izplānots komunikāciju protokols
+starp aģentu un klientu. Protokols tika formāli definēts, izstrādājot BNF
+formāta sintaksi, kuru iespējams apskatīt pielikumā \ref{att:minosbnf}. Ņemot
+vērā, ka vēlamais protokols ir binārs, tad BNF formāts definē baitus kā
+heksidecimālu ciparu pārus tātad "0x??".
+
+\ref{lst:minosledchunk}
+
+\begin{lstlisting}[caption={MinOS LED gaismu pakete},label={lst:minosledchunk},captionpos=b]
+    0x00 0x02 0xFF 0x00 0x01 
+\end{lstlisting}
 
 Pielikums attēls: TUI saskarne https://github.com/kshaa/dip-testbed-dist/blob/master/docs/assets/UHuU1Ur8e0CgoTmsm5khLuOJH.png
 
@@ -106,6 +228,7 @@ Ko ar šo saskarni var panākt?
 Ko ar šo saskarni nevar panākt?
 
 \section{Infrastruktūras pārvaldība}
+\label{sec:ops}
 
 Kā laboratorijas īpašnieki pieslēdz savus dzelžus platformai?
 
@@ -120,6 +243,7 @@ Board management w/ Ansible
 CICD deployment procesi
 
 \section{Testēšana un uzturēšana}
+\label{sec:usage}
 
 Šo es praktiski neesmu paspējis izdarīt, bet šis būtu interesanti:
 
