@@ -386,6 +386,57 @@ dip_client quick-run -b f65e4276-2d72-4471-b5de-bddbc833d2ea \
 \section{Tīmekļa kameras virtuālā saskarne}
 \label{sec:vinweb}
 
+Pēc darba vadītāja ieteikumiem, tika secināts, ka gadījumos, kad attālināta
+aparatūras programmēšana nefunkcionē korekti, būtu diezgan grūti bez fiziskas
+klātbūtnes secināt, kas ir pie vainas, tādēļ būtu noderīgi, ja būtu pieejama
+aparatūras video straumēšana ar tīmekļa kameru.
+
+Lai realizētu šo funkcionalitāti, tika izveidoti dažādi \ref{sec:dipactorsystem}
+nodaļā minēti servera un aģenta aktieri, lai veiktu tīmekļakameras datu
+starpniecību. Zemāk aprakstīts šo aktieru dzīvescikls un ziņapmaiņa.
+
+\begin{enumerate}
+    \item Tīmekļa kameras datu avots ir ar komandu rindas rīku nokonfigurējams
+        aktieris \lstinline!agent-video!
+    \item \lstinline!agent-video! pievienojas serverim, tādējādi serverī
+        izveidojot aktieri \lstinline!server-video-control!, kas sūta atpakaļ
+        \lstinline!agent-video! informāciju par straumes abonentu skaitu
+    \item \lstinline!agent-video! no fiziski pievienotas tīmekļa kameras saņem
+        video straumes datus
+    \item Atkarībā no tā vai ir aktuāli video straumes abonenti,
+        \lstinline!agent-video! sūta \lstinline!server-video-control! video
+        straumes datus, lai ietaupītu patērētos tīkla resursus
+    \item Serverī \lstinline!server-video-control! publicē video straumes datus,
+        izmantojot aktieri \lstinline!pub-sub!
+    \item Pārvaldības panelim pieslēdzas lietotāji, pieprasot video straumi, kas
+        rezultē jauna aktiera izveidē \lstinline!server-video-subscriber!, kurš
+        informē \lstinline!server-video-control! un \lstinline!pub-sub! par savu
+        abonamentu
+    \item \lstinline!pub-sub! saņemot video straumes datus no
+        \lstinline!server-video-control!, pārtranslē šos datus arī
+        \lstinline!server-video-subscriber!
+    \item \lstinline!server-video-subscriber! aizsūta lietotājam atpakaļ HTTP
+        \lstinline!application/ogg! atbildē aktuālos video straumes datus
+\end{enumerate}
+
+\begin{figure}[H]
+    \includegraphics[width=0.6\linewidth]{assets/video_engine.drawio.png}
+    \centering
+    \caption{Tīmekļa kameras aģenta loģika.}
+    \label{fig:videoengine}
+\end{figure}
+
+Attēlā \ref{fig:videoengine} ir redzama iepriekšminētā \lstinline!agent-video!
+komandu rindas aktiera dzīvescikla loģika. Jāmin, ka brīžos, kad jebkas noiet
+greizi, aktieris vienkārši izbeidz visus aktīvos savienojumus un beidz darbu.
+
+Savukārt, attēlos \ref{fig:mgmtpanelhw} un \ref{fig:hwstream} ir redzams
+pārvaldības paneļa aparatūras pārvaldības skats, no kura iespējams sākt
+skatīties aparatūras video straumi, kā arī piemērs kā izskatās šāda video
+straume pārlūkā, precīzāk, kā izskatās publiski pieejamā
+\cite{VeinbahsKrisjanisProduction} testa vides laboratorijas video straume, kas
+tiek raidīta no darba autora mājām.
+
 \begin{figure}[H]
     \includegraphics[width=0.9\linewidth]{assets/mgmt-panel-hw-gray.png}
     \centering
@@ -400,14 +451,36 @@ dip_client quick-run -b f65e4276-2d72-4471-b5de-bddbc833d2ea \
     \label{fig:hwstream}
 \end{figure}
 
-Visi veidi kā es mēģināju realizēt tīmekļkameras virtuālo saskarni.
+Diemžēl, jāmin, ka augstāk aprakstītajai video straumes translēšanas pieejai ir
+pāris tehniskas un veiktspējas problēmas, kas tika atklātas izstrādes un
+pētniecības laikā.
 
-Cik labi tas strādā?
+Pirmkārt, aģents ir izstrādāts Python programmēšanas valodā, kas nav īsti
+paredzēta tādai paralēlai datu apstrādei, kas realizēta tīmekļa kameras datu
+straumēšanas aktierī.
 
-Kā to varētu izdarīt vēl labāk?
+Otrkārt, pārtranslēt VLC HTTP OGG straumi varētu nebūt pārāk efektīvi, labāk
+būtu izmantot kādu bibliotēku, kas piedāvā šādu funkcionalitāti bez papildus
+HTTP savienojuma nepieciešamības.
 
-Īsumā - OGG video streaming
-
+Treškārt, aģents ir mikrokontrolieris ar vājiem skaitļošanas resursiem, tādēļ
+nav ieteicams, nedz pat īsti iespējams, no aģenta raidīt vairāk kā vienu
+straumi, kas nozīmē, ka servera pusē to ir jāduplicē ar \gls{pubsub}
+mehānismiem, taču tas nebūt nav triviāli, jo video straumes datos ir iekodēta
+dienasta informācija par to, kurš aktuālais kadrs šobrīd tiek rādīts, kas,
+savukārt, ietekmē to kā serverim ir jāizsūta HTTP OGG atbildes, kas nozīmē, ka
+ir jāveic programmatiska video datu lasīšana vai iespējams pat pārrakstīšana.
+Precīzāk, sūtot HTTP \lstinline!application/ogg! atbildes daļas, ir nepieciešams
+norādīt \lstinline!Range! galveni, kas saturētu informāciju par to kurā video
+straumes laikā parādās minētie video dati. \cite[para. 14.35.2]{RFC2616} Šī
+informācija ir iekodēta OGG lapās laukā \lstinline!granule_position! \cite[para
+6., A]{RFC3533}, taču, lai to nolasītu ir jāizstrādā OGG lapu parseris, ko darba
+izstrādes laika ierobežojumu dēļ nebija iespējams laicīgi izdarīt. Darba
+ietvaros šim trešajam punktam tika realizēti dažādi aprisinājumi (1. straumes
+sākšana no jauna katru reizi, kad ir jauns abonents, 2. straumes pirmo lapu
+atcerēšanās un sākotnēja nosūtēšana tādējādi imitējot straumes korektu sākumu,
+kam seko pārrāvums līdz aktuālajam brīdim), taču tie nebija pārāk augstas
+kvalitātes, kas rezultēja straumes lēnumā un pārrāvumos. 
 
 \section{Baitu virtuālās saskarnes}
 \label{sec:vinbytes}
