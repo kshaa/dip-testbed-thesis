@@ -166,8 +166,8 @@ kuras lietotājam platforma piedēvē attiecīgas tiesības veikt dažādas darb
 kuras skatāmas tabulā \ref{table:permissions}.
 
 \begin{table}[H]
-    \newcounter{counter}
-    \newcommand\rownumber{\stepcounter{counter}\arabic{counter}.}
+    \newcounter{permissioncounter}
+    \newcommand\rownumber{\stepcounter{permissioncounter}\arabic{permissioncounter}.}
     \begin{tabular}{ |p{1cm}|p{5cm}|p{3cm}|p{6cm}| }
     \hline
     N.p.k.&Darbība&Nepieciešamās tiesības&Papildus nosacījumi \\
@@ -226,39 +226,74 @@ pārvaldības paneļa lietotāju sadaļas skatāms attēlā \ref{fig:mgmtpanelus
 \section{Notikumu sistēmas algoritma realizācija}
 \label{sec:dipactorsystem}
 
-1. HTTP REST - Biznesa entītiju pārvaldība centrālajā serverī
-2. HTTP WebSocket - Vāja reāllaika komunikācija starp centrālo serveri un klientiem/aģentiem
-3. Akka - Centrālā servera aktieru vāja reāllaika komunikācija
+Darbā izstrādātajā platformā, lai veiktu ziņu starpniecību starp lietotāju un
+aparatūru, bija nepieciešams realizēt vāja reāllaika komunikāciju. Tā ir
+nepieciešama, piemēram, lai sūtītu "LED gaismu" aktuālo stāvokli no aparatūras
+lietotājam un "spiedpogu" aktuālo stāvokli no lietotāja aparatūrai jeb lai
+realizētu \glslink{vinterface}{virtuālas saskarnes}.
 
-Agent JSON protocol
+Lai realizētu šādu vāja reāllaika komunikācijas sistēmu, platforma tika pamatā
+izstrādāta kā notikumu sistēma, izmantojot Scala programmēšanas valodas aktieru
+modeļa programmēšanas ietvaru Akka. Aktieru modelī bāzētas notikumu sistēmas ir
+pierādījušas sevi kā spējīgas nodrošināt veiktspēju augstas paralelitātes
+reāllaika sistēmām, piemēram, Microsoft ir izstrādājuši aktieru modelī bāzētu
+mākoņpakalpojumu risinājumu satvaru Orleans, ar kuru tie spēja realizēt
+gājienos-bāzētu spēli "Galactic Reign", kuru tie testēja ar 1000 paralēli
+darbojošamies aktieriem, novērojot stabilu veiktspēju ar 95-97\% procesoru
+nodarbinātību. \cite[para. 5.1, 5.2]{Bernstein2014}.
 
-Notikumu dzinējs ar blakusefektiem - notikumu sistēmas realizācija gan klientā, gan aģentā, gan serverī.
+Platformas notikumu sistēmas realizācijai pamatā ir nodaļās \ref{sec:actormodel}
+un \ref{sec:eventsourcing} pieminētais aktieru modelis un notikumu sistēmas.
 
-Actor model (every actor defines its inputs)
+Starp \glslink{server}{centralizēto serveri} un \glslink{client}{klientu}, un
+\glslink{agent}{aģentu} komunikācija notiek, izmantojot, WebSocket un HTTP
+savienojumus. WebSocket savienojumos tiek raidītas gan bināra, gan teksta
+formāta ziņas, papildus šādiem savienojumiem tika realizēts, ka pirmai ziņai
+vienmēr ir jābūt autentifikācijas ziņai JSON formātā, kas satur lietotājvārdu un
+paroli, kā arī tika realizēts, ka ik pēc nokonfigurējama intervāla, kas pēc
+noklusējuma bija 30 sekundes, klientam vai aģentam ir jāsūta sirdspuksta (angl.
+heartbeat) ziņa, kas, ja netika saņemta 3 reizes pēc kārtas, ļāva secināt, ka
+savienojums ir bojāts un to var izbeigt. HTTP savienojumiem autentifikācija tika
+realizēta izmantojot HTTP sīkdatnes un HTTP "basic auth" galveni, papildus HTTP
+savienojumu gadījumā reāllaika komunikācijas vajadzībām, tika pieņemta
+konfigurējama noildze, kas pēc noklusējuma bija 30 sekundes.
 
-Message passing.
+Starp \glslink{board}{aparatūru} un \glslink{agent}{aģentu} ir izmantota sadaļā
+\ref{sec:serial} aprakstītā seriālā komunikācija. Aģenti, kas realizēti Python
+valodā izmantojot daudz dažādas publiski pieejamas bibliotēkas, ik pēc 0.01
+sekundes nolasa Linux čaulas seriālo ierīču dziņu buferos ielasītos datus un tos
+izsūta kā ziņu WebSocket savienojumā ar serveri. Dati atkarībā no aģenta veida
+tiek lasīti pēc dažāda "baudrate", kas pēc noklusējuma ir 115200, kas ir
+ātrākais Digilent Anvyl datu pārraides ātrums. Kad aģenta aparatūras datu ziņas
+tiek nosūtītas serverī, tās tiek translētas visiem ierīces seriālā porta
+abonentiem Akka jeb platformas aktieru klasterī, kas precīzāk aprakstīts sadaļā
+\ref{sec:hwmgmt}.
 
-Event engines.
+Tabulā \ref{table:actors} ir aprakstīti platformas izstrādes gaitā realizētie
+aktieri, to funkcija jeb biznesa loģika kā arī kurā platformas sastāvdaļā jeb
+apakšsistēmā tie ir realizēti. Gan ir vērts minēt, ka šajā sarakstā nav dažādi
+Akka vai Play satvaru sistēmas aktieri.
 
-Event sourcing.
-
-Purity and side-effects.
+\begin{table}[H]
+    \newcounter{actorcounter}
+    \newcommand\rownumber{\stepcounter{actorcounter}\arabic{actorcounter}.}
+    \begin{tabular}{ |p{1cm}|p{3cm}|p{2cm}|p{8cm}| }
+    \hline
+    N.p.k.&Aktieris&Platformas sastāvdaļa&Aktiera funkcija \\
+    \hline
+    \rownumber & PubSub & Serveris & Uzskaita tematus, tā abonentus, saņem ziņas, publicē abonentiem \\
+    \hline
+    \end{tabular}
+    \centering
+    \captionsetup{justification=centering}
+    \caption{Platformas aktieri}
+    \label{table:actors}
+\end{table}
 
 \section{Aparatūras pārvaldības realizācija}
 \label{sec:hwmgmt}
 
 Komandrindas rīki, Scala, Play, JSON API, header auth.
-
-\section{Aģenti un klienti un to starpkomunikācija}
-\label{sec:agentclient}
-
-Kā strādā aģenti, kā tie klausās komandas no platformas, kā tie veic programmēšanu,
-kā tie uztur virtuālās saskarnes komunikācijas?
-
-Kā strādā klienti? Kā tie sūta CRUD izmaiņas? Kā tie sūta aģentiem komandas? Kā tie
-komunicē ar aģentu programmaparatūru izmantojot seriālo portu.
-
-UART, Virtual Interfaces (webcam, serial connection)
 
 \section{Virtuālā saskarne "tīmekļkamera"}
 \label{sec:vinweb}
