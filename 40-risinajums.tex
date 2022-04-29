@@ -485,24 +485,77 @@ kvalitātes, kas rezultēja straumes lēnumā un pārrāvumos.
 \section{Baitu virtuālās saskarnes}
 \label{sec:vinbytes}
 
-"hexbytes" un "buttonleds"
+Pats primitīvākais veids kā uzturēt seriālo komunikāciju ir sūtīt starp uz un no
+aparatūras baitus. Izmantojot šādu primitīvu komunikācijas mehānismu, lai
+lietotājs varētu attālināti mijiedarboties ar aparatūru, ir izstrādātas divas
+virtuālas saskarnes, kas realizētas 1) kā termināļa tekstuāla saskarne un 2) kā
+termināļa grafiskā saskarne.
 
-5. USB serial - Izmantots komunikācijai starp aģentu un dzelzi
+Tekstuālā baitu līmeņa termināļa saskarne komandu rindas rīkā tiek dēvēta par
+\lstinline!hexbytes!, izmantojot šo tekstuālo saskarni aparatūras lietotājam
+jeb, ticamāk, izstrādātājam ir iespējams nolasīt no aparatūras nākošos baitus kā
+heksidecimālu simbolu virkni, savukārt, aparatūrā ir iespējams sūtīt baitus
+spiežot datora klaviatūras spiedpogas, kas tiek interpretētas kā ASCII simboli,
+kuru baitu vērtība tiek sūtīta uz aparatūru. Šādas tekstuālas virtuālās
+saskarnes pielietojumu, izmantojot platformas komandu rindas rīku, var skatīt
+tekstā \ref{lst:hexbytes}, kur redzama attālināta pieslēgšanās noteiktas
+aparatūras (pēc platformā reģistrēta identifikatora) seriālajam portam,
+izmantojot virtuālo saskarni \ref{lst:hexbytes}, kas tiek pārtraukta procesam
+nododot \lstinline!SIGINT! signālu, izmantojot \lstinline!Ctrl+C! klaviatūras
+spiedpogu kombināciju.
 
+\begin{lstlisting}[caption={\lstinline!hexbytes! izmantošana no komandu rindas},label={lst:hexbytes},captionpos=b]
+$ dip_client hardware-serial-monitor \
+    -b f65e4276-2d72-4471-b5de-bddbc833d2ea -t hexbytes
+[0x0] [0x2] [0x2e] [0x0] [0x1] [0x0] [0x6] 
+[0x0] [0x0] [0x0] [0x0] [0x0] [0x1] [0x0] [0x6]  
+Success: Finished monitoring
+\end{lstlisting}
 
-Apraksts dažādu veidu 1-pret-1 baitu ziņapmaiņas virtuālajām saskarnēm.
+Grafiskā baitu līmeņa termināļa saskarne komandu rindas rīkā tiek dēvēta par
+\lstinline!buttonleds!, programmatiski tā funkcionē tāpat kā iepriekšminētā
+virtuālā saskarne, jo baiti tiek sūtīti uz aparatūru un baiti tiek saņemti no
+aparatūras, taču lietotājam šī mijiedarbība tiek pasniegta izmantojot grafisku
+saskarni, kurā ir 24 spiedpogas baitu vērtībā no \lstinline!0x00! līdz
+\lstinline!0x17! un 8 LED gaismas 8 bitu jeb baita vērtībā. Šīs virtuālās
+saskarnes izsaukums redzams tekstā \ref{lst:buttonleds} un saskarnes izskats
+attēlā \ref{fig:buttonleds}.
 
-Ko ar tām var panākt?
+\begin{lstlisting}[caption={\lstinline!buttonleds! izsaukums no komandu rindas},label={lst:buttonleds},captionpos=b]
+$ dip_client hardware-serial-monitor \
+    -b f65e4276-2d72-4471-b5de-bddbc833d2ea -t buttonleds
+[2022-04-29 21:37:24] [INFO] [monitor_button_led_bytes_app] Starting app
+[2022-04-29 21:37:50] [INFO] [monitor_button_led_bytes_app] App finished
+Success: Finished monitoring
+\end{lstlisting}
 
-Ko ar tām nevar panākt?
+\begin{figure}[H]
+    \includegraphics[width=0.9\linewidth]{assets/buttonleds.png}
+    \centering
+    \caption{\lstinline!buttonleds! virtuālā grafiskā saskarne}
+    \label{fig:buttonleds}
+\end{figure}
+
+Šādas baitu līmeņa saskarnes jau ir ļoti spējīgas, ar tām var piemēram,
+projektēt galīgu stāvokļu automātus vai pat šādus automātus, kas veic darbības
+ar papildus reģistru atmiņu. Un spiedpogas var izmantot kā ievaddatus, lai
+darbinātu šādu automātu stāvokļu pārejas.
+
+Tomēr šādām saskarnēm ir trūkums - vienā sūtījumā ir pieejams tikai viens baits,
+kas patiesībā nav daudz, it īpaši, ja sūtījumā vēlas sūtīt dažāda veida datus.
+Ja nu ir nepieciešamība sūtīt 4 slēdžu aktuālos datus un spiedpogu ievaddatus?
+Tad izsūtītajā baitā 4 biti jāizmanto slēdžu vērtībām un pārējie 4 spiedpogu
+vērtībām. Bet ko darīt, ja jāizsūta 16 slēdžu vērtības? Tad ar baitu vairs
+nepietiek, nepieciešami vairāki baiti, tādēļ tika izstrādāta sarežģītāka
+virtuālā saskarne MinOS, kas aprakstīta nodaļā \ref{sec:vinminos}.
 
 \section{MinOS virtuālā saskarne}
 \label{sec:vinminos}
 
 MinOS ir virtuāla saskarne, lai mijiedarbotos ar attīstītājrīku aparatūru, kas
 ir realizēta kā termināļa grafiskā saskarne, kas redzama attēlā
-\ref{fig:minosgui}, taču vizuāli tā līdzinās tai pašai saskarnei, kas pieejama
-uz Anvyl attīstītājrīka fiziski, kas redzama attēlā \ref{fig:anvyl}. 
+\ref{fig:minosgui} un konceptuāli tā līdzinās tai pašai fiziskai saskarnei, kas
+pieejama uz Anvyl attīstītājrīka, kas redzama attēlā \ref{fig:anvyl}. 
 
 Skatoties attēla \ref{fig:minosgui} saskarnē, ir redzams 8x8 RGB displejs (skat.
 kreiso daļu), 8 sarkanas LED gaismas (skat. labās puses 1. rindu), 8 sarkani LED
@@ -510,7 +563,7 @@ slēdži (skat. labās puses 2. rindu), 3x8 pelēkas spiedpogas (skat. labās pu
 3.-5. rindu), teksta lauki (skat. labās puses 6.-7. rindu). 
 
 \begin{figure}[H]
-    \includegraphics[width=0.7\linewidth]{assets/min-os-execution.png}
+    \includegraphics[width=1.0\linewidth]{assets/min-os-execution.png}
     \centering
     \caption{MinOS termināļa grafiskā saskarne.}
     \label{fig:minosgui}
@@ -523,25 +576,185 @@ slēdži (skat. labās puses 2. rindu), 3x8 pelēkas spiedpogas (skat. labās pu
     \label{fig:anvyl}
 \end{figure}
 
-Lai realizētu MinOS virtuālo saskarni tika izplānots komunikāciju protokols
-starp aģentu un klientu. Protokols tika formāli definēts, izstrādājot BNF
-formāta sintaksi, kuru iespējams apskatīt pielikumā \ref{att:minosbnf}. Ņemot
-vērā, ka vēlamais protokols ir binārs, tad BNF formāts definē baitus kā
-heksidecimālu ciparu pārus tātad "0x??".
+Lai realizētu MinOS virtuālo saskarni ir nepieciešams uz un no aparatūras sūtīt
+dažāda veida datus. Gana daudz, lai ar vienu baitu nepietiktu, jo lai izsūtītu
+64 pikseļu RGB displejam pat viena pikseļa datus ir nepieciešami 6 biti krāsai
+(\(2^2 * 3\)) un vēl 6 biti indeksam (\(\log_{2}64\)), tātad kopā 12 biti, kas
+ir vairāk par 8 bitiem jeb baitu, kas izmantots iepriekšminētās virtuālās
+saskarnēs. Un MinOS saskarnē vēlamo elementu ir vairāk nekā tikai RGB displejs,
+tādēļ nepieciešams protokols, lai sūtītu vairāku veidu baitu ziņas seriālajā
+komunikācijā.
 
-\ref{lst:minosledchunk}
+MinOS saskarnes vairāku baitu ziņapmaiņai tika izplānots komunikācijas protokols
+starp \glslink{board}{aparatūru} un klientu. Protokols tika formāli definēts,
+izstrādājot BNF formāta sintaksi, kuru iespējams apskatīt pielikumā
+\ref{att:minosbnf}. Ņemot vērā, ka vēlamais protokols ir binārs, tad BNF formāts
+definē baitus kā heksidecimālu ciparu pārus tātad formātā \lstinline!0x??!.
+
+Kā piemērs ziņai, kas atbilst pielikumā pieejamajam BNF formātam ir binārā ziņa
+\ref{lst:minosledchunk}, kas MinOS saskarnē tiek izmantota, lai sūtītu LED
+gaismas datus no aparatūras uz klientu grafiskai attēlošanai.
 
 \begin{lstlisting}[caption={MinOS LED gaismu pakete},label={lst:minosledchunk},captionpos=b]
     0x00 0x02 0xFF 0x00 0x01 
 \end{lstlisting}
 
-Pielikums attēls: TUI saskarne https://github.com/kshaa/dip-testbed-dist/blob/master/docs/assets/UHuU1Ur8e0CgoTmsm5khLuOJH.png
+MinOS ziņapmaiņas protokols rakstiskā valodā ir sekojošs.
+\begin{enumerate}
+    \item Baitu straumē var sastapt diva veida simbolus:
+    \begin{enumerate}
+        \item \lstinline!escaped! simbolus
+        \item ne \lstinline!escaped! simbolus
+    \end{enumerate}
+    \item \lstinline!escaped! simboli ir jebkurš baits, pirms kura iepriekšējais ir baits ir \lstinline!0x00!
+    \item Ne \lstinline!escaped! simbols ir tāds, pirms kura iepriekšējais baits nav \lstinline!0x00!
+    \item Ja baitu straumē sastopams \lstinline!0x00 0x00!, tad jāpieņem, ka
+        sākotnējā \lstinline!escaped! simbola sūtīšana netika korekti pabeigta
+        un ir sākusies nākamā \lstinline!escaped! simbola sūtīšana
+    \item Ir diva veida \lstinline!escaped! simboli: 
+    \begin{enumerate}
+        \item Ziņas beigu simbols \lstinline!0x01!
+        \item Tipizētas ziņas sākuma simbols \(x\), kur \(x\geq0x02\)
+    \end{enumerate}
+\end{enumerate}
 
-Pielikums attēls: 
+Ar šādu protokola definīciju ir iespējams sūtīt vairāku baitu ziņas, kur katrai
+ziņai piemīt tips, kas ir skaitlis vērtībā no \(0\) līdz \(2^8-2\). Šis
+protokols arī ir izmantots MinOS saskarnē, lai sūtītu ziņas no lietotāja
+aparatūrai un otrādi. 
 
-Ko ar šo saskarni var panākt?
+Kā piemēru skatoties iepriekšminēto LED gaismas ziņu \ref{lst:minosledchunk}
+varam redzēt, ka ziņa sākas ar \lstinline!0x00 0x02!, tātad LED gaismas ziņas
+tips ir \(0x02 - 2 = 0x00\) jeb \(0\), redzams, ka ziņa korekti beidzas ar
+simbolu \lstinline!0x00 0x01!. Un ziņai pa vidu ir vērtība \lstinline!0xFF!, kas
+apzīmē, ka no 8 LED gaismām visas ir ieslēgtas (visi 8 biti ir ar vērtību 1). Ja
+šo ziņu pārbauda ar kādu tiešsaistē pieejamu BNF sintakses pārbaudes rīku,
+piemēram, BNF playground, \cite{BNFPlayground} pret simbolu \lstinline!<chunk>!,
+izmantojot pielikumā definēto protokola sintaksi, kas ir ziņas simbols, tad šī
+ziņa veiksmīgi iziet pārbaudi.
 
-Ko ar šo saskarni nevar panākt?
+Daļa no šāda protokola izstrādes sarežģītības nāk ne tikai no tā plānošanas, bet
+arī no tā realizācijas, jo jāatcerās, ka, lai gan realizēt parseri Python
+programmēšanas valodā ir triviāli, realizēt to Verilog programmaparatūrā ir
+mazliet grūtāk.
+
+Attēlā \ref{fig:chunkparser} redzams galīgs determinēts stāvokļu automāts, kas
+realizē pielikumā pieejamās BNF sintakses parsēšanu, nolasot ziņas tipu un
+datus. Gadījumos, kad ievaddati neatbilst nevienai pārejai, automāts paliek tajā
+pašā stāvoklī, kurā jau šobrīd atrodās. Attēlā redzamās pārejas pirmajā rindā
+satur pārejas ievaddatu nosacījumus un otrā rindā, pārejas blakusefektus jeb
+izpildītās darbības. Šis automāts nav pilnīgs, jo patiesībā ir nepieciešami
+papildus dienasta dati, lai glabātu aktuālo parsētās ziņas indeksu datu buferī,
+taču šī loģika netika ielikta ilustrācijā, lai to pārāk nesarežģītu. Šādu
+automātu ir iespējams vienkārši realizēt gan Verilog valodā, gan Python valodā,
+kas arī tika darīts, lai realizētu MinOS virtuālo saskarni.
+
+Automātā pieminētie ievaddati ir ielasītā baita gatavība
+\lstinline!is_rx_ready!, ielasītā baita vērtība \lstinline!rx_data!. Automātā
+pieminētie izvaddati ir ziņas veids \lstinline!r_chunk_type! un ziņas datu
+buferis \lstinline!r_chunk_bytes!. Automātā pieminēta arī palīgvērtība - ziņas
+aktuālā baita indekss buferī \lstinline!buffer_index!.
+
+\begin{figure}[H]
+    \includegraphics[width=1.0\linewidth]{assets/chunkparser.png}
+    \centering
+    \caption{MinOS ziņu parsera galīgs determinēts automāts.}
+    \label{fig:chunkparser}
+\end{figure}
+
+Lai gan lejupielādējot platformas klienta komandu rindas rīku uzreiz ir pieejama
+Python valodā programmētā grafiskā saskarne, tomēr attīstītājrīkā ir
+nepieciešama atbilstoša programmaparatūra, kas komunicē izmantojot MinOS
+protokolu, tādēļ projekta ietvaros Verilog valodā tika izstrādāts MinOS modulis,
+kas abstrahē seriālo komunikāciju un izstrādātājam izvērš tikai interesējošos
+virtuālās saskarnes elementus. Attēlā \ref{fig:minos} redzama šī Verilog moduļa
+grafiskā interpretācija. 
+
+\begin{figure}[H]
+    \includegraphics[width=0.7\linewidth]{assets/min-os-grey.png}
+    \centering
+    \caption{MinOS programmaparatūras modulis.}
+    \label{fig:minos}
+\end{figure}
+
+Attēlā \ref{fig:minos} redzamais Verilog valodā izstrādātais modulis izvērš
+dažādus signālus, lai mijiedarbotos ar attālināto grafisko lietotāja MinOS
+saskarni. Tabulā \ref{table:minossignals} ir dokumentēti no moduļa izvērstie
+signāli un to būtība.
+
+\begin{table}[H]
+    \newcounter{minossignalcounter}
+    \newcommand\rownumber{\stepcounter{minossignalcounter}\arabic{minossignalcounter}.}
+    \begin{tabular}{ |p{1cm}|p{3cm}|p{2cm}|p{3cm}|p{6cm}| }
+    \hline
+    N.p.k.&Signāls&Virziens&Izmērs&Būtība \\
+    \hline
+    \rownumber&\lstinline!CLK!&I&1&Pulksteņa signāls \\
+    \hline
+    \rownumber&\lstinline!T19!&I&1&Seriālā porta ievaddatu signāls \\
+    \hline
+    \rownumber&\lstinline!display!&I&\(64 * 8 = 512\)&Displeja pikseļu krāsas datu signāls \\
+    \hline
+    \rownumber&\lstinline!leds!&I&8&LED gaismu signāli \\
+    \hline
+    \rownumber&\lstinline!tx_text_bytes!&I&\(32 * 8 = 256\)&Izsūtītā ASCII teksta datu signāls \\
+    \hline
+    \rownumber&\lstinline!tx_text_size!&I&8&Izsūtītā ASCII teksta izmēra signāls \\
+    \hline
+    \rownumber&\lstinline!T20!&O&1&Seriālā porta izvaddatu signāls \\
+    \hline
+    \rownumber&\lstinline!button_index!&O&1&Nospiestās spiedpogas indeksa signāls \\
+    \hline
+    \rownumber&\lstinline!button_pressed!&O&1&Spiedpogas nospiešanas stāvokļa signāls \\
+    \hline
+    \rownumber&\lstinline!rx_is_text_ready!&O&1&Iesūtītā ASCII teksta gatavības signāls \\
+    \hline
+    \rownumber&\lstinline!rx_text_bytes!&O&\(32 * 8 = 256\)&Iesūtītā ASCII teksta datu signāls \\
+    \hline
+    \rownumber&\lstinline!rx_text_size!&O&8&Iesūtītā ASCII teksta izmēra signāls \\
+    \hline
+    \rownumber&\lstinline!switches!&O&8&Slēdžu stāvokļu signāls \\
+    \hline
+    \end{tabular}
+    \centering
+    \captionsetup{justification=centering}
+    \caption{Verilog MinOS moduļa signāli, I - ievad signāls, O - izvadsignāls}
+    \label{table:minossignals}
+\end{table}
+
+Ar šādu virtuālu saskarni un tās Verilog realizāciju jau ir iespējams projektēt
+daudz sarežģītākas digitālas iekārtas. Tehniski, ņemot vērā, ka ir pieejams 64
+RGB krāsu monitors un spiedpogas, būtu jābūt iespējai ar šādu abstrakciju
+attālināti projektēt, testēt un spēlēt datorspēli "Tetris" tikpat ārti kā esot
+fiziski klāt attīstītājrīku aparatūrai, kas ir cienījams sasniegums!
+
+Būtu vērtīgi līdz galam definēt ziņas, kādas atbalsta MinOS saskarne. Kā jau
+iepriekš ilustrēts, MinOS saskarne atbalsta sūtīt ziņu par LED gaismu stāvokli.
+Visas MinOS atbalstītās ziņas, savukārt, aprakstītas tabulā \ref{table:minospackets}.
+
+\begin{table}[H]
+    \newcounter{minospacketcounter}
+    \newcommand\rownumber{\stepcounter{minospacketcounter}\arabic{minospacketcounter}.}
+    \begin{tabular}{ |p{1cm}|p{3cm}|p{2cm}|p{8cm}| }
+    \hline
+    N.p.k.&Nosaukums&Izmērs&Būtība \\
+    \hline
+    \rownumber&\lstinline!leds!&1 baits&8 LED gaismu stāvoklis \\
+    \hline
+    \rownumber&\lstinline!switches!&1 baits&8 slēdžu stāvoklis \\
+    \hline
+    \rownumber&\lstinline!buttons!&1 baits&\(2^8\) spiedpogu nospiešanas fakts \\
+    \hline
+    \rownumber&\lstinline!display!&2 baiti&6 biti pikseļa indeksam, 6 biti pikseļa RGB krāsu vērtībām \\
+    \hline
+    \rownumber&\lstinline!text!&32 baiti&ASCII teksta vērtība \\
+    \hline
+    \end{tabular}
+    \centering
+    \captionsetup{justification=centering}
+    \caption{MinOS virtuālās saskarnes atbalstītās ziņas}
+    \label{table:minospackets}
+\end{table}
 
 \section{Infrastruktūras pārvaldība}
 \label{sec:ops}

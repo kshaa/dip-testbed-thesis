@@ -1,0 +1,26 @@
+digraph G {
+    R_CHUNKER_IDLE;
+    R_CHUNKER_READING_TYPE;
+    R_CHUNKER_READING_BYTE
+    R_CHUNKER_READING_ESCAPED_BYTE;
+    R_CHUNKER_FINISHED_CHUNK;
+    R_CHUNKER_PARSE_ERROR;
+    nowhere [style=invis,shape=point];
+    nowhere -> R_CHUNKER_IDLE;
+    
+    R_CHUNKER_IDLE -> R_CHUNKER_READING_TYPE[label="is_rx_ready == 1 && rx_data == 0"];
+ 
+    R_CHUNKER_READING_TYPE -> R_CHUNKER_PARSE_ERROR[label="is_rx_ready == 1 && rx_data == 0"];
+    R_CHUNKER_READING_TYPE -> R_CHUNKER_READING_BYTE[label="is_rx_ready == 1 && rx_data != 0\nr_chunk_type <= rx_data"];
+    
+    R_CHUNKER_READING_BYTE -> R_CHUNKER_READING_ESCAPED_BYTE[label="is_rx_ready == 1 && rx_data == 0"];
+    R_CHUNKER_READING_BYTE -> R_CHUNKER_READING_BYTE[label="is_rx_ready == 1 && rx_data != 0\nr_chunk_bytes[buffer_index * 8 +: 8] <= rx_data"];
+    
+    R_CHUNKER_READING_ESCAPED_BYTE -> R_CHUNKER_READING_BYTE[label="is_rx_ready == 1 && rx_data == 0\nr_chunk_bytes[buffer_index * 8 +: 8] <= 0;"];
+    R_CHUNKER_READING_ESCAPED_BYTE -> R_CHUNKER_FINISHED_CHUNK[label="is_rx_ready == 1 && rx_data == 1"];
+    R_CHUNKER_READING_ESCAPED_BYTE -> R_CHUNKER_PARSE_ERROR[label="is_rx_ready == 1"];
+    
+    R_CHUNKER_FINISHED_CHUNK -> R_CHUNKER_IDLE;
+    R_CHUNKER_PARSE_ERROR -> R_CHUNKER_IDLE
+    
+}
