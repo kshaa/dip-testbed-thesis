@@ -116,7 +116,17 @@
 \usepackage{float}
 
 % šis paredzēts, lai darbā varētu ievietot programmas koda fragmentus.
-\usepackage{listings} 
+\usepackage{listings}
+\lstset{    
+    basicstyle=\ttfamily\footnotesize,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    captionpos=b, 
+    tabsize=4,
+    extendedchars=true,
+    rulecolor=\color{black!30},
+    escapeinside={\%*}{*)}
+} 
 \lstnewenvironment{code}[1][] % Koda pieraksta bloks \begin{code}[options] \end{code}. Labā lieta, ka šis bloks nedalās pa lapām, lai nebūtu puse vienā un puse otrā lapā.
 {
     \noindent
@@ -130,7 +140,7 @@
         tabsize=4,
         extendedchars=true,
         rulecolor=\color{black!30},
-        escapeinside={\%*}{*)},                
+        escapeinside={\%*}{*)},
         #1
     }
 }

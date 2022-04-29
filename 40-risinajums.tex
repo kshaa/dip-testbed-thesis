@@ -118,7 +118,7 @@ realizēta virtuālā saskarne MinOS formālā protokolā, klientā un attīstī
 6) tika dokumentēta sistēmas darbība un arhitektūra, tai skaitā arī šī dokumenta
 izstrāde.
 
-\section{Statisku datu pārvaldība}
+\section{Statisko datu pārvaldība}
 \label{sec:staticdata}
 
 Šī platforma pamatā sastāv no reāllaika datu starpniecības un statisku datu
@@ -156,7 +156,7 @@ par notikušo vājā reāllaika komunikāciju, taču laika ierobežojumu dēļ �
 funkcionalitāte netika realizēta, jo nebija kritiska platformas
 funkcionētspējai.
 
-\section{Lietotāju pārvaldības realizācija}
+\section{Lietotāju datu pārvaldība}
 \label{sec:usermgmt}
 
 Lietotāju uzskaitei izmantota attēlā \ref{fig:staticdata} redzamā tabula "user".
@@ -223,7 +223,7 @@ pārvaldības paneļa lietotāju sadaļas skatāms attēlā \ref{fig:mgmtpanelus
     \label{fig:mgmtpanelusr}
 \end{figure}
 
-\section{Notikumu sistēmas algoritma realizācija}
+\section{Notikumu sistēmu realizācija}
 \label{sec:dipactorsystem}
 
 Darbā izstrādātajā platformā, lai veiktu ziņu starpniecību starp lietotāju un
@@ -269,34 +269,101 @@ tiek nosūtītas serverī, tās tiek translētas visiem ierīces seriālā porta
 abonentiem Akka jeb platformas aktieru klasterī, kas precīzāk aprakstīts sadaļā
 \ref{sec:hwmgmt}.
 
-Tabulā \ref{table:actors} ir aprakstīti platformas izstrādes gaitā realizētie
-aktieri, to funkcija jeb biznesa loģika kā arī kurā platformas sastāvdaļā jeb
-apakšsistēmā tie ir realizēti. Gan ir vērts minēt, ka šajā sarakstā nav dažādi
-Akka vai Play satvaru sistēmas aktieri.
+Tabulā \ref{table:serveractors} ir aprakstīti platformas izstrādes gaitā
+realizētie serverī esošie aktieri, to funkcija jeb biznesa loģika. Ir vērts
+minēt, ka šajā sarakstā nav dažādi Akka vai Play satvaru sistēmas aktieri.
+
+Tabulā \ref{table:cliactors} ir aprakstīti platformas izstrādes gaitā realizētie
+aģentā un klientā realizētie aktieri un to apraksts. Šie aktieri ir sarakstīti
+kopā, jo reāli tiem pamatā ir tā pati arhitektūra, jo gan klients, gan aģents
+abi realizēti vienā Python koda bāzē.
 
 \begin{table}[H]
-    \newcounter{actorcounter}
-    \newcommand\rownumber{\stepcounter{actorcounter}\arabic{actorcounter}.}
-    \begin{tabular}{ |p{1cm}|p{3cm}|p{2cm}|p{8cm}| }
+    \newcounter{serveractorcounter}
+    \newcommand\rownumber{\stepcounter{serveractorcounter}\arabic{serveractorcounter}.}
+    \begin{tabular}{ |p{1cm}|p{5cm}|p{9cm}| }
     \hline
-    N.p.k.&Aktieris&Platformas sastāvdaļa&Aktiera funkcija \\
+    N.p.k.&Aktieris&Aktiera funkcija \\
     \hline
-    \rownumber & PubSub & Serveris & Uzskaita tematus, tā abonentus, saņem ziņas, publicē abonentiem \\
+    \rownumber & Abonamenti (oriģ. PubSub) & Uzskaita tematus, tā abonentus,
+        saņem ziņas, publicē abonentiem \\
+    \hline
+    \rownumber & Vaicājumi (oriģ. Query) & Palīgaktieris, lai HTTP pieprasījumos
+        izveidotu šo aktieri, izsūtītu kādu ziņu, saņemtu atpakaļ ziņu un beigtu
+        darbību, kas ir noderīgi, lai integrētu HTTP saskarnes aktieru modelī \\
+    \hline
+    \rownumber & Tīmekļkamera (oriģ. Camera) & Saņem tīmekļa kameras datus no
+        aparatūras un publicē tos tīmekļkameras abonentiem \\
+    \hline
+    \rownumber & Tīmekļkameras abonents (oriģ. CameraListener) & Klausās
+        publicētos tīmekļa kameras datus un pāradresē tos tos tīmekļkameras
+        skatītājam HTTP savienojumā kā \lstinline!application/ogg! straumi \\
+    \hline
+    \rownumber & Aparatūras kontrolieris (oriģ. HardwareControl) & Uztur
+        WebSocket savienojumu ar aparatūru, saņem un pāradresē komandas
+        aparatūrai, veic seriālās komunikācijas datu starpniecību starp
+        aparatūru un aparatūras abonentiem \\
+    \hline
+    \rownumber & Aparatūras abonents (oriģ. SerialListener) & Uztur WebSocket
+        savienojumu ar lietotāju, veic seriālās komunikācijas datu starpniecību
+        starp aparatūru un lietotāju \\
     \hline
     \end{tabular}
     \centering
     \captionsetup{justification=centering}
-    \caption{Platformas aktieri}
-    \label{table:actors}
+    \caption{Platformas servera aktieri}
+    \label{table:serveractors}
 \end{table}
 
-\section{Aparatūras pārvaldības realizācija}
+\begin{table}[H]
+    \newcounter{cliactorcounter}
+    \newcommand\rownumber{\stepcounter{cliactorcounter}\arabic{cliactorcounter}.}
+    \begin{tabular}{ |p{1cm}|p{5cm}|p{9cm}| }
+    \hline
+    N.p.k.&Aktieris&Aktiera funkcija \\
+    \hline
+    \rownumber & Aparatūra (oriģ. Hardware) & Uztur savienojumu ar serveri un
+        aparatūru, gaida servera komandas, programmē aparatūru, veic seriālo
+        datu komunikāciju starp aparatūru un serveri, ir trīs paveidi
+        \lstinline!Anvyl! FPGA attīstīrājrīkam, \lstinline!nrf52!
+        mikrokontrolierim un \lstinline!fake! testēšanai \\
+    \hline
+    \rownumber & Tīmekļkamera (oriģ. Camera) & Uztur savienojumu ar serveri un
+        tīmekļkameru, kas fiziski pievienota un pieejama aģenta sistēmā, sūta
+        tīmekļkameras datus uz serveri \\
+    \hline
+    \rownumber & Aparatūras abonents (oriģ. SerialListener) & Uztur WebSocket
+        savienojumu ar lietotāju, veic seriālās komunikācijas datu starpniecību
+        starp lietotāju un serveri \\
+    \hline
+    \end{tabular}
+    \centering
+    \captionsetup{justification=centering}
+    \caption{Aģentu un klientu aktieri}
+    \label{table:cliactors}
+\end{table}
+
+\section{Aparatūras pārvaldība}
 \label{sec:hwmgmt}
 
 Komandrindas rīki, Scala, Play, JSON API, header auth.
 
-\section{Virtuālā saskarne "tīmekļkamera"}
+\section{Tīmekļa kameras virtuālā saskarne}
 \label{sec:vinweb}
+
+\begin{figure}[H]
+    \includegraphics[width=0.9\linewidth]{assets/mgmt-panel-hw-gray.png}
+    \centering
+    \caption{Platformas pārvaldības paneļa lietotāju pārvaldības skats.}
+    \label{fig:mgmtpanelhw}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=0.9\linewidth]{assets/webcam-usage.png}
+    \centering
+    \caption{Pārvaldības paneļa aparatūras video straume.}
+    \label{fig:hwstream}
+\end{figure}
 
 Visi veidi kā es mēģināju realizēt tīmekļkameras virtuālo saskarni.
 
@@ -306,8 +373,11 @@ Kā to varētu izdarīt vēl labāk?
 
 Īsumā - OGG video streaming
 
-\section{Virtuālās saskarnes "hexbytes" un "buttonleds"}
+
+\section{Baitu virtuālās saskarnes}
 \label{sec:vinbytes}
+
+"hexbytes" un "buttonleds"
 
 5. USB serial - Izmantots komunikācijai starp aģentu un dzelzi
 
@@ -318,7 +388,7 @@ Ko ar tām var panākt?
 
 Ko ar tām nevar panākt?
 
-\section{Virtuālā saskarne "MinOS"}
+\section{MinOS virtuālā saskarne}
 \label{sec:vinminos}
 
 MinOS ir virtuāla saskarne, lai mijiedarbotos ar attīstītājrīku aparatūru, kas
