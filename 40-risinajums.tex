@@ -1,4 +1,5 @@
 \section{DIP platforma}
+\label{sec:dipplatform}
 
 Izstrādātā platforma sastāv no \glslink{server}{servera}, \glslink{agent}{aģentiem}
 jeb aparatūras starpniekiem, pašas fiziskās attīstītājrīku aparatūras,
@@ -435,7 +436,7 @@ pārvaldības paneļa aparatūras pārvaldības skats, no kura iespējams sākt
 skatīties aparatūras video straumi, kā arī piemērs kā izskatās šāda video
 straume pārlūkā, precīzāk, kā izskatās publiski pieejamā
 \cite{VeinbahsKrisjanisProduction} testa vides laboratorijas video straume, kas
-tiek raidīta no darba autora mājām.
+tiek raidīta no darba autora mājām, Kalnciema ielā.
 
 \begin{figure}[H]
     \includegraphics[width=0.9\linewidth]{assets/mgmt-panel-hw-gray.png}
@@ -756,30 +757,184 @@ Visas MinOS atbalstītās ziņas, savukārt, aprakstītas tabulā \ref{table:min
     \label{table:minospackets}
 \end{table}
 
+Atsaucoties uz nodaļas sākumu, attēlā \ref{fig:minosgui}, ir ekrānuzņēmums no
+MinOS virtuālās saskarnes, kuru darbina attēlā \ref{fig:minosusage} redzamā demo
+jeb parauga programmaparatūra, kas tika izstrādāta, lai atrādītu MinOS darboties
+spēju.
+
+\begin{figure}[H]
+    \includegraphics[width=1.0\linewidth]{assets/min-os-usage-grey.png}
+    \centering
+    \caption{MinOS programmaparatūras piemērs.}
+    \label{fig:minosusage}
+\end{figure}
+
+Attēlā \ref{fig:minosusage} redzamā programmaparatūra sastāv no četrām
+savienotām moduļu shēmām. 
+
+Kreisajā apakšējā stūrī ir projektā izstrādātais MinOS protokola seriālās
+komunikācijas abstrakcijas modulis \lstinline!min_os!, attēla sānos ir FPGA
+porti \lstinline!CLK!, \lstinline!T19!, \lstinline!T20!, \lstinline!LD0-7!, kas
+aprakstīti arī tabulā \ref{table:minossignals}, izņemot \lstinline!LD0-7!, kas
+nav MinOS specifiski, bet ir vienkārši fiziskas gaismas diodes, kas ir pieejamas
+uz Anvyl attīstītājrīka, ko izstrādātā demo programmatūra izmanto papildus. 
+
+Papildus šiem tipiskajiem moduļiem ir trīs demo programmaparatūrai specifiski
+moduļi. Pirmkārt, pa vidu augšā \lstinline!main_counter!, kas katru sekundi uz
+vienu tikšķi paceļ signālu \lstinline!tick!, katru sekundi maina vērtību
+signālam \lstinline!flipper!, katru sekundi pieskaita 8 bitu signālam
+\lstinline!counter! skaitli \lstinline!0x01!. Otrkārt, pa labi apakšā modulis
+\lstinline!main_echo_text! saņem no lietotāja saskarnes sūtītu tekstu un pārsūta
+to atpakaļ saskarnei. Treškārt, pa labi augšā modulis
+\lstinline!main_flashes_and_blocks! reaģē uz spiedpogu signāliem un funkcionē kā
+RGB displeja dzinis.
+
+Rezultātē programmaparatūra nodrošina sekojošu saskarnes demo funkcionalitāti.
+\begin{enumerate}
+    \item RGB monitorā katru sekundi trīs stūros mirkšķ sarkana, zaļa un zila
+        gaisma
+    \item Saskarnē izmantojot WASD un TFGH spiedpogas, monitorā ir kustināmi uz
+        visām pusēm divi dažādu pelēku krāsu pikseļi
+    \item Sarkanās LED gaismas skaita no \lstinline!0! līdz \lstinline!255!,
+        ilustrējot šo skaitli gaismās kā 8 bitu vērtību
+    \item Ja kāds no slēdžiem ir ieslēgts, tad LED gaismas spoguļo slēdžu
+        vērtību
+    \item Jebkurš teksts, kas tiek iesūtīts aparatūrai tiek atsūtīts atpakaļ
+        identiski saskarnē
+\end{enumerate}
+
+Lai gan attēls \ref{fig:minosgui} ir statisks un nespēj šo funkcionalitāti
+atrādīt, eksistē arī publiski internetā, YouTube platformā, pieejams video ar
+šīs demo programmaparatūru un MinOS saskarni.
+\cite{VeinbahsKrisjanisDemo} 
+
 \section{Infrastruktūras pārvaldība}
 \label{sec:ops}
 
-Kā laboratorijas īpašnieki pieslēdz savus dzelžus platformai?
+Attēlā \ref{fig:hwstream} redzama demo laboratorija, kas uzstādīta darba autora
+mājās, Kalnciema ielā. Lai gan nodaļā \ref{sec:dipplatform} redzamā 0. līmeņa DPD
+diagramma, šķietami, gana ilustrē platformas konceptuālo uzbūvi, iespējams ir
+vērtīgi aplūkot fiziskā līmenī izmantoto publisko testa platformu
+\cite{VeinbahsKrisjanisProduction}. Attēlā \ref{fig:production} redzama šāda
+testa platformas fiziskā līmeņa arhitektūra. Testa platformas serveris tika
+uzstādīts DigitalOcean mākoņpakalpojumu devēja virtuālmašīnā, kas atrodas datu
+centrā Frankfurtē jeb Vācijā. Savukārt, pati laboratorija ar platformas aģentu
+un aparatūru atradās Kalnciema ielā jeb Latvijā. Arī programmaparatūras
+izstrādātājs jeb darba autors, atradās Latvijā kafejnīcā ar bezvada tīklu.
 
-Kā klienti pieslēdzas sistēmai un gūst iespēju izmantot dzelžus?
+\begin{figure}[H]
+    \includegraphics[width=0.8\linewidth]{assets/production.drawio.png}
+    \centering
+    \caption{Platformas testa vides fiziskā līmeņa arhitektūra.}
+    \label{fig:production}
+\end{figure}
 
-Kā izstrādātājs jeb darba autors jeb es automatizē versionēšanu, artefaktu pārvaldību?
+Veicot attālinātu programmaparatūras izstrādi datu plūsma notika starp šo
+fizisko iekārtu tīklu. Tieši šajā arhitektūrā arī lielākoties notika platformas
+izstrāde un testēšana tai skaitā demo programmaparatūras izstrāde un testēšana.
+Darba izstrādes laikā tīkla latence starp šīm iekārtām nebija būtiski jūtama un
+būtiski neietekmēja darba izstrādi.
 
-Docker cross-platform w/ buildx i.e. buildkit
+Papildus jāmin, ka attēlā \ref{fig:production} redzama vairāk fiziska aparatūra
+nekā aprakstīta šajā darbā, taču oriģināli prototipējot darba arhitektūru, tika
+secināts, ka arī šādas ierīces ir iespējams pievienot platformai, taču laika
+ierobežojumu dēļ tām netika izstrādāts atbalsts platformas komandu rindas aģenta
+rīkā. 
 
-Board management w/ Ansible
+\section{Platformas lietojamība un uzturēšana}
+\label{sec:maintenance}
 
-CICD deployment procesi
+Darba izstrādes laikā tika pacelti apsvērumi par šādas platformas uzturamību un
+lietojamību, kas apskatīti un aprakstīti šajā nodaļā. J - jautājums, A -
+atbilde.
 
-\section{Testēšana un uzturēšana}
-\label{sec:usage}
+J. Cik sarežģīti laboratorijas īpašniekam ir pieslēgt savu laboratoriju
+platformai?
 
-Šo es praktiski neesmu paspējis izdarīt, bet šis būtu interesanti:
+A. Ir nepieciešama papildus aparatūra laboratorijā, kas funkcionēs kā
+komunikācijas starpnieks starp platformu un aparatūru, jeb ir nepieciešams
+aģenta dators vai mikrokontrolieris. Aģentu nepieciešams administrēt, tajā
+jāuzstāda aparatūras pārvaldības programmatūra, ko parasti nodrošina aparatūras
+ražotāji. Aģentā nepieciešams uzstādīt platformas komandu rindas aģenta rīku.
+Lai optimizētu šo administrēšanas procesu tehniski ir iespējams izstrādāt
+Ansible, Chef vai citu automatizācijas risinājumu skriptus, lai automātiski
+nokonfigurētu aģenta sistēmu. Papildus, ja ir aģenti nepieciešami ir daudz,
+tehniski Raspberry mikrokontroliera gadījumā ir iespējams izstrādāt sistēmas
+attēla kopiju, ko var pārkopēt citā SD kartē, ko var ievietot nākamajā Raspberry
+mikrokontrolierī, tādējādi vienkāršojot aģentu uzstādīšanas procesu. Darba
+ietvaros šīs divas optimizācijas nav mēģināts izstrādāt laika ierobežojumu dēļ.
 
-Waveform recordings
+J. Cik sarežģīti platformas autoram ir izstrādāt jaunu platformas versiju?
 
-WASM testing
+A. Platformas pirmkoda kompilēšana ir automatizēta. Pirmkoda repozitorijā ir
+fails \lstinline!build.sh!, kas automātiski sakompilē platformas servera Scala
+pirmkodu ar \lstinline!sbt! rīku, automātiski sakompilē platformas aģenta un
+klienta komandu rindas rīkus \lstinline!AMD64! un \lstinline!ARM64! procesoru
+arhitektūrām (\lstinline!ARM64! nepieciešams, lai darbinātu aģentu Raspberry Pi
+mikrokontrolierī vai Apple datorā ar M1 procesoru) un ar \lstinline!pip! rīku un
+\lstinline!docker buildx!, kas atbalsta multi-platformu kompilāciju,
+\cite{DockerBuildx}. Lai autora darbs būtu vēl vieglāks šo visu varētu
+automatizēt kādā nepārtrauktās integrācijas platformā, piem. Jenkins, Drone CI,
+Concourse CI, Hydra CI, u.c..
 
-Ko reāli varētu izdarīt (drīzumā uzkodēšu, šim vajadzētu būt ātri):
+J. Cik sarežģīti platformas izstrādātājam ir sākt lietot platformu?
 
-MinOS request and response
+A. Lai sāktu izmantot platformā pieejamo aparatūru, ir izstrādāts skripts, lai
+automātiski datorā ieinstalētu platformas komandu rindas klienta rīku. Tekstā
+\ref{lst:setup} redzams, ka no klienta ieinstalēšanas līdz programmaparatūras
+augšupielādei un lietošanai ir tikai trīs komandas, neskaitot lietotāja un tā
+tiesību izveidošanu, ko tipiski darītu laboratorijas vai platformas īpašnieks.
+
+\begin{lstlisting}[caption={Platformas klienta lietošanas uzsākšana},label={lst:setup},captionpos=b]
+curl -L https://github.com/kshaa/dip-test[...]install.sh | bash
+dip_client session-auth -u <username> -p <password>
+dip_client quick-run -f firmware.bit -b ${BOARD_UUID}
+\end{lstlisting}
+
+\section{Programmaparatūras testēšana}
+\label{sec:testing}
+
+Lai gan platformā iespējams augšupielādēt un attālināti mijiedarboties ar
+programmaparatūru, tās testēšana nebūt nav triviāla.
+
+Viens variants ir testēt programmaparatūru manuāli - attālināti augšupielādēt to
+attīstītājrīka aparatūrā, uzsākt virtuālās saskarnes sesiju, mijiedarboties un
+secināt vai aparatūra darbojas kā paredzēts. Šis variants ir pilnīgi pietiekams
+maza izmēra projektiem, kuriem nav stingru laika ierobežojumu. Šis arī ir veids
+kā tika testēta platformas demo programmaparatūra un tātad šis testēšanas veids
+ir pieejams platformā.
+
+Otrs variants ir pirms programmaparatūras augšupielādes aparatūrā, veikt tās
+programmatisku simulāciju, ko nodrošina tādi rīki kā \lstinline!iverilog! vai
+grafiskā izstrādes vide \lstinline!Xilinx ISE WebPACK Design!. Šis ir viens no
+svarīgākajiem izstrādātāja instrumentiem, kas arī tika izmantots testējot demo
+programmaparatūru un ir izmantojams platformas ietvaros, lai gan tehniski ir
+ārpus-platformas rīks.
+
+Trešais variants ir testēt programmaparatūras darbību programmatiski.Un pat šim
+variantam ir divi veidi - testēt reāllaikā un testēt post-factum. 
+
+Platformas ietvaros tika izstrādāta virtuālā saskarne \lstinline!minosrequest!,
+kas ļauj definēt laikus, kad iesūtīt saskarnē ziņas, un kas ieraksta visas
+ienākošās un izejošās ziņas JSON formātā. Ar šo saskarni ir iespējams realizēt
+post-factum darbības testēšanu veicot datu jeb ziņu analīzi jebkurā
+programmēšanas valodā, kas spēj parsēt JSON datus. Kā piemēru analizējamiem
+datiem, var skatīt JSON ierakstu pielikumā \ref{att:minosrequest}.
+
+Lai testētu programmaparatūras darbību reāllaikā ir dažādas realizācijas
+iespējas. Viens variants ir skaidri dokumentēt platformas seriālās komunikācijas
+WebSocket API un izmantoto protokolu, kas ļautu jebkurā programmēšanas valodā
+viegli attālināti pieslēgties aparatūrai un definēt jebkāda veida mijiedarbību
+vai papildus virtuālu saskarni, vai testus, u.t.t. Šī ir laba ideja, kas nav
+realizēta darba ietvaros laika ierobežojumu dēļ.
+
+Iepriekšminētajai pieejai gan ir viens mīnuss, kas ir, ka izstrādātājam ir vai
+nu jābūt ieslēgtam laptopam vai arī jāuztur sava infrastruktūra, lai veiktu
+ilgtermiņa (stundas vai dienas) testus. Potenciāls risinājums šim ir iestrādāt
+platformas serverī \gls{wasm} atbalstu un ļaut iesūtīt WASM programmatūru, kas
+darbotos platformā, saņemtu ziņas, sūtītu atpakaļ ziņas, rakstītu žurnāla datus,
+secinātu vai apratūra darbojas korekti. Šādai pieejai arī būtu pluss, ka visi
+izvadītie testa dati būtu standartizēti un pieejami platformā. Darba ietvaros
+tika veikti eksperimenti un tika secināts, ka Scala programmēšanas valodā ir
+WASM virtuālmašīnas darbināšanas atbalsts, taču laika ierobežojumu dēļ, ideja
+netika tālāk izpētīta.

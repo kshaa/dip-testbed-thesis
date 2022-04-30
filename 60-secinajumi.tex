@@ -1,15 +1,46 @@
-Pieminēt, ka uztaisīju platformu ar tīmekļa serveri.
+Darba ietvaros ir izstrādāta digitālās aparatūras projektēšanas tiešsaistes
+platforma, kas iekļauj dažādus rīkus aparatūras izstrādātājiem un aparatūras
+laboratoriju īpašniekiem.
 
-Pieminēt, ka uztaisīju klientus un aģentus.
+Precīzāk, ir izstrādāta platforma, kas sastāv no klienta komandu rindas rīka
+izstrādātājiem, lai augšupielādētu un testētu platformā programmaparatūru,
+aģenta komandu rindas rīka laboratorijas īpašniekiem, lai attālināti pieslēgtu
+fizisku attīstītājrīku aparatūru platformai attālinātai programmēšanai un
+lietošanai. Papildus platformas ietvaros izstrādāts serveris, kurā pārvaldīt
+dažādus lietotāju, aparatūras un programmaparatūras datus un kas funkcionē kā
+vājas reāllaika komunikācijas starpnieks starp izstrādātājiem un attālināto
+aparatūru. Papildus platformas ietvaros izstrādātas dažādas virtuālas saskarnes,
+lai imitētu fizisku mijiedarbību ar aparatūru attālinātos apstākļos termināļa
+vidē. Tai skaitā arī izstrādāta MinOS grafiskā termināļa virtuālā saskarne,
+MinOS BNF formāta protokols, MinOS Verilog programmaparatūras modulis, lai
+abstrahētu attālināto komunikāciju starp aparatūru, platformu un lietotāju.
+\cite{VeinbahsKrisjanisTestbed}
 
-Pieminēt, ka uzprojektēju MinOS Verilogā.
+Neskaitot visu iepriekšminēto programmaparatūru tika uzstādīta arī publiska
+testa vide, kurā lielākoties notika darba izstrāde. Testa vide sastāvēja no
+servera, kas atradās virtuālmašīnā publiski pieejama mākoņpakalpojumu devēja
+datu centrā, no laboratorijas, kas atradās darba autora mājās.
+\cite{VeinbahsKrisjanisProduction}
 
-Pieminēt, ka mērķis, manuprāt, izpildīts, jo var digitāli pārvaldīt dzelžus un piekļuvi tiem, var tos digitāli programmēt un testēt.   
+Šī darba sākumā tika uzstādīts mērķis, kas pieminēts dokumenta ievadā, mēģināt
+uzlabot digitālu iekārtu projektēšanas procesu, pārveidojot fizisko tehnikas
+pārvaldību, programmēšanu un testēšanu par digitālu procesu, izstrādājot jaunu
+tiešsaistes platformu šim nolūkam.
 
-Pieminēt, ka līdz pilnai laimei platformai vajadzētu paplašinājumus un uzlabojumus.
+Darba autors uzskata mērķi par sasniegtu un izpildītu, jo izstrādātajā platformā
+ir iespējams reģistrēt un attālināti pārvaldīt fizisku aparatūru laboratorijas
+īpašniekam. Ir iespējams šai aparatūrai dot attālinātu piekļuvi izstrādātājiem.
+Programmaparatūras izstrādātājiem ir iespējams izstrādāt, augšupielādēt un
+testēt programmaparatūru attālināti. 
 
-- Uzturēšanas metrikas (heartbeat, response time, etc.)
-
-- WASM virtuālās saskarnes un uzraudzība (i.e. in-cluster supervisor)
-
-- API wrapper jebkurā valodā, lai būtu pilnīga brīvība izstrādāt jebkādu virtuālo saskarni
+Darba autors uzskata, ka darbā apskatītajam tematam ir iespējams arī
+turpinājums. Būtu vērtīgi apskatīt šādas platformas pārveidi, lai realizētu
+līdzīgu platformu "FPGA kā pakalpojums" (angl. "FPGA as a service"), kurā
+lietotājiem būtu nevis individuāla piekļuve aparatūrai, bet gan piekļuve ierīču
+fermai, kas sastāv no vairākām FPGA ierīcēm. Šādā platformā varētu, piemēram,
+veikt paralelizētu datu apstrādi vai testēšanu. Papildus eksistējošā platforma
+varētu tikt attīstīta dažādos veidos: 1) seriālās komunikācijas ierakstīšana un
+pēcāka lejupielāde un analīze, 2) ierīču labklājības monitorēšana (angl. health
+check), 3) automatizēta programmējama ierīču testēšana, piemēram, ar WASM
+pirmkodu, kas darbinās aģentā vai serverī, sūta un saņem signālus, un secina vai
+aparatūras programmaparatūra funkcionē kā paredzēts.
