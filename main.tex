@@ -24,17 +24,30 @@
     \end{center}
     \vspace{1.5\baselineskip}
 
-    Darba mērķis ir izstrādāt un analizēt tiešsaistes platformu digitālās aparatūras attīstītājrīku
-    attālinātai pārvaldībai, programmaparatūras jeb projektējumu glabāšanai un šīs programmaparatūras testēšanai
+    Darba mērķis ir izstrādāt un analizēt tiešsaistes platformu digitālās
+    aparatūras attīstītājrīku attālinātai pārvaldībai, programmaparatūras jeb
+    projektējumu glabāšanai un šīs programmaparatūras attālinātai testēšanai
     platformā pieejamajos attīstītājrīkos.
 
-    Darbā tiek apskatīta platformas darbības mehānismu modelēšana, sarežģījumi šādas
-    platformas izstrādē, izmantotie risinājumi un to arhitektūra.
+    Darbā tiek apskatīta platformas darbības mehānismu modelēšana, sarežģījumi
+    šādas platformas izstrādē, izstrādes laikā izmantotie risinājumi un to
+    arhitektūra.
 
     Precīzāk, darbā tiek apskatīta vāja reāllaika attālinātas mijiedarbības
-    realizācija starp platformas lietotājiem un digitālo aparatūru, tai skaitā attālināta
-    noprogrammēšana, testēšana un izmantošana. Tiek apskatītas, analizētas un
-    izstrādātas arī dažādas papildus funkcionalitātes, kas uzlabo šo platformas pieredzi.
+    realizācija starp platformas lietotājiem un digitālo aparatūru, tai skaitā
+    attālināta aparatūras programmēšana, attālināta testēšana un attālināta
+    izmantošana. Tiek apskatītas, analizētas un izstrādātas arī dažādas papildus
+    funkcionalitātes, kas uzlabo šo platformas pieredzi.
+
+    Darba ietvaros tika izstrādāta platforma, kas sastāv no servera, kas
+    nodrošina aparatūras un lietotāju komunikācijas starpniecību, no komandu
+    rindas rīka jeb klienta, kas nodrošina lietotāja komunikāciju ar serveri un
+    aparatūru, no komandu rindas rīka jeb aģenta, kas nodrošina aparatūras
+    savienojumu ar serveri un lietotājiem. Papildus izstrādātā platforma tika
+    uzstādīta publiskā mākoņpakalpojumu serverī, darba autora mājās tika
+    uzstādīta testa laboratorija jeb FPGA Testbed ar attīstītājrīku, kas
+    pievienots publiski pieejamajai platformai, un tajā tika veiksmīgi
+    attālināti izstrādāta un attālināti testēta pārbaudes programmaparatūra.
 
     \textbf{Atslēgas vārdi}: FPGA, UART, reāllaiks, notikumu sistēma, aktieru modelis.
 \end{abstract}
@@ -50,15 +63,27 @@
     \end{center}
     \vspace{1.5\baselineskip}
 
-    This work contains details regarding the development and analysis of an online platform for
-    managing digital hardware development boards and for managing and testing prototype firmware on these boards.
+    This work contains details regarding the development and analysis of an
+    online platform for remotely managing digital hardware development boards
+    and for remotely managing and testing prototype firmware on these boards.
 
-    Also this work encompasses process modelling of such a platform, complications encountered in development and
-    the solutions and architecture for solving these complications.  
+    Also this work encompasses process modelling of such a platform,
+    complications encountered in development and the solutions and architectures
+    used for solving these complications.  
 
-    More specifically this work describes a soft realtime system for remote interaction between platform users and 
-    available digital hardware development boards i.e. board programming, prototype firmware testing and information exchange.
-    In addition some extra features for better user experience in the platform are implemented and described.  
+    More specifically this work describes a soft realtime system for remote
+    interaction between platform users and available digital hardware
+    development boards i.e. remote board programming, remote prototype firmware
+    testing and information exchange. In addition some extra features for better
+    user experience in the platform are implemented and described.  
+
+    A platform was developed in the scope of this work which consists of a
+    server acting as a communication proxy, a client i.e. a command line tool
+    for connecting the user to the server and hardware, an agent i.e. a command
+    line tool for connecting the hardware to the server and users. Additionally
+    this platform was hosted in a public cloud platform. A test laboratory i.e.
+    an FPGA testbed was created in the author's home and connected to the public
+    cloud platform.
 
     \textbf{Keywords}: FPGA, UART, realtime, event system, actor model.
 \end{abstract}
@@ -84,13 +109,17 @@
 \chapter{Pašreizējā situācija}
 \input{30-situacija}
 
-\chapter{Teorija}
+\chapter{Literatūras apskats}
 \label{teorija}
 \input{35-teorija}
 
-\chapter{Risinājums}
+\chapter{Piedāvātais risinājums}
 \label{risinajums}
 \input{40-risinajums}
+
+\chapter{Rezultāti}
+\label{results}
+\input{45-rezultati}
 
 %----------------------------------------------SECINĀJUMI----------------------------------------------------------
 

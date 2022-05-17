@@ -1,25 +1,139 @@
+\section{Digitālas aparatūras projektēšana}
+
+Lai digitalizētu programmaparatūras jeb digitālu iekārtu prototipēšanas fāzi, ir
+nepieciešams saprast, ko nozīmē prototipēt jeb izstrādāt, jeb projektēt digitālu
+aparatūru.  
+  
+Digitālās aparatūras projektēšana sevī ietver 1) signālus, 2) loģiskus
+elementus, 3) vadus starp tiem loģiskajiem elementiem, 4) šo elementu
+izvietošanu integrētā shēmā. 
+  
+Vērtīgi pieminēt, ka loģiskie elementi šajā kontekstā apraksta ne tikai
+kombinatorās loģikas elementus, kas realizē loģikas tabulas un funkcionē bez
+stāvokļa (angl. stateless), bet arī sekvenciālās loģikas elementus, kas realizē
+atmiņu, piem. flip-flop. \cite[para 1.1]{LarryMassengale2018} 
+
+Apskatīsim sekojošu piemēru. Pieņemsim, ka jāizstrādā ierīce, kurai ir divas
+spiedpogas "+" un "-" un 8x gaismu bināra skaitļa "displejs". Pieņemsim, ka
+displejs no sākuma rāda "0" un atkarībā no nospiestās pogas vai nu pieskaita vai
+atņem skaitli viens. Pieņemsim, ka \(0-1=255\) un \(255+1=0\).
+
+\begin{figure}[H]
+    \includegraphics[width=0.5\linewidth]{assets/counter.png}
+    \centering
+    \caption{Loģisko elementu konfigurācija "pieskaitītājs un atņēmējs"}
+    \label{fig:counter}
+\end{figure}
+
+Attēlā \ref{fig:counter} redzama shēmtehnika, kas realizē šādu "pieskaitītāja un
+atņēmēja" aparatūras loģisko elementu konfigurāciju.
+
+Šī shēmtehnika arī ilustrē visus iepriekšminētos projektēšanas pamatelementus.
+Konfigurācijā redzami divi ievadsignāli "BTN0" un "BTN1" un astoņi "LD{0-7}"
+izvadsignāli. Papildus konfigurācijā izmantots astoņu bitu atmiņas flip-flop
+reģistrs (taisnstūris ar trijstūri), signālu multipleksors, kas atkarībā no
+"nosacījuma" signāla ārā izvada vai nu vienu signālu vai otru (trapece),
+konstants astoņu bitu signāls ar vieninieka vērtību (taisntūris ar "1"). Kad
+"BTN0" signāls top no 0 par 1, reģistrā "1" tiek atņemts vieninieks. Kad "BTN1"
+signāls top no 0 par 1, reģistrā "0" tiek pieskaitīts vieninieks. Astoņu bitu
+reģistra "1" bitu vērtība tiek izvadīta izvadsignālos "LD{0-7}". Vērts pieminēt,
+ka "+" un "-" šajā ilustrācijā ir abstrakcijas, ar kurām patiesībā domāti
+elementi 1) astoņu bitu "full adder" un 2) astoņu bitu "full subtractor".
+
+Lai no \gls{hdl} valodas iegūtu attēlā \ref{att:counter} redzamo loģisko
+elementu konfigurāciju, ir nepieciešams veikt projektējuma sintēzi, kas pārveido
+augsta abstrakcijas līmeņa \gls{hdl} aprakstu uz zema abstrakcijas līmeņa
+\gls{netlist} jeb elektrisko savienojumu aprakstu, kuru, savukārt, var realizēt
+īstā aparatūrā, kas aprakstīts nodaļā \ref{sec:fpgaboard}.
+
+Šī ilustrācija ir izveidota izmantojot "yosys" atvērtos rīku \gls{hdl} sintēzei
+un "netlistsvg" atvērto rīku sintezētā elektronikas apraksta ilustrācijai. Šīs
+digitālās aparatūras Verilog projekta avota kods un ilustrācijas kods ir
+pieejams šī projekta avota koda repozitorijā. \cite{VeinbahsKrisjanisTestbed}
+Papildus tas ir pieejams arī pielikumā \ref{att:counter}.
+
+\section{FPGA attīstītājrīki}
+\label{sec:fpgaboard}
+
+Lai digitalizētu digitālas aparatūras prototipēšanas fāzi, darbā izstrādātā
+platforma abstrahē attālinātu mijiedarbību ar digitālu iekārtu projektēšanas
+aparatūru jeb, precīzāk, mijiedarbību ar \gls{fpga} attīstītājrīku aparatūru.
+
+Iepriekšējā nodaļā ir aprakstīta digitālās aparatūras projektēšana, taču, lai
+saprastu kā strādā izstrādātā digitālās aparatūras attālinātās prototipēšanas
+platforma, ir noderīgi apskatīt kā \gls{fpga} attīstītājrīku aparatūra iederās
+aparatūras prototipēšanas fāzē.
+
+Ja uz papīra vai datorā ir izstrādāts digitālās aparatūras projektējums jeb
+savienojumi, signāli un loģiskie elementi un ja šis projektējums ir sintezēts
+elektrisko savienojumu aprakstā jeb \gls{netlist}, tad ir divas iespējas kā to
+realizēt fiziskā, lietojamā digitālā aparatūrā: 1) ražot mikroshēmu kādā
+silīcija plates ražotnē \cite{WikiFabs} vai 2) \gls{fpga} attīstītājrīku
+aparatūrā augšupielādēt aparatūras loģisko elementu konfigurāciju.
+
+Attēlā \ref{fig:fpgalayers} redzama \gls{fpga} arhitektūra, kas sastāv no diviem
+slāņiem - lietotāja un konfigurācijas slāņa, kur lietotāja slānis realizē vēlamo
+digitālo aparatūru un konfigurācijas slānis satur atmiņu, kurā iekodēta šīs
+aparatūras loģisko elementu konfigurācija, kuru izmanto lietotāja slānis.
+\cite[para. II]{HerreraAlzu2013}
+
+\begin{figure}[H]
+    \includegraphics[width=0.5\linewidth]{assets/a-c-layers.png}
+    \centering
+    \caption{\gls{fpga} loģisko elementu konfigurācijas realizācija.
+    \cite[para. II]{HerreraAlzu2013}}
+    \label{fig:fpgalayers}
+\end{figure}
+
+Tomēr, lai attēlā \ref{fig:fpgalayers} redzamo konfigurācijas slāni
+noprogrammētu ar vēlamo aparatūras loģisko elementu konfigurāciju, ir
+nepieciešama papildus elektronika, kas ierakstīs vēlamo informāciju šajā
+konfigurācijas slāņa atmiņā.
+
+\gls{fpga} attīstītājrīku aparatūra ir digitāla aparatūra, kas abstrahē darbu ar
+\gls{fpga} mikroshēmu. Piemērs šādai aparatūrai, kas arī tika izmantota darbā
+aprakstītās platformas izstrādei, ir Digilent Anvyl attīstītājrīks, kas redzams
+attēlā \ref{fig:anvylexplained} un kas satur Xilinx Spartan-6 \gls{fpga}
+mikroshēmu, kā arī USB-UART savienojumu, lai nodrošinātu attīstītājrīka
+pārvaldību no datora, kas arī ir galvenais izmantotais mijiedarbības mehānisms
+ar attīstītājrīku izstrādātajā platformā.
+
+\begin{figure}[H]
+    \includegraphics[width=0.7\linewidth]{assets/anvyl-explained.png}
+    \centering
+    \caption{Digilent Anvyl attīstītājrīks (viss attēls), Xilinx Spartan-6 FPGA (zilais taisnstūris ar "FPGA")
+        un USB-UART savienojums (zaļais taisnstūris ar "USB-UART").}
+    \label{fig:anvylexplained}
+\end{figure}
+
 \section{Aktieru modelis}
 \label{sec:actormodel}
 
-Aktieru modelis apraksta veidu kā realizēt vienotu atteikumnoturīgu informācijas
-sistēmu, kas sastāv no vairākām atsevišķām, paralēli darbinātām mazākām
-informācijas sistēmām - aktieriem. Aktieru modelī aktieri var 1) sūtīt ziņas, 2)
-izveidot jaunus \glslink{actor}{aktierus} un 3) definēt kā reaģēt uz ziņām kas
-tiek adresētas tiem pašiem. \cite[p. 1]{CarlHewitt2010}
+Lai modelētu platformā fiziski pieejamo digitālo aparatūru un platformas
+lietotājus, tiek izmantots aktieru modelis. Aktieru modelis apraksta veidu kā
+realizēt vienotu atteikumnoturīgu informācijas sistēmu, kas sastāv no vairākām
+atsevišķām, paralēli darbinātām mazākām informācijas sistēmām - aktieriem.
+Aktieru modelī aktieri var 1) sūtīt ziņas, 2) izveidot jaunus
+\glslink{actor}{aktierus} un 3) definēt kā reaģēt uz ziņām kas tiek adresētas
+tiem pašiem. \cite[p. 1]{CarlHewitt2010}
 
-Svarīga īpatnība aktieru modelī, kas ļauj tam labi aprakstīt reālu, fizisku
-infrastruktūru (kas ir svarīgi šī darba ietvaros, jo ir nepieciešams modelēt
-fizisku attīstītājrīku aparatūru), ir pamatprincips, ka aktieriem piemīt laicīgs
-dzīvescikls jeb jebkurā brīdī tie var sākt darboties vai beigt darboties.
+Lai modelētu fizisku attīstītājrīku aparatūras un lietotāju savienojumus, ir
+noderīgs aktieru modelis, kura pamatprincips ir, ka aktieriem piemīt laicīgs
+dzīvescikls tātad jebkurā brīdī tie var sākt darboties vai beigt darboties, jo
+gan aparatūrai, gan lietotājiem var pazust interneta savienojums.
 \cite[p. 6]{CarlHewitt2010} 
  
 Šī īpatnība ir noderīga darba ietvaros, jo fiziskā aparatūra var salūzt, zaudēt
-elektrību, zaudēt interneta savienojumu, utml. Kā arī šis modelis ir vērtīgs, jo
-eksistē publiski pieejami satvari, kas ir izstrādāti pēc šī modeļa un tātad ļauj
-projektēt šāda veida sistēmas. Šī darba ietvaros ir izmantots satvars Akka, kas
-ir pieejams Java, Scala un .NET programmēšanas valodās, taču konceptuāli līdzīgi
-satvari eksistē arī daudzās citās valodās, piem. Erlang valodā OTP satvars, Rust
-valodā Actix, Haskell valodā Cloud Haskell, utml.
+elektrību, zaudēt interneta savienojumu, utml. Savukārt, lietotāji platformai
+var pieslēgties un no tās atvienoties. Kā arī šis modelis ir vērtīgs, jo eksistē
+publiski pieejami satvari, kas ir izstrādāti pēc šī modeļa un tātad ļauj
+projektēt šāda veida sistēmas. Šī darba ietvaros ir izmantots satvars Akka,
+programmēšanas valodā Scala. Akka satvars ir pieejams Java, Scala un .NET
+programmēšanas valodās, kā arī konceptuāli līdzīgi satvari eksistē arī daudzās
+citās valodās, piem. Erlang valodā OTP satvars, Rust valodā Actix, Haskell
+valodā Cloud Haskell, utml, taču Scala valoda ir izvēlēta, jo tā ļauj
+programmētājam vieglāk rakstīt funkcionālu kodu, izcelt funkcijas, kam piemīt
+blakusefekti, tādējādi atvieglojot platformas koda uzturamību un lietojamību. 
 
 \begin{figure}[H]
     \includegraphics[width=0.5\linewidth]{assets/akka-actor-hierarchy-gray.png}
@@ -41,12 +155,14 @@ izveidos veselu biznesa loģikas aktieru hierarhiju atbilstoši vajadzībām.
 \section{Notikumu sistēmas}
 \label{sec:eventsourcing}
 
-Piedāvātajā risinājumā caurvijas koncepts par notikumu sistēmām. Notikumu
-sistēma ir tāda informācijas sistēma, kas apstrādā komandas jeb vēlamās izmaiņas
-sistēmā, potenciāli akceptē komandas notikumos jeb veiktajās izmaiņās, izmaina
-sistēmas stāvokli atbilstoši šiem notikumiem jeb  izmaiņām kā arī izpilda
-blakusefektus jeb reakcijas atbilstoši šiem notikumiem, lai izmainītu kādas
-ārējas sistēmas stāvokli.
+Lai realizētu viegli testējamus aktieru modeļus lietotāju un aparatūras
+mijiedarbībām ar platformu, platformā ir izmantotas notikumu sistēmas, kas
+nošķir saņemtās, izsūtītās ziņas, aktuālo sistēmas stāvokli un izpildītos
+blakusefektus. Notikumu sistēma ir tāda informācijas sistēma, kas apstrādā
+komandas jeb vēlamās izmaiņas sistēmā, potenciāli akceptē komandas notikumos jeb
+veiktajās izmaiņās, izmaina sistēmas stāvokli atbilstoši šiem notikumiem jeb
+izmaiņām kā arī izpilda blakusefektus jeb reakcijas atbilstoši šiem notikumiem,
+lai izmainītu kādas ārējas sistēmas stāvokli.
 \cite[para. 3.2.3]{JohnsenEspen2018}
 
 Notikumu sistēmas pamatā ir notikumu dzinējs, kas realizē vēlamo sistēmas
@@ -80,50 +196,6 @@ virtuālās saskarnes, piem. MinOS., kas arī ir realizētas kā notikumu sistē
 Pašā platformā, centralizētajā \glslink{server}{serverī}, lietotāju un aģentu
 apkalpošanas mehānismi ir realizēti izmantojot notikumu sistēmas un aktieru
 modeli. 
-
-\section{Digitālas aparatūras projektēšana}
-
-Lai digitalizētu mijiedarbību ar attīstītājrīku aparatūru, ir nepieciešams, lai
-aparatūra ir spējīga kooperēties ar mūsu platformu, kas nozīmē, ka to ir jāprot
-korekti noprogrammēt jeb, precīzāk, tajā jāaugšupielādē atbilstoši projektēta
-loģisko elementu konfigurācija jeb programmaparatūra, kas nodrošinās mūsu vēlamo
-mijiedarbību ar platformu.
-
-Ir dažādi veidi kā attīstājrīka aparatūra varētu mijiedarboties ar izstrādāto
-platformu, kas vēlākās nodaļās tiek arī detalizētāk apskatīti, bet pamatā ir
-jāsaprot, ko īsti nozīmē digitālās aparatūras projektēšana. Digitālās aparatūras
-projektēšana sevī ietver 1) signālus, 2) loģiskus elementus, 3) vadus starp tiem
-loģiskajiem elementiem, 4) šo elementu izvietošanu integrētā shēmā. 
-
-Vērtīgi pieminēt, ka loģiskie elementi šajā kontekstā nozīmē ne tikai
-kombinatorās loģikas elementus, kas realizē loģikas tabulas un funkcionē bez
-stāvokļa (angl. stateless), bet arī sekvenciālās loģikas elementus, kas realizē
-atmiņu, piem. flip-flop. \cite[para 1.1]{LarryMassengale2018} 
-
-\begin{figure}[H]
-    \includegraphics[width=0.5\linewidth]{assets/counter.png}
-    \centering
-    \caption{Loģisko elementu konfigurācija "pieskaitītājs un atņēmējs"}
-    \label{fig:counter}
-\end{figure}
-
-Attēlā \ref{fig:counter} redzama tipiska loģisko elementu konfigurācija, kas
-ilustrē visus iepriekšminētos projektēšanas pamatelementus. Konfigurācijā
-redzami divi ievadsignāli "BTN0" un "BTN1" un astoņi "LD{0-7}" izvadsignāli.
-Papildus konfigurācijā izmantots astoņu bitu atmiņas flip-flop reģistrs
-(taisnstūris ar trijstūri), signālu multipleksors, kas atkarībā no "nosacījuma"
-signāla ārā izvada vai nu vienu signālu vai otru (trapece), konstants astoņu
-bitu signāls ar vieninieka vērtību (taisntūris ar "1"). Kad "BTN0" signāls top
-no 0 par 1, reģistrā "1" tiek atņemts vieninieks. Kad "BTN1" signāls top no 0
-par 1, reģistrā "0" tiek pieskaitīts vieninieks. Astoņu bitu reģistra "1" bitu
-vērtība tiek izvadīta izvadsignālos "LD{0-7}". Vērts pieminēt, ka "+" un "-"
-šajā ilustrācijā ir abstrakcijas, ar kurām patiesībā domāti elementi 1) astoņu
-bitu "full adder" un 2) astoņu bitu "full subtractor".
-
-Šī ilustrācija ir izveidota izmantojot "yosys" un "netlistsvg" atvērtos rīkus.
-Šīs digitālās aparatūras Verilog projekta avota kods un ilustrācijas kods ir
-pieejams šī projekta avota koda repozitorijā. \cite{VeinbahsKrisjanisTestbed}
-Papildus tas ir pieejams arī pielikumā \ref{att:counter}.
 
 \section{Seriālā komunikācija}
 \label{sec:serial}

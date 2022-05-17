@@ -1,4 +1,4 @@
-\section{DIP platforma}
+\section{Digitālās aparatūras prototipēšanas platforma}
 \label{sec:dipplatform}
 
 Izstrādātā platforma sastāv no \glslink{server}{servera}, \glslink{agent}{aģentiem}
@@ -8,9 +8,9 @@ pārvaldības paneļa jeb datu pārvaldības tīmekļa lietotnes. Attēlā
 \ref{fig:dipdpd0} redzama 0. līm. datu plūsmas diagramma minētai platformai. 
 
 \begin{figure}[H]
-    \includegraphics[width=0.7\linewidth]{assets/DPD0.drawio.png}
+    \includegraphics[width=1.0\linewidth]{assets/DPD0.drawio.png}
     \centering
-    \caption{DIP platformas 0. līmeņa datu plūsmas diagramma}
+    \caption{Digitālās aparatūras prototipēšanas platformas virspusēja datu plūsmas diagramma}
     \label{fig:dipdpd0}
 \end{figure}
 
@@ -25,15 +25,15 @@ savukārt, tā dalība komunikācijas mehānismos ir aprakstīta \ref{sec:dipact
 Nodaļā \ref{sec:dipactorsystem} aprakstītā vājo reāllaika komunikācijas sistēmu,
 savukārt, izmanto komandrindas rīki - klients un aģents - lai ļautu lietotājiem
 mijiedarboties ar attīstītājrīku aparatūru. Šis mehānisms ir aprakstīts nodaļā
-\ref{sec:agentclient}. Un izmantojot šo klienta - aģenta mehānismu, platformā
+\ref{sec:hwmgmt}. Un izmantojot šo klienta - aģenta mehānismu, platformā
 lietotājam tiek realizētas trīs saskarnes, lai mijiedarbotos ar attīstītājrīku
 aparatūru, kuras aprakstītas nodaļās \ref{sec:vinweb}, \ref{sec:vinbytes} un
 \ref{sec:vinminos}.
 
 Par šīs platformas, tai skaitā aparatūras laboratoriju, uzstādīšanu un
 administrēšanu ir aprakstīts nodaļā \ref{sec:ops}. Par programmaparatūras
-izstrādi un testēšanu platformā mazliet aprakstīts nodaļā \ref{sec:usage}. Par
-šī darba veikumu un tvērumu aprakstīts nākamajā nodaļā \ref{sec:scope}.
+izstrādi un testēšanu platformā aprakstīts nodaļā \ref{sec:maintenance}. Par šī
+darba veikumu un tvērumu aprakstīts nākamajā nodaļā \ref{sec:scope}.
 
 \section{Darba tvērums}
 \label{sec:scope}
@@ -53,27 +53,27 @@ publiski pieejams GitHub platformā brīvai apskatei un izmantošanai.
 \cite{VeinbahsKrisjanisTestbed} \cite{VeinbahsKrisjanisThesis}.
 
 \begin{table}[H]
-    \begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}| }
+    \begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}|p{3cm}| }
     \hline
-    Programmēšanas valoda&Faili&Tukšās rindiņas&Komentāru rindiņas&Koda rindiņas\\
+    Programmēšanas valoda & Faili & Komentāru rindiņas & Koda rindiņas \\
     \hline
-    Python & 101 & 1551 & 717 & 7424\\
-    Scala & 101 & 593 & 120 & 4088\\
-    Verilog & 34 & 409 & 676 & 2496\\
-    HTML & 11 & 3 & 0 & 492\\
-    Bourne Shell & 17 & 91 & 85 & 378\\
-    make & 2 & 36 & 30 & 80\\
-    SQL & 2 & 33 & 28 & 70\\
-    XML & 1 & 14 & 8 & 40\\
-    YAML & 2 & 0 & 1 & 33\\
-    C++ & 1 & 4 & 14 & 14\\
-    \hhline{|=|=|=|=|=|}
-    Kopā & 272 & 2734 & 1679 & 15115\\
+    Python          & 101   & 717   & 7424  \\
+    Scala           & 101   & 120   & 4088  \\
+    Verilog         & 34    & 676   & 2496  \\
+    HTML            & 11    & 0     & 492   \\
+    Bourne Shell    & 17    & 85    & 378   \\
+    make            & 2     & 30    & 80    \\
+    SQL             & 2     & 28    & 70    \\
+    XML             & 1     & 8     & 40    \\
+    YAML            & 2     & 1     & 33    \\
+    C++             & 1     & 14    & 14    \\
+    \hhline{|=|=|=|=|}
+    Kopā & 272 & 1679 & 15115\\
     \hline
     \end{tabular}
     \centering
     \captionsetup{justification=centering}
-    \caption{Koda rindiņu skaita analīze projekta pirmkodā}
+    \caption{Koda rindiņu skaita analīze projekta pirmkodā ar atvērtā koda rīku \lstinline!cloc!}
     \label{table:cloc}
 \end{table}
 
@@ -93,7 +93,7 @@ realizēta virtuālā saskarne MinOS formālā protokolā, klientā un attīstī
 6) tika dokumentēta sistēmas darbība un arhitektūra, tai skaitā arī šī dokumenta
 izstrāde.
 
-\section{Statisko datu pārvaldība}
+\section{Datu relācijas modelis}
 \label{sec:staticdata}
 
 Šī platforma pamatā sastāv no reāllaika datu starpniecības un statisku datu
@@ -354,7 +354,7 @@ identifikatoru \lstinline!-b ...!, fiziski piesaistītā aparatūra ir ar noteik
 konfigurēšanas/programmēšanas parametriem \lstinline!-n ... -s ...! un ka aparatūrai ir
 pieejams noteikts seriālās komunikācijas ports \lstinline!-f ...!.
 
-\begin{lstlisting}[caption={Aģenta uzstādīšana komandu rindā},label={lst:agentconfig},captionpos=b]
+\begin{lstlisting}[caption={\gls{dip} aģenta uzstādīšana komandu rindā},label={lst:agentconfig},captionpos=b]
 dip_client agent-anvyl -b 5b17a393-9004-40ec-a9db-e0bb1e77a0e6 -n Anvyl \
     -s 0 -f /dev/serial/by-id/usb-Digilent_...-if01-port0
 \end{lstlisting}
@@ -372,7 +372,7 @@ sakompilētas programmaparatūras faila ceļš izstrādātāja datorā \lstinlin
 un vēlamās izmantojamās \glslink{vinterface}{virtuālās saskarnes} veids
 \lstinline!-t ...!.
 
-\begin{lstlisting}[caption={Programmaparatūras augšupielāde un seriālās komunikācijas klienta komanda},label={lst:quickrun},captionpos=b]
+\begin{lstlisting}[caption={Programmaparatūras augšupielāde un seriālās komunikācijas komanda \gls{dip} klientā},label={lst:quickrun},captionpos=b]
 dip_client quick-run -b f65e4276-2d72-4471-b5de-bddbc833d2ea \ 
     -f ./main.bit -t minos
 \end{lstlisting}
@@ -548,15 +548,18 @@ Ja nu ir nepieciešamība sūtīt 4 slēdžu aktuālos datus un spiedpogu ievadd
 Tad izsūtītajā baitā 4 biti jāizmanto slēdžu vērtībām un pārējie 4 spiedpogu
 vērtībām. Bet ko darīt, ja jāizsūta 16 slēdžu vērtības? Tad ar baitu vairs
 nepietiek, nepieciešami vairāki baiti, tādēļ tika izstrādāta sarežģītāka
-virtuālā saskarne MinOS, kas aprakstīta nodaļā \ref{sec:vinminos}.
+virtuālā saskarne "MinOS" (no angl. minimal operating system), kas aprakstīta
+nodaļā \ref{sec:vinminos}.
 
-\section{MinOS virtuālā saskarne}
+\section{Multifunkcionāla virtuālā saskarne "MinOS"}
 \label{sec:vinminos}
 
-MinOS ir virtuāla saskarne, lai mijiedarbotos ar attīstītājrīku aparatūru, kas
-ir realizēta kā termināļa grafiskā saskarne, kas redzama attēlā
-\ref{fig:minosgui} un konceptuāli tā līdzinās tai pašai fiziskai saskarnei, kas
-pieejama uz Anvyl attīstītājrīka, kas redzama attēlā \ref{fig:anvyl}. 
+Multifunkcionālā virtuālā saskarne "MinOS" (no angl. minimal operating system),
+kas sastāv no vairākiem grafiskiem elementiem, ir virtuāla saskarne, lai
+vairākos veidos vienā saskarnē mijiedarbotos ar attīstītājrīku aparatūru, kas ir
+realizēta kā termināļa grafiskā saskarne, kas redzama attēlā \ref{fig:minosgui}
+un konceptuāli tā līdzinās tai pašai fiziskai saskarnei, kas pieejama uz Anvyl
+attīstītājrīka, kas redzama attēlā \ref{fig:anvyl}. 
 
 Skatoties attēla \ref{fig:minosgui} saskarnē, ir redzams 8x8 RGB displejs (skat.
 kreiso daļu), 8 sarkanas LED gaismas (skat. labās puses 1. rindu), 8 sarkani LED
@@ -840,101 +843,3 @@ nekā aprakstīta šajā darbā, taču oriģināli prototipējot darba arhitekt�
 secināts, ka arī šādas ierīces ir iespējams pievienot platformai, taču laika
 ierobežojumu dēļ tām netika izstrādāts atbalsts platformas komandu rindas aģenta
 rīkā. 
-
-\section{Platformas lietojamība un uzturēšana}
-\label{sec:maintenance}
-
-Darba izstrādes laikā tika pacelti apsvērumi par šādas platformas uzturamību un
-lietojamību, kas apskatīti un aprakstīti šajā nodaļā. J - jautājums, A -
-atbilde.
-
-J. Cik sarežģīti laboratorijas īpašniekam ir pieslēgt savu laboratoriju
-platformai?
-
-A. Ir nepieciešama papildus aparatūra laboratorijā, kas funkcionēs kā
-komunikācijas starpnieks starp platformu un aparatūru, jeb ir nepieciešams
-aģenta dators vai mikrokontrolieris. Aģentu nepieciešams administrēt, tajā
-jāuzstāda aparatūras pārvaldības programmatūra, ko parasti nodrošina aparatūras
-ražotāji. Aģentā nepieciešams uzstādīt platformas komandu rindas aģenta rīku.
-Lai optimizētu šo administrēšanas procesu tehniski ir iespējams izstrādāt
-Ansible, Chef vai citu automatizācijas risinājumu skriptus, lai automātiski
-nokonfigurētu aģenta sistēmu. Papildus, ja ir aģenti nepieciešami ir daudz,
-tehniski Raspberry mikrokontroliera gadījumā ir iespējams izstrādāt sistēmas
-attēla kopiju, ko var pārkopēt citā SD kartē, ko var ievietot nākamajā Raspberry
-mikrokontrolierī, tādējādi vienkāršojot aģentu uzstādīšanas procesu. Darba
-ietvaros šīs divas optimizācijas nav mēģināts izstrādāt laika ierobežojumu dēļ.
-
-J. Cik sarežģīti platformas autoram ir izstrādāt jaunu platformas versiju?
-
-A. Platformas pirmkoda kompilēšana ir automatizēta. Pirmkoda repozitorijā ir
-fails \lstinline!build.sh!, kas automātiski sakompilē platformas servera Scala
-pirmkodu ar \lstinline!sbt! rīku, automātiski sakompilē platformas aģenta un
-klienta komandu rindas rīkus \lstinline!AMD64! un \lstinline!ARM64! procesoru
-arhitektūrām (\lstinline!ARM64! nepieciešams, lai darbinātu aģentu Raspberry Pi
-mikrokontrolierī vai Apple datorā ar M1 procesoru) un ar \lstinline!pip! rīku un
-\lstinline!docker buildx!, kas atbalsta multi-platformu kompilāciju,
-\cite{DockerBuildx}. Lai autora darbs būtu vēl vieglāks šo visu varētu
-automatizēt kādā nepārtrauktās integrācijas platformā, piem. Jenkins, Drone CI,
-Concourse CI, Hydra CI, u.c..
-
-J. Cik sarežģīti platformas izstrādātājam ir sākt lietot platformu?
-
-A. Lai sāktu izmantot platformā pieejamo aparatūru, ir izstrādāts skripts, lai
-automātiski datorā ieinstalētu platformas komandu rindas klienta rīku. Tekstā
-\ref{lst:setup} redzams, ka no klienta ieinstalēšanas līdz programmaparatūras
-augšupielādei un lietošanai ir tikai trīs komandas, neskaitot lietotāja un tā
-tiesību izveidošanu, ko tipiski darītu laboratorijas vai platformas īpašnieks.
-
-\begin{lstlisting}[caption={Platformas klienta lietošanas uzsākšana},label={lst:setup},captionpos=b]
-curl -L https://github.com/kshaa/dip-test[...]install.sh | bash
-dip_client session-auth -u <username> -p <password>
-dip_client quick-run -f firmware.bit -b ${BOARD_UUID}
-\end{lstlisting}
-
-\section{Programmaparatūras testēšana}
-\label{sec:testing}
-
-Lai gan platformā iespējams augšupielādēt un attālināti mijiedarboties ar
-programmaparatūru, tās testēšana nebūt nav triviāla.
-
-Viens variants ir testēt programmaparatūru manuāli - attālināti augšupielādēt to
-attīstītājrīka aparatūrā, uzsākt virtuālās saskarnes sesiju, mijiedarboties un
-secināt vai aparatūra darbojas kā paredzēts. Šis variants ir pilnīgi pietiekams
-maza izmēra projektiem, kuriem nav stingru laika ierobežojumu. Šis arī ir veids
-kā tika testēta platformas demo programmaparatūra un tātad šis testēšanas veids
-ir pieejams platformā.
-
-Otrs variants ir pirms programmaparatūras augšupielādes aparatūrā, veikt tās
-programmatisku simulāciju, ko nodrošina tādi rīki kā \lstinline!iverilog! vai
-grafiskā izstrādes vide \lstinline!Xilinx ISE WebPACK Design!. Šis ir viens no
-svarīgākajiem izstrādātāja instrumentiem, kas arī tika izmantots testējot demo
-programmaparatūru un ir izmantojams platformas ietvaros, lai gan tehniski ir
-ārpus-platformas rīks.
-
-Trešais variants ir testēt programmaparatūras darbību programmatiski.Un pat šim
-variantam ir divi veidi - testēt reāllaikā un testēt post-factum. 
-
-Platformas ietvaros tika izstrādāta virtuālā saskarne \lstinline!minosrequest!,
-kas ļauj definēt laikus, kad iesūtīt saskarnē ziņas, un kas ieraksta visas
-ienākošās un izejošās ziņas JSON formātā. Ar šo saskarni ir iespējams realizēt
-post-factum darbības testēšanu veicot datu jeb ziņu analīzi jebkurā
-programmēšanas valodā, kas spēj parsēt JSON datus. Kā piemēru analizējamiem
-datiem, var skatīt JSON ierakstu pielikumā \ref{att:minosrequest}.
-
-Lai testētu programmaparatūras darbību reāllaikā ir dažādas realizācijas
-iespējas. Viens variants ir skaidri dokumentēt platformas seriālās komunikācijas
-WebSocket API un izmantoto protokolu, kas ļautu jebkurā programmēšanas valodā
-viegli attālināti pieslēgties aparatūrai un definēt jebkāda veida mijiedarbību
-vai papildus virtuālu saskarni, vai testus, u.t.t. Šī ir laba ideja, kas nav
-realizēta darba ietvaros laika ierobežojumu dēļ.
-
-Iepriekšminētajai pieejai gan ir viens mīnuss, kas ir, ka izstrādātājam ir vai
-nu jābūt ieslēgtam laptopam vai arī jāuztur sava infrastruktūra, lai veiktu
-ilgtermiņa (stundas vai dienas) testus. Potenciāls risinājums šim ir iestrādāt
-platformas serverī \gls{wasm} atbalstu un ļaut iesūtīt WASM programmatūru, kas
-darbotos platformā, saņemtu ziņas, sūtītu atpakaļ ziņas, rakstītu žurnāla datus,
-secinātu vai apratūra darbojas korekti. Šādai pieejai arī būtu pluss, ka visi
-izvadītie testa dati būtu standartizēti un pieejami platformā. Darba ietvaros
-tika veikti eksperimenti un tika secināts, ka Scala programmēšanas valodā ir
-WASM virtuālmašīnas darbināšanas atbalsts, taču laika ierobežojumu dēļ, ideja
-netika tālāk izpētīta.

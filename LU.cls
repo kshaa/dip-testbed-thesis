@@ -7,6 +7,9 @@
 % atkāpes no malām kreisā 3cm pārējās 2cm (5.2. iekš LU 03.02.2012, 1/38 )
 \usepackage[top=20mm,bottom=20mm,left=30mm,right=20mm]{geometry}
 
+% Atstarpes nodaļu pirmajām rindkopām
+\usepackage{indentfirst}
+
 % 1.5 rindstarpa (5.2. iekš LU 03.02.2012, 1/38 )
 \linespread{1.5}
 
@@ -100,9 +103,9 @@
 
 % Nodaļu nosaukumu labošana - aizdomas, ka šo var izdarīt labāk un pareizāk
 \usepackage{titlesec}
-\titleformat{\chapter}{\normalfont\fontsize{14}{14}\bfseries}{\thechapter.\hspace{10pt}}{0pt}{\normalfont\fontsize{14}{14}\bfseries\uppercase}
-\titleformat{\section}{\normalfont\fontsize{14}{14}\bfseries}{\thesection.\hspace{10pt}}{0pt}{}
-\titleformat{\subsection}{\normalfont\fontsize{14}{14}\bfseries}{\thesubsection.\hspace{10pt}}{0pt}{}
+\titleformat{\chapter}{\normalfont\fontsize{14}{14}\bfseries\centering}{\thechapter.\hspace{10pt}}{0pt}{\normalfont\fontsize{14}{14}\bfseries\uppercase}
+\titleformat{\section}{\normalfont\fontsize{14}{14}\bfseries\centering}{\thesection.\hspace{10pt}}{0pt}{}
+\titleformat{\subsection}{\normalfont\fontsize{14}{14}\bfseries\centering}{\thesubsection.\hspace{10pt}}{0pt}{}
 \titlespacing{\chapter}{0cm}{2em}{2em} % Nodaļu virsraksat atstarpes no augšas un apakšas
 
 

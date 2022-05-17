@@ -1,15 +1,12 @@
 \section{Problēmas pamatnostādne}
 
-Darbā risinātā problēma ir - vai ir iespējams digitalizēt fizisku digitālu
-iekārtu projektēšanu, izstrādājot tam paredzētu tiešsaistes platformu?
-
 Darbā tiek izstrādāta šāda platforma, tiek apskatītas dažādas tehniskas
 problēmas šādas platformas izstrādē un attiecīgi risinājumi šīm problēmām. 
 
-Šī darba pirmstecī jeb kursa darbā, tika secināts, ka, lai gan eksistē dažādas
-tiešsaistes platformas, lai uzturētu datu apmaiņu starp fizisku aparatūru un
-platformas lietotājiem, tās pārsvarā vai nu 1) koncentrējas uz aparatūras
-izejdatu monitorēšanu vai 2) uz komandu un atbilžu veida datu apmaiņu.
+Kursa darbā, tika secināts, ka, lai gan eksistē dažādas tiešsaistes platformas,
+lai uzturētu datu apmaiņu starp fizisku aparatūru un platformas lietotājiem, tās
+pārsvarā vai nu 1) koncentrējas uz aparatūras izejdatu monitorēšanu vai 2) uz
+komandu un atbilžu veida datu apmaiņu.
 \cite[para. 3]{VeinbahsKrisjanis2021}
 
 Papildus kursa darba ietvaros tika secināts, ka šo situāciju būtu iespējams
@@ -19,8 +16,16 @@ lietotājiem iespēju mijiedarboties ar aparatūru attālināti, bet ar vienlīd
 līdzīgu sajūtu kā, ja tas notiktu fiziski, klātienē. \cite[para.
 5]{VeinbahsKrisjanis2021} 
 
+Balstoties uz kursa darbā rakstīto, bakalaura darbā tika realizēts sistēmas
+pārvaldības panelis, grafiskas termināļa saskarnes baitu virtuālajai saskarnei
+un multifunkcionālajai "MinOS" virtuālajai saskarnei, tika izplānota un
+izstrādāta multifunkcionāla "MinOS" virtuālā saskarne, tai skaitā protokols un
+interaktīvā termināļa saskarne. Papildus platforma tika uzstādīta publiskā
+mākonī un platformai tika pieslēgta testa laboratorija ar Digilent Anvyl
+attīstītājrīku.
+
 Darbs ir rakstīts kā mērķauditoriju uzskatot cilvēkus ar tehniskām iemaņām,
-primāri datorinženierus, taču darbs ir sarakstīts tā, lai to varētu saprast
+primāri datorinženierus, taču darbs ir rakstīts tā, lai to varētu saprast
 jebkurš datorikas students, pasniedzējs, kolēģis.
 
 Nodaļā \ref{teorija} tiek apskatītas aktieru sistēmas un notikumu sistēmas, lai
@@ -31,9 +36,56 @@ aprakstīta realizētā platforma, tās apakšsistēmas un rīki un darbības me
 
 \section{Saistība ar citiem pētījumiem}
 
-Šis darbs ir autora kursa darba konceptuāls turpinājums. Autora kursa darbā tika veikts virspusējs problēmas
-apskats par to, kas būtu nepieciešams, lai realizētu digitālu sistēmu mijiedarbībai starp fizisku digitālu 
-aparatūru un sistēmas lietotājiem. Šājā darbā tiek izstrādāta konkrēta sistēma, lai panāktu digitālās aparatūras 
-prototipēšanas fāzes digitalizāciju, kā arī tiek analizēti un modelēti dažādi procesi un grūtības šādas sistēmas
-izstrādē. \cite{VeinbahsKrisjanis2021}
+Šis darbs ir autora kursa darba konceptuāls turpinājums. Autora kursa darbā tika
+veikts virspusējs problēmas apskats par to, kas būtu nepieciešams, lai realizētu
+digitālu sistēmu mijiedarbībai starp fizisku digitālu aparatūru un sistēmas
+lietotājiem. Šājā darbā tiek izstrādāta konkrēta sistēma, lai panāktu digitālās
+aparatūras prototipēšanas fāzes virtualizāciju, kā arī tiek analizēti un
+modelēti dažādi procesi un grūtības šādas sistēmas izstrādē.
+\cite{VeinbahsKrisjanis2021}
 
+Darbā izstrādātā platforma ir līdzīga citām eksistējošām \gls{fpga}
+virtualizācijas platformām, taču pamatā atšķiras ar platformas mērķi un
+mērķauditoriju - platforma ir mērķēta attālinātai \gls{fpga} ierīču
+programmaparatūras projektēšanai, nodrošinot vāja reāllaika mijiedarbību ar
+ierīcēm.
+
+Darba izstrādes brīdī ir pētīti dažādi veidi kā abstrahēt jeb virtualizēt
+\gls{fpga} ierīces. \cite[para. I]{VaishnavAnuj2018} Piemēram, "resursu līmenī"
+jeb definējot jaunu virtuālu ierīci, kurā projektēt aparatūru ar \gls{hdl},
+\cite[para III]{VaishnavAnuj2018}. Piemēram, implementējot virtualizāciju
+"mezglu līmenī", kur katrs \gls{fpga} attīstītājrīks ir kā mezlgs, ar ko
+mijiedarboties. \cite[para IV]{VaishnavAnuj2018} Kā arī realizējot
+virtualizāciju "multi-mezglu līmenī", kas ļauj veikt paralēlus datu apstrādes
+darbus vairākās \gls{fpga} ierīcēs. \cite[para V]{VaishnavAnuj2018}
+
+\gls{fpga} virtualizācijai var būt dažādi mērķi, piemēram, lai paātrinātu kādus
+datu apstrādes darbus vai lai nodrošinātu piekļuvi grūti pieejamai aparatūrai
+(finanšu, ērtību vai fiziskās atrašanās vietas dēļ). Šis darbs koncentrējas uz
+attālinātu aparatūras nodrošināšanu studentiem, tādēļ, vispiemērotākais
+risinājums, ir tāds, kas būtu noderīgs studentiem un ko būtu viegli atkārtot
+jebkurā universitātes laboratorijā. Tādēļ \gls{fpga} ierīču virtualizēšana
+abstraktā "resursā" būtu lieka, jo studenti vēlas strādāt ar konkrētu, plaši
+dokumentētu aparatūru. "Multi-mezglu" virtualizācija nebūtu gana interaktīva, jo
+tā ir paredzēta \textit{ne reāllaika}, grupveida jeb paralēlai datu apstrādei, lai
+gan studentiem ir vispirms jāiemācās projektēt vienu ierīci. Tādēļ platformā
+izstrādātā "mezgla līmeņa" virtualizācija. 
+
+\gls{fpga} "mezglu līmenī" var panākt lielas datu caurlaidspējas virtualizāciju,
+pieslēdzot \gls{fpga} ierīces PCIe ligzdā datoram, kurš funkcionē kā ierīces
+pārvaldītājs, taču tas būtu nepamatots finansiāls slogs universitātes
+laboratorijai, jo studentiem nav nepieciešama liela datu caurlaidspēja mācību
+nolūkos. \cite{WangWei2013} \cite{AsiaticiMikhail2017} 
+
+Tā vietā autors piedāvā sistēmu, kurā komunikācija ar \gls{fpga} ierīcēm notiek
+izmantojot seriālo komunikāciju USB savienojumā, kas nodrošina zemāku
+veiktspēju, taču padara ierīču uzstādīšanas un uzturēšanas darbus finansiāli
+pieejamākus. 
+
+Kā arī daļa šobrīdējās \gls{fpga} ierīču virtualizācijas pētniecības tiek
+koncentrēta uz efektīvu \gls{fpga} ierīču izmantošanu jeb, lai nodrošinātu, ka
+ierīces nepaliek neizmantotas. \cite[para IV, C]{VaishnavAnuj2018} Taču
+laboratorijas un universitātes kursu nolūkos tas ir mazāk aktuāli, jo vienā
+semestrī parasti ir fiksēts studentu skaits, kas mācās un izmanto šīs ierīces,
+tādēļ izstrādātā platforma ir optimālāka šajā gadījumā, jo tajā netiek risināta
+mazāk aktuāla problēma - ierīču daudznomāšana laikā vai telpā.

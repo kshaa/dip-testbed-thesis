@@ -4,12 +4,18 @@
 \section{Digitālās aparatūra "pieskaitītājs un atņēmējs"}
 \label{att:counter}
 
-Sekojošais kods ir sarakstīts Verilog valodā un to sintezējot ir iespējams iegūt
-loģisko elementu konfigurāciju, ko, savukārt, jau ir iespējams augšupielādēt
-kādā digitālās aparatūras attīstītājrīkā. Kods satur spiedpogu signālus
-\lstinline!BTN0-1! kā ievaddatus un LED gaismas \lstinline!LD0-7! kā izvaddatus.
-Programmaparatūra skaita no \lstinline!0! līdz \lstinline!255! jeb \(2^8\) un
-izvada šī skaitļa vērtību kā 8 bitus LED gaismu signālos. 
+Lai ilustrētu digitālās projektēšanas procesu, tika Verilog \gls{hdl} valodā
+projektēta digitāla iekārta, kas, izmantojot spiedpogas, skaitlim pieskaita un
+atņem skaitli viens.
+
+Sintezējot šo programmaparatūru ir iespējams iegūt loģisko elementu
+konfigurāciju, ko, savukārt, jau ir iespējams augšupielādēt kādā digitālās
+aparatūras attīstītājrīkā, lai testētu aparatūras funkcionalitāti. 
+
+Kods satur spiedpogu signālus \lstinline!BTN0-1! kā ievaddatus un LED gaismas
+\lstinline!LD0-7! kā izvaddatus. Programmaparatūra spēj skaitīt no \lstinline!0!
+līdz \lstinline!255! jeb \(2^8\) un izvada šī skaitļa vērtību kā 8 bitus LED
+gaismu signālos.
 
 \begin{lstlisting}
 // counter.v
@@ -49,8 +55,14 @@ module main(
 endmodule    
 \end{lstlisting}
   
-\section{MinOS pakotņu protokola BNF sintakse}
+\section{Multifunkcionālās saskarnes "MinOS" pakotņu protokola BNF sintakse}
 \label{att:minosbnf}
+
+Lai nodrošinātu multifunkcionālajā, vairāku grafisko elementu virtuālajā
+saskarnē "MinOS" komunikāciju starp digitālo iekārtu un lietotāja komandu rindas
+klientu jeb virtuālo saskarni, ir nepieciešams datu apmaiņas protokols, kas
+ļautu sūtīt vairākus baitus tīklā un interpretēt tos kā paketes ar tipu, sākumu,
+beigām un saturu.
 
 Sekojošais saturs ir BNF formātā aprakstīta sintakse protokolam, kas tiek
 izmantots, lai baitu straumē iekodētu vairāku baitu paketes. Šis protokols tiek
@@ -113,15 +125,25 @@ izmantots, lai realizētu MinOS virtuālās saskarnes protokolu. Simbols
 <chunk> ::= <chunk_start> <chunk_content> <chunk_end>
 \end{lstlisting}
 
-\section{MinOS saskarnes ziņu ieraksts}
+\section{Multifunkcionālās saskarnes "MinOS" saskarnes ziņu ieraksts}
 \label{att:minosrequest}
 
-Sekojošais pielikums ir daļa no \lstinline!minosrequest! virtuālās saskarnes.
-Ierakstā redzams tā 4.5 sekunžu izpildes laiks \lstinline!tresholdTime!,
-maksimālo saņemto ziņu skaits \lstinline!-1! jeb neierobežots skaits, sākuma
-laika zīmogs \lstinline!startTimeStamp!, saņemta displeja pikseļa ziņa
-\lstinline!display!, kurā 63. pikselis mainīja savus krāsas datus uz
-\lstinline!0x00! laikā \lstinline!sentTimestamp!.
+Lai testētu digitālo aparatūru nevis manuāli grafiskā saskarnē, bet gan
+programmatiski, tika realizēta iespēja definēt JSON formāta teksta failu ar
+saskarnē sūtāmajām baitu paketes. Izmantojot šo "MinOS" programmatisko modeli,
+ir iespējams nosūtīt iepriekšdefinētas saskarnes paketes un atpakaļ saņemt jaunu
+JSON formāta teksta failu, kas satur aparatūras atpakaļ atsūtītās baitu paketes.
+Šo saskarnes izdoto saņemto pakešu JSON teksta failu jau savukārt var
+programmatiski apstrādāt ar jebkuru programmēšanas valodu, lai veiktu jebkāda
+veida testus jeb pārbaudes.
+
+Sekojošais pielikums ir daļa no šīs programmatiskās \lstinline!minosrequest!
+virtuālās saskarnes atgrieztā JSON formāta teksta faila. Ierakstā redzams tā 4.5
+sekunžu izpildes laiks \lstinline!tresholdTime!, maksimālo saņemto ziņu skaits
+\lstinline!-1! jeb neierobežots skaits, sākuma laika zīmogs
+\lstinline!startTimeStamp!, saņemta displeja pikseļa ziņa \lstinline!display!,
+kurā 63. pikselis mainīja savus krāsas datus uz \lstinline!0x00! laikā
+\lstinline!sentTimestamp!.
 
 \begin{lstlisting}[caption={\lstinline!minosrequest! programmaparatūras ziņu ieraksts JSON formātā},label={lst:buttonleds},captionpos=b]
     [...]
