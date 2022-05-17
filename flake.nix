@@ -36,6 +36,11 @@
           appendix
           bookmark
           ehhline
+          tracklang
+          babel
+          babel-latvian
+          babel-russian
+          ruhyphen
           soul;
       };
     in rec {

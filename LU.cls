@@ -13,6 +13,9 @@
 % 1.5 rindstarpa (5.2. iekš LU 03.02.2012, 1/38 )
 \linespread{1.5}
 
+\usepackage{babel}
+\newcommand\fh{\babelhyphen{hard}}
+
 % matemātikas pierakstam - nezinu cik no šīm vajag, bet par ļaunu nenāks visas
 \usepackage{amsmath}
 \usepackage{amssymb}
