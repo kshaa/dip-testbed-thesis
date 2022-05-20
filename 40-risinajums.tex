@@ -1,11 +1,12 @@
 \section{Digitālās aparatūras prototipēšanas platforma}
 \label{sec:dipplatform}
 
-Izstrādātā platforma sastāv no \glslink{server}{servera}, \glslink{agent}{aģentiem}
-jeb aparatūras starpniekiem, pašas fiziskās attīstītājrīku aparatūras,
-\glslink{client}{klientiem} jeb gala lietotājiem ar komandrindas rīkiem, un
-pārvaldības paneļa jeb datu pārvaldības tīmekļa lietotnes. Attēlā
-\ref{fig:dipdpd0} redzama 0. līm. datu plūsmas diagramma minētai platformai. 
+Izstrādātā platforma sastāv no \glslink{server}{servera},
+\glslink{agent}{aģentiem} jeb \glslink{board}{aparatūras} starpniekiem, pašas
+fiziskās attīstītājrīku \glslink{board}{aparatūras}, \glslink{client}{klientiem}
+jeb gala lietotājiem ar komandrindas rīkiem, un pārvaldības paneļa jeb datu
+pārvaldības tīmekļa lietotnes. Attēlā \ref{fig:dipdpd0} redzama 0. līm. datu
+plūsmas diagramma minētai platformai. 
 
 \begin{figure}[H]
     \includegraphics[width=1.0\linewidth]{assets/DPD0.drawio.png}
@@ -17,34 +18,37 @@ pārvaldības paneļa jeb datu pārvaldības tīmekļa lietotnes. Attēlā
 Attēlā \ref{fig:dipdpd0} redzamās apakšsistēmas ir aprakstītas šajā dokumentā
 sekojoši. 
 
-Pašā platformas centrā ir centralizēts tīmekļa serveris, kas funkcionē
-kā pārvaldības datu avots un platformas lietotāju komunikācijas starpnieks, tā
-datu pārvaldības ir aprakstīta nodaļās \ref{sec:usermgmt} un \ref{sec:hwmgmt},
-savukārt, tā dalība komunikācijas mehānismos ir aprakstīta \ref{sec:dipactorsystem}.
+Pašā platformas centrā ir centralizēts tīmekļa \glslink{server}{serveris}, kas
+funkcionē kā pārvaldības datu avots un platformas lietotāju komunikācijas
+starpnieks, tā datu pārvaldības ir aprakstīta nodaļās \ref{sec:usermgmt} un
+\ref{sec:hwmgmt}, savukārt, tā dalība komunikācijas mehānismos ir aprakstīta
+\ref{sec:dipactorsystem}.
 
 Nodaļā \ref{sec:dipactorsystem} aprakstītā vājo reāllaika komunikācijas sistēmu,
 savukārt, izmanto komandrindas rīki - klients un aģents - lai ļautu lietotājiem
-mijiedarboties ar attīstītājrīku aparatūru. Šis mehānisms ir aprakstīts nodaļā
-\ref{sec:hwmgmt}. Un izmantojot šo klienta - aģenta mehānismu, platformā
-lietotājam tiek realizētas trīs saskarnes, lai mijiedarbotos ar attīstītājrīku
-aparatūru, kuras aprakstītas nodaļās \ref{sec:vinweb}, \ref{sec:vinbytes} un
-\ref{sec:vinminos}.
+mijiedarboties ar attīstītājrīku \glslink{board}{aparatūru}. Šis mehānisms ir
+aprakstīts nodaļā \ref{sec:hwmgmt}. Un izmantojot šo klienta - aģenta mehānismu,
+platformā lietotājam tiek realizētas trīs \glslink{vinterface}{saskarnes}, lai
+mijiedarbotos ar attīstītājrīku \glslink{board}{aparatūru}, kuras aprakstītas
+nodaļās \ref{sec:vinweb}, \ref{sec:vinbytes} un \ref{sec:vinminos}.
 
-Par šīs platformas, tai skaitā aparatūras laboratoriju, uzstādīšanu un
-administrēšanu ir aprakstīts nodaļā \ref{sec:ops}. Par programmaparatūras
-izstrādi un testēšanu platformā aprakstīts nodaļā \ref{sec:maintenance}. Par šī
-darba veikumu un tvērumu aprakstīts nākamajā nodaļā \ref{sec:scope}.
+Par šīs platformas, tai skaitā \glslink{board}{aparatūras} laboratoriju,
+uzstādīšanu un administrēšanu ir aprakstīts nodaļā \ref{sec:ops}. Par
+\glslink{firmware}{programmaparatūras} izstrādi un testēšanu platformā
+aprakstīts nodaļā \ref{sec:maintenance}. Par šī darba veikumu un tvērumu
+aprakstīts nākamajā nodaļā \ref{sec:scope}.
 
 \section{Darba tvērums}
 \label{sec:scope}
 
 Darba ietvaros tika izstrādāta vāja reāllaika komunikācijas platforma, kas
-nodrošina 1) iespēju reģistrēt un uzskaitīt, pārvaldīt fizisku attīstītājrīku
-vai mikrokontrolieru aparatūru, 2) veikt programmaparatūras augšupielādi
-aparatūrā, 3) mijiedarboties ar aparatūru, izmantojot vizuālu saskarni, kas
-līdzinās noklusētajai aparatūrā fiziski pieejamajai saskarnei, 4) ierobežoti
-testēt aparatūras funkcionalitāti. Papildus platforma tika arī testēšanas
-nolūkiem izveidota publiskā mākoņpakalpojumu serverī, kas aprakstīts avota koda
+nodrošina 1) iespēju reģistrēt un uzskaitīt, pārvaldīt \glslink{board}{fizisku
+attīstītājrīku} vai mikrokontrolieru aparatūru, 2) veikt
+\glslink{firmware}{programmaparatūras} augšupielādi aparatūrā, 3) mijiedarboties
+ar aparatūru, izmantojot vizuālu saskarni, kas līdzinās noklusētajai aparatūrā
+fiziski pieejamajai \glslink{vinterface}{saskarnei}, 4) ierobežoti testēt
+aparatūras funkcionalitāti. Papildus platforma tika arī testēšanas nolūkiem
+izveidota publiskā mākoņpakalpojumu serverī, kas aprakstīts avota koda
 repozitorijā un nodaļā \ref{sec:ops}. \cite{VeinbahsKrisjanisTestbed}
 \cite{VeinbahsKrisjanisProduction}
 
@@ -82,16 +86,18 @@ koda rindiņu analīzes rīks \cite{AlDanialCloc}, kura rezultāti redzami gan p
 pirmkoda versiju kontroles repozitorijā \cite{VeinbahsKrisjanisTestbed}, gan tabulā
 \ref{table:cloc}.
 
-Platformas pamata funkcionalitāte, lai lietotājs augšupielādētu programmatūru un
-veiktu baitu līmeņa datu apmaiņu ar aparatūru, tika realizēta kursa darba laikā.
+Platformas pamata funkcionalitāte, lai lietotājs augšupielādētu
+\glslink{firmware}{programmaparatūru} un veiktu baitu līmeņa datu apmaiņu ar
+\glslink{board}{aparatūru}, tika realizēta kursa darba laikā.
 
 Bakalaura darba laikā, 1) platformai tika pievienota autentifikācija, 2)
-izstrādāts pārvaldības panelis, 3) pārrakstīts klients no tīras grafiskas
-saskarnes par termināļa grafisko saskarni, 4) pārrakstīta klienta virtuālā
-saskarne kā notikumu sistēma nevis nestrukturizēts kods, 5) izplānota un
-realizēta virtuālā saskarne MinOS formālā protokolā, klientā un attīstītājrīkā,
-6) tika dokumentēta sistēmas darbība un arhitektūra, tai skaitā arī šī dokumenta
-izstrāde.
+izstrādāts \glslink{mgmtpanel}{pārvaldības panelis}, 3) pārrakstīts klients no
+tīras grafiskas saskarnes par termināļa grafisko saskarni, 4) pārrakstīta
+klienta virtuālā \glslink{vinterface}{saskarne} kā notikumu sistēma nevis
+nestrukturizēts kods, 5) izplānota un realizēta virtuālā
+\glslink{vinterface}{saskarne} MinOS formālā protokolā, klientā un
+attīstītājrīkā, 6) tika dokumentēta sistēmas darbība un arhitektūra, tai skaitā
+arī šī dokumenta izstrāde.
 
 \section{Datu relācijas modelis}
 \label{sec:staticdata}
@@ -110,23 +116,23 @@ nemaina izmantojot vājā reāllaika komunikācijas kanālus, kas aprakstīti sa
 
 Attēlā \ref{fig:staticdata} redzama platformas izstrādes laikā izveidotā
 datubāzes fiziskā līmeņa relāciju diagramma, kurā redzamas tabulas lietotājiem
-\lstinline!user!, programmaparatūrai \lstinline!software!, aparatūrai
-\lstinline!hardware! un aparatūras piekļuvei \lstinline!hardware_access!, kā arī
-papildus tabula datubāzes migrāciju vēstures pārvaldībai
-\lstinline!play_evolutions!, kas ir noklusēts tabulas nosaukums projektā
-izmantotajam Scala programmēšanas valodas tīmekļa lapu izstrādes ietvaram "Play
-Framework".
+\lstinline!user!, \glslink{firmware}{programmaparatūrai} \lstinline!software!,
+aparatūrai \lstinline!hardware! un \glslink{board}{aparatūras} piekļuvei
+\lstinline!hardware_access!, kā arī papildus tabula datubāzes migrāciju vēstures
+pārvaldībai \lstinline!play_evolutions!, kas ir noklusēts tabulas nosaukums
+projektā izmantotajam Scala programmēšanas valodas tīmekļa lapu izstrādes
+ietvaram "Play Framework".
 
 Lielākoties visām biznesa loģikas entītijām ir piesaistīts \gls{uuid}
 identifikators \lstinline!uuid! un nosaukums \lstinline!name!, papildus dažām
-entītijām ir dažādi piekļuves dati formātā \lstinline!is_*!, programmaparatūrai
-ir arī tās saturs \lstinline!content! un lietotājam ir paroles ar jaucējvērtību
-datiem \lstinline!hashed_password!.
+entītijām ir dažādi piekļuves dati formātā \lstinline!is_*!,
+\glslink{firmware}{programmaparatūrai} ir arī tās saturs \lstinline!content! un
+lietotājam ir paroles ar jaucējvērtību datiem \lstinline!hashed_password!.
 
-Programmaparatūras tabulu varētu arī saukt \lstinline!firmware!, taču platformas
-izstrādes laikā tika eksperimentēts platformā arī reģistrēt ne tikai
-attīstītājrīku aparatūru, bet arī programmējamus mikrokontrolierus, kuros
-augšupielādē programmatūru.
+\glslink{firmware}{Programmaparatūras} tabulu varētu arī saukt
+\lstinline!firmware!, taču platformas izstrādes laikā tika eksperimentēts
+platformā arī reģistrēt ne tikai attīstītājrīku \glslink{board}{aparatūru}, bet
+arī programmējamus mikrokontrolierus, kuros augšupielādē programmatūru.
 
 Darba ietvaros tika arī apsvērta tabula \lstinline!hardware_messages!, lai
 glabātu vēsturi par notikušo vājā reāllaika komunikāciju, taču laika
@@ -186,9 +192,9 @@ piedēvē attiecīgas tiesības veikt dažādas darbības, kuras skatāmas tabul
     \label{table:permissions}
 \end{table}
 
-Platformā projekta programmatūras konfigurācijā ir konfigurējams administratora
-lietotājs ar visām trīs iepriekšminētajām tiesībām, lai izveidotu sākotnējos
-pārvaldības lietotājus.
+Platformā projekta \glslink{software}{programmatūras} konfigurācijā ir
+konfigurējams administratora lietotājs ar visām trīs iepriekšminētajām tiesībām,
+lai izveidotu sākotnējos pārvaldības lietotājus.
 
 Platformā lietotājus un to piekļuves datus var konfigurēt no
 \glslink{mgmtpanel}{pārvaldības paneļa}, kas ir atšķirīgi no pārējām platformas
@@ -210,23 +216,26 @@ pārvaldības paneļa lietotāju sadaļas skatāms attēlā \ref{fig:mgmtpanelus
 \label{sec:dipactorsystem}
 
 Darbā izstrādātajā platformā, lai veiktu ziņu starpniecību starp lietotāju un
-aparatūru, bija nepieciešams realizēt vāja reāllaika komunikāciju. Tā ir
-nepieciešama, piemēram, lai sūtītu "LED gaismu" aktuālo stāvokli no aparatūras
-lietotājam un "spiedpogu" aktuālo stāvokli no lietotāja aparatūrai jeb lai
-realizētu \glslink{vinterface}{virtuālas saskarnes}.
+\glslink{board}{aparatūru}, bija nepieciešams realizēt vāja reāllaika
+komunikāciju. Tā ir nepieciešama, piemēram, lai sūtītu "LED gaismu" aktuālo
+stāvokli no \glslink{board}{aparatūras} lietotājam un "spiedpogu" aktuālo
+stāvokli no lietotāja \glslink{board}{aparatūrai} jeb lai realizētu
+\glslink{vinterface}{virtuālas saskarnes}.
 
 Lai realizētu šādu vāja reāllaika komunikācijas sistēmu, platforma tika pamatā
-izstrādāta kā notikumu sistēma, izmantojot Scala programmēšanas valodas aktieru
-modeļa programmēšanas ietvaru Akka. Aktieru modelī bāzētas notikumu sistēmas ir
-pierādījušas sevi kā spējīgas nodrošināt veiktspēju augstas paralelitātes
-reāllaika sistēmām, piemēram, Microsoft ir izstrādājuši aktieru modelī bāzētu
+izstrādāta kā notikumu sistēma, izmantojot Scala programmēšanas valodas
+\glslink{actor}{aktieru} modeļa programmēšanas ietvaru Akka.
+\glslink{actor}{Aktieru} modelī bāzētas notikumu sistēmas ir pierādījušas sevi
+kā spējīgas nodrošināt veiktspēju augstas paralelitātes reāllaika sistēmām,
+piemēram, Microsoft ir izstrādājuši \glslink{actor}{aktieru} modelī bāzētu
 mākoņpakalpojumu risinājumu satvaru Orleans, ar kuru tie spēja realizēt
 gājienos-bāzētu spēli "Galactic Reign", kuru tie testēja ar 1000 paralēli
-darbojošamies aktieriem, novērojot stabilu veiktspēju ar 95-97\% procesoru
-nodarbinātību. \cite[para. 5.1, 5.2]{Bernstein2014}.
+darbojošamies \glslink{actor}{aktieriem}, novērojot stabilu veiktspēju ar
+95-97\% procesoru nodarbinātību. \cite[para. 5.1, 5.2]{Bernstein2014}.
 
 Platformas notikumu sistēmas realizācijai pamatā ir nodaļās \ref{sec:actormodel}
-un \ref{sec:eventsourcing} pieminētais aktieru modelis un notikumu sistēmas.
+un \ref{sec:eventsourcing} pieminētais \glslink{actor}{aktieru} modelis un
+notikumu sistēmas.
 
 Starp \glslink{server}{centralizēto serveri} un \glslink{client}{klientu}, un
 \glslink{agent}{aģentu} komunikācija notiek, izmantojot, WebSocket un HTTP
@@ -245,21 +254,23 @@ Starp \glslink{board}{aparatūru} un \glslink{agent}{aģentu} ir izmantota sada�
 \ref{sec:serial} aprakstītā seriālā komunikācija. Aģenti, kas realizēti Python
 valodā izmantojot daudz dažādas publiski pieejamas bibliotēkas, ik pēc 0.01
 sekundes nolasa Linux čaulas seriālo ierīču dziņu buferos ielasītos datus un tos
-izsūta kā ziņu WebSocket savienojumā ar serveri. Dati atkarībā no aģenta veida
-tiek lasīti pēc dažāda "baudrate", kas pēc noklusējuma ir 115200, kas ir
-ātrākais Digilent Anvyl datu pārraides ātrums. Kad aģenta aparatūras datu ziņas
-tiek nosūtītas serverī, tās tiek translētas visiem ierīces seriālā porta
-abonentiem Akka jeb platformas aktieru klasterī, kas precīzāk aprakstīts sadaļā
+izsūta kā ziņu WebSocket savienojumā ar \glslink{server}{serveri}. Dati atkarībā
+no aģenta veida tiek lasīti pēc dažāda "baudrate", kas pēc noklusējuma ir
+115200, kas ir ātrākais Digilent Anvyl datu pārraides ātrums. Kad aģenta
+\glslink{board}{aparatūras} datu ziņas tiek nosūtītas \glslink{server}{serverī},
+tās tiek translētas visiem ierīces seriālā porta abonentiem Akka jeb platformas
+\glslink{actor}{aktieru} klasterī, kas precīzāk aprakstīts sadaļā
 \ref{sec:hwmgmt}.
 
 Tabulā \ref{table:serveractors} ir aprakstīti platformas izstrādes gaitā
-realizētie serverī esošie aktieri, to funkcija jeb biznesa loģika. Ir vērts
-minēt, ka šajā sarakstā nav dažādi Akka vai Play satvaru sistēmas aktieri.
+realizētie \glslink{server}{serverī} esošie \glslink{actor}{aktieri}, to
+funkcija jeb biznesa loģika. Ir vērts minēt, ka šajā sarakstā nav dažādi Akka
+vai Play satvaru sistēmas \glslink{actor}{aktieri}.
 
 Tabulā \ref{table:cliactors} ir aprakstīti platformas izstrādes gaitā realizētie
-aģentā un klientā realizētie aktieri un to apraksts. Šie aktieri ir sarakstīti
-kopā, jo reāli tiem pamatā ir tā pati arhitektūra, jo gan klients, gan aģents
-abi realizēti vienā Python koda bāzē.
+aģentā un klientā realizētie \glslink{actor}{aktieri} un to apraksts. Šie
+\glslink{actor}{aktieri} ir sarakstīti kopā, jo reāli tiem pamatā ir tā pati
+arhitektūra, jo gan klients, gan aģents abi realizēti vienā Python koda bāzē.
 
 \begin{table}[H]
     \newcounter{serveractorcounter}
@@ -305,19 +316,21 @@ abi realizēti vienā Python koda bāzē.
     \hline
     N.p.k.&Aktieris&Aktiera funkcija \\
     \hline
-    \rownumber & Aparatūra (oriģ. Hardware) & Uztur savienojumu ar serveri un
-        aparatūru, gaida servera komandas, programmē aparatūru, veic seriālo
-        datu komunikāciju starp aparatūru un serveri, ir trīs paveidi
-        \lstinline!Anvyl! FPGA attīstīrājrīkam, \lstinline!nrf52!
+    \rownumber & Aparatūra (oriģ. Hardware) & Uztur savienojumu ar
+        \glslink{server}{serveri} un aparatūru, gaida \glslink{server}{servera}
+        komandas, programmē aparatūru, veic seriālo datu komunikāciju starp
+        aparatūru un \glslink{server}{serveri}, ir trīs paveidi
+        \lstinline!Anvyl! \gls{fpga} attīstīrājrīkam, \lstinline!nrf52!
         mikrokontrolierim un \lstinline!fake! testēšanai \\
     \hline
-    \rownumber & Tīmekļkamera (oriģ. Camera) & Uztur savienojumu ar serveri un
-        tīmekļkameru, kas fiziski pievienota un pieejama aģenta sistēmā, sūta
-        tīmekļkameras datus uz serveri \\
+    \rownumber & Tīmekļkamera (oriģ. Camera) & Uztur savienojumu ar
+        \glslink{server}{serveri} un tīmekļkameru, kas fiziski pievienota un
+        pieejama aģenta sistēmā, sūta tīmekļkameras datus uz
+        \glslink{server}{serveri} \\
     \hline
     \rownumber & Aparatūras abonents (oriģ. SerialListener) & Uztur WebSocket
         savienojumu ar lietotāju, veic seriālās komunikācijas datu starpniecību
-        starp lietotāju un serveri \\
+        starp lietotāju un \glslink{server}{serveri} \\
     \hline
     \end{tabular}
     \centering
@@ -329,14 +342,15 @@ abi realizēti vienā Python koda bāzē.
 \section{Aparatūras pārvaldība}
 \label{sec:hwmgmt}
 
-Iepriekšējās nodaļās ir aprakstīta platformas datu pārvaldība un aktieru
-hierarhija, šī nodaļa apraksta kā šī arhitektūra sasaistas kopā, lai realizētu
-digitāli pārvaldāmu aparatūru.
+Iepriekšējās nodaļās ir aprakstīta platformas datu pārvaldība un
+\glslink{actor}{aktieru} hierarhija, šī nodaļa apraksta kā šī arhitektūra
+sasaistas kopā, lai realizētu digitāli pārvaldāmu \glslink{board}{FPGA
+attīstītājrīku aparatūru}.
 
 Attēlā \ref{fig:labsetup} aprakstīts kā izskatītos platformas sākotnēja
 uzstādīšana, lai digitalizētu jeb padarītu pieejamu tiešsaistē laboratorijā
-pieejamo aparatūru. Tiek pieņemts, ka katrs servera pieprasījums rezultē
-veiksmīgā atbildē.
+pieejamo \glslink{board}{aparatūru}. Tiek pieņemts, ka katrs
+\glslink{server}{servera} pieprasījums rezultē veiksmīgā atbildē.
 
 \begin{figure}[H]
     \includegraphics[width=1.0\linewidth]{assets/lab.png}
@@ -346,13 +360,16 @@ veiksmīgā atbildē.
 \end{figure}
 
 Lai sajustu, kāda ir lietotāja pieredze, ir vērts novērtēt aģenta uzstādīšanas
-komandu \ref{lst:agentconfig}, kas izveido aktieri \lstinline!Aparatura!,
-izveido savienojumu ar serveri un veic aparatūras pārvaldību pēc servera
-komandām. Minētā komanda informē komandu rindas rīku, ka aparatūra ir Digilent
-Anvyl paveida \lstinline!agent-anvyl!, platformā aparatūra ir reģistrēta ar noteiktu
-identifikatoru \lstinline!-b ...!, fiziski piesaistītā aparatūra ir ar noteiktiem
-konfigurēšanas/programmēšanas parametriem \lstinline!-n ... -s ...! un ka aparatūrai ir
-pieejams noteikts seriālās komunikācijas ports \lstinline!-f ...!.
+komandu \ref{lst:agentconfig}, kas izveido \glslink{actor}{aktieri}
+\lstinline!Aparatura!, izveido savienojumu ar \glslink{server}{serveri} un veic
+\glslink{board}{aparatūras} pārvaldību pēc \glslink{server}{servera} komandām.
+Minētā komanda informē komandu rindas rīku, ka \glslink{board}{aparatūra} ir
+Digilent Anvyl paveida \lstinline!agent-anvyl!, platformā
+\glslink{board}{aparatūra} ir reģistrēta ar noteiktu identifikatoru
+\lstinline!-b ...!, fiziski piesaistītā \glslink{board}{aparatūra} ir ar
+noteiktiem konfigurēšanas/programmēšanas parametriem \lstinline!-n ... -s ...!
+un ka \glslink{board}{aparatūrai} ir pieejams noteikts seriālās komunikācijas
+ports \lstinline!-f ...!.
 
 \begin{lstlisting}[caption={\gls{dip} aģenta uzstādīšana komandu rindā},label={lst:agentconfig},captionpos=b]
 dip_client agent-anvyl -b 5b17a393-9004-40ec-a9db-e0bb1e77a0e6 -n Anvyl \
@@ -360,19 +377,21 @@ dip_client agent-anvyl -b 5b17a393-9004-40ec-a9db-e0bb1e77a0e6 -n Anvyl \
 \end{lstlisting}
 
 Attēlā \ref{fig:development} aprakstīts kā izskatītos izstrādātāja platformas
-izmantošana, lai digitāli un attālināti bez tiešas, fiziskas aparatūras
-piekļuves veiktu aparatūras programmēšanu, testēšanu un izmantošanu. Kā arī
-komandā \ref{lst:quickrun} ir redzams, ka, lai gan programmēšanas mehānisms
-pamatā ir sarežģīts, no izstrādātāja skatpunkta aparatūras attālināta
-programmēšana un seriālā komunikācija var tikt abstrahēta gana, lai tas šķistu
-diezgan intuitīvi. Komandā redzams norādījums izpildīt programmatūras
-augšupielādi serverī un aparatūrā, un uzsākt seriālo komunikāciju
-\lstinline!quick-run!, aparatūras identifikators platformā \lstinline!-b ...!,
-sakompilētas programmaparatūras faila ceļš izstrādātāja datorā \lstinline!-f ...!
-un vēlamās izmantojamās \glslink{vinterface}{virtuālās saskarnes} veids
-\lstinline!-t ...!.
+izmantošana, lai digitāli un attālināti bez tiešas, fiziskas
+\glslink{board}{aparatūras} piekļuves veiktu \glslink{board}{aparatūras}
+programmēšanu, testēšanu un izmantošanu. Kā arī komandā \ref{lst:quickrun} ir
+redzams, ka, lai gan programmēšanas mehānisms pamatā ir sarežģīts, no
+izstrādātāja skatpunkta \glslink{board}{aparatūras} attālināta programmēšana un
+seriālā komunikācija var tikt abstrahēta gana, lai tas šķistu diezgan intuitīvi.
+Komandā redzams norādījums izpildīt programmatūras augšupielādi
+\glslink{server}{serverī} un \glslink{board}{aparatūrā}, un uzsākt seriālo
+komunikāciju \lstinline!quick-run!, \glslink{board}{aparatūras} identifikators
+platformā \lstinline!-b ...!, sakompilētas
+\glslink{firmware}{programmaparatūras} faila ceļš izstrādātāja datorā
+\lstinline!-f ...! un vēlamās izmantojamās \glslink{vinterface}{virtuālās
+saskarnes} veids \lstinline!-t ...!.
 
-\begin{lstlisting}[caption={Programmaparatūras augšupielāde un seriālās komunikācijas komanda \gls{dip} klientā},label={lst:quickrun},captionpos=b]
+\begin{lstlisting}[caption={\glslink{firmware}{Programmaparatūras} augšupielāde un seriālās komunikācijas komanda \gls{dip} klientā},label={lst:quickrun},captionpos=b]
 dip_client quick-run -b f65e4276-2d72-4471-b5de-bddbc833d2ea \ 
     -f ./main.bit -t minos
 \end{lstlisting}
@@ -388,30 +407,34 @@ dip_client quick-run -b f65e4276-2d72-4471-b5de-bddbc833d2ea \
 \label{sec:vinweb}
 
 Pēc darba vadītāja ieteikumiem, tika secināts, ka gadījumos, kad attālināta
-aparatūras programmēšana nefunkcionē korekti, būtu diezgan grūti bez fiziskas
-klātbūtnes secināt, kas ir pie vainas, tādēļ būtu noderīgi, ja būtu pieejama
-aparatūras video straumēšana ar tīmekļa kameru.
+\glslink{board}{aparatūras} programmēšana nefunkcionē korekti, būtu diezgan
+grūti bez fiziskas klātbūtnes secināt, kas ir pie vainas, tādēļ būtu noderīgi,
+ja būtu pieejama \glslink{board}{aparatūras} video straumēšana ar tīmekļa
+kameru.
 
 Lai realizētu šo funkcionalitāti, tika izveidoti dažādi \ref{sec:dipactorsystem}
-nodaļā minēti servera un aģenta aktieri, lai veiktu tīmekļakameras datu
-starpniecību. Zemāk aprakstīts šo aktieru dzīvescikls un ziņapmaiņa.
+nodaļā minēti \glslink{server}{servera} un aģenta \glslink{actor}{aktieri}, lai
+veiktu tīmekļakameras datu starpniecību. Zemāk aprakstīts šo
+\glslink{actor}{aktieru} dzīvescikls un ziņapmaiņa.
 
 \begin{enumerate}
     \item Tīmekļa kameras datu avots ir ar komandu rindas rīku nokonfigurējams
         aktieris \lstinline!agent-video!
-    \item \lstinline!agent-video! pievienojas serverim, tādējādi serverī
-        izveidojot aktieri \lstinline!server-video-control!, kas sūta atpakaļ
+    \item \lstinline!agent-video! pievienojas \glslink{server}{serverim},
+        tādējādi \glslink{server}{serverī} izveidojot aktieri
+        \lstinline!server-video-control!, kas sūta atpakaļ
         \lstinline!agent-video! informāciju par straumes abonentu skaitu
     \item \lstinline!agent-video! no fiziski pievienotas tīmekļa kameras saņem
         video straumes datus
     \item Atkarībā no tā vai ir aktuāli video straumes abonenti,
         \lstinline!agent-video! sūta \lstinline!server-video-control! video
         straumes datus, lai ietaupītu patērētos tīkla resursus
-    \item Serverī \lstinline!server-video-control! publicē video straumes datus,
-        izmantojot aktieri \lstinline!pub-sub!
-    \item Pārvaldības panelim pieslēdzas lietotāji, pieprasot video straumi, kas
-        rezultē jauna aktiera izveidē \lstinline!server-video-subscriber!, kurš
-        informē \lstinline!server-video-control! un \lstinline!pub-sub! par savu
+    \item \glslink{server}{Serverī} \lstinline!server-video-control! publicē
+        video straumes datus, izmantojot aktieri \lstinline!pub-sub!
+    \item \glslink{mgmtpanel}{Pārvaldības panelim} pieslēdzas lietotāji,
+        pieprasot video straumi, kas rezultē jauna aktiera izveidē
+        \lstinline!server-video-subscriber!, kurš informē
+        \lstinline!server-video-control! un \lstinline!pub-sub! par savu
         abonamentu
     \item \lstinline!pub-sub! saņemot video straumes datus no
         \lstinline!server-video-control!, pārtranslē šos datus arī
@@ -428,15 +451,16 @@ starpniecību. Zemāk aprakstīts šo aktieru dzīvescikls un ziņapmaiņa.
 \end{figure}
 
 Attēlā \ref{fig:videoengine} ir redzama iepriekšminētā \lstinline!agent-video!
-komandu rindas aktiera dzīvescikla loģika. Jāmin, ka brīžos, kad jebkas noiet
-greizi, aktieris vienkārši izbeidz visus aktīvos savienojumus un beidz darbu.
+komandu rindas \glslink{actor}{aktiera} dzīvescikla loģika. Jāmin, ka brīžos,
+kad jebkas noiet greizi, \glslink{actor}{aktieris} vienkārši izbeidz visus
+aktīvos savienojumus un beidz darbu.
 
 Savukārt, attēlos \ref{fig:mgmtpanelhw} un \ref{fig:hwstream} ir redzams
-pārvaldības paneļa aparatūras pārvaldības skats, no kura iespējams sākt
-skatīties aparatūras video straumi, kā arī piemērs kā izskatās šāda video
-straume pārlūkā, precīzāk, kā izskatās publiski pieejamā
-\cite{VeinbahsKrisjanisProduction} testa vides laboratorijas video straume, kas
-tiek raidīta no darba autora mājām, Kalnciema ielā.
+pārvaldības paneļa \glslink{board}{aparatūras} pārvaldības skats, no kura
+iespējams sākt skatīties \glslink{board}{aparatūras} video straumi, kā arī
+piemērs kā izskatās šāda video straume pārlūkā, precīzāk, kā izskatās publiski
+pieejamā \cite{VeinbahsKrisjanisProduction} testa vides laboratorijas video
+straume, kas tiek raidīta no darba autora mājām, Kalnciema ielā.
 
 \begin{figure}[H]
     \includegraphics[width=0.9\linewidth]{assets/mgmt-panel-hw-gray.png}
@@ -458,7 +482,7 @@ pētniecības laikā.
 
 Pirmkārt, aģents ir izstrādāts Python programmēšanas valodā, kas nav īsti
 paredzēta tādai paralēlai datu apstrādei, kas realizēta tīmekļa kameras datu
-straumēšanas aktierī.
+straumēšanas \glslink{actor}{aktierī}.
 
 Otrkārt, pārtranslēt VLC HTTP OGG straumi varētu nebūt pārāk efektīvi, labāk
 būtu izmantot kādu bibliotēku, kas piedāvā šādu funkcionalitāti bez papildus
@@ -466,42 +490,46 @@ HTTP savienojuma nepieciešamības.
 
 Treškārt, aģents ir mikrokontrolieris ar vājiem skaitļošanas resursiem, tādēļ
 nav ieteicams, nedz pat īsti iespējams, no aģenta raidīt vairāk kā vienu
-straumi, kas nozīmē, ka servera pusē to ir jāduplicē ar \gls{pubsub}
-mehānismiem, taču tas nebūt nav triviāli, jo video straumes datos ir iekodēta
-dienasta informācija par to, kurš aktuālais kadrs šobrīd tiek rādīts, kas,
-savukārt, ietekmē to kā serverim ir jāizsūta HTTP OGG atbildes, kas nozīmē, ka
-ir jāveic programmatiska video datu lasīšana vai iespējams pat pārrakstīšana.
-Precīzāk, sūtot HTTP \lstinline!application/ogg! atbildes daļas, ir nepieciešams
-norādīt \lstinline!Range! galveni, kas saturētu informāciju par to kurā video
-straumes laikā parādās minētie video dati. \cite[para. 14.35.2]{RFC2616} Šī
-informācija ir iekodēta OGG lapās laukā \lstinline!granule_position! \cite[para
-6., A]{RFC3533}, taču, lai to nolasītu ir jāizstrādā OGG lapu parseris, ko darba
-izstrādes laika ierobežojumu dēļ nebija iespējams laicīgi izdarīt. Darba
-ietvaros šim trešajam punktam tika realizēti dažādi aprisinājumi (1. straumes
-sākšana no jauna katru reizi, kad ir jauns abonents, 2. straumes pirmo lapu
-atcerēšanās un sākotnēja nosūtēšana tādējādi imitējot straumes korektu sākumu,
-kam seko pārrāvums līdz aktuālajam brīdim), taču tie nebija pārāk augstas
-kvalitātes, kas rezultēja straumes lēnumā un pārrāvumos. 
+straumi, kas nozīmē, ka \glslink{server}{servera} pusē to ir jāduplicē ar
+\gls{pubsub} mehānismiem, taču tas nebūt nav triviāli, jo video straumes datos
+ir iekodēta dienasta informācija par to, kurš aktuālais kadrs šobrīd tiek
+rādīts, kas, savukārt, ietekmē to kā \glslink{server}{serverim} ir jāizsūta HTTP
+OGG atbildes, kas nozīmē, ka ir jāveic programmatiska video datu lasīšana vai
+iespējams pat pārrakstīšana. Precīzāk, sūtot HTTP \lstinline!application/ogg!
+atbildes daļas, ir nepieciešams norādīt \lstinline!Range! galveni, kas saturētu
+informāciju par to kurā video straumes laikā parādās minētie video dati.
+\cite[para. 14.35.2]{RFC2616} Šī informācija ir iekodēta OGG lapās laukā
+\lstinline!granule_position! \cite[para 6., A]{RFC3533}, taču, lai to nolasītu
+ir jāizstrādā OGG lapu parseris, ko darba izstrādes laika ierobežojumu dēļ
+nebija iespējams laicīgi izdarīt. Darba ietvaros šim trešajam punktam tika
+realizēti dažādi aprisinājumi (1. straumes sākšana no jauna katru reizi, kad ir
+jauns abonents, 2. straumes pirmo lapu atcerēšanās un sākotnēja nosūtēšana
+tādējādi imitējot straumes korektu sākumu, kam seko pārrāvums līdz aktuālajam
+brīdim), taču tie nebija pārāk augstas kvalitātes, kas rezultēja straumes lēnumā
+un pārrāvumos. 
 
 \section{Baitu virtuālās saskarnes}
 \label{sec:vinbytes}
 
-Pats primitīvākais veids kā uzturēt seriālo komunikāciju ir sūtīt starp uz un no
-aparatūras baitus. Izmantojot šādu primitīvu komunikācijas mehānismu, lai
-lietotājs varētu attālināti mijiedarboties ar aparatūru, ir izstrādātas divas
-virtuālas saskarnes, kas realizētas 1) kā termināļa tekstuāla saskarne un 2) kā
-termināļa grafiskā saskarne.
+Pats primitīvākais veids kā uzturēt seriālo komunikāciju ir sūtīt uz un no
+\glslink{board}{aparatūras} baitus. Izmantojot šādu primitīvu komunikācijas
+mehānismu, lai lietotājs varētu attālināti mijiedarboties ar
+\glslink{board}{aparatūru}, ir izstrādātas divas virtuālas
+\glslink{vinterface}{saskarnes}, kas realizētas 1) kā termināļa tekstuāla
+saskarne un 2) kā termināļa grafiskā saskarne.
 
 Tekstuālā baitu līmeņa termināļa saskarne komandu rindas rīkā tiek dēvēta par
-\lstinline!hexbytes!, izmantojot šo tekstuālo saskarni aparatūras lietotājam
-jeb, ticamāk, izstrādātājam ir iespējams nolasīt no aparatūras nākošos baitus kā
-heksidecimālu simbolu virkni, savukārt, aparatūrā ir iespējams sūtīt baitus
-spiežot datora klaviatūras spiedpogas, kas tiek interpretētas kā ASCII simboli,
-kuru baitu vērtība tiek sūtīta uz aparatūru. Šādas tekstuālas virtuālās
-saskarnes pielietojumu, izmantojot platformas komandu rindas rīku, var skatīt
-tekstā \ref{lst:hexbytes}, kur redzama attālināta pieslēgšanās noteiktas
-aparatūras (pēc platformā reģistrēta identifikatora) seriālajam portam,
-izmantojot virtuālo saskarni \ref{lst:hexbytes}, kas tiek pārtraukta procesam
+\lstinline!hexbytes!, izmantojot šo tekstuālo saskarni
+\glslink{board}{aparatūras} lietotājam jeb, ticamāk, izstrādātājam ir iespējams
+nolasīt no \glslink{board}{aparatūras} nākošos baitus kā heksidecimālu simbolu
+virkni, savukārt, \glslink{board}{aparatūrā} ir iespējams sūtīt baitus spiežot
+datora klaviatūras spiedpogas, kas tiek interpretētas kā ASCII simboli, kuru
+baitu vērtība tiek sūtīta uz \glslink{board}{aparatūru}. Šādas tekstuālas
+virtuālās \glslink{vinterface}{saskarnes} pielietojumu, izmantojot platformas
+komandu rindas rīku, var skatīt tekstā \ref{lst:hexbytes}, kur redzama
+attālināta pieslēgšanās noteiktas \glslink{board}{aparatūras} (pēc platformā
+reģistrēta identifikatora) seriālajam portam, izmantojot virtuālo
+\glslink{vinterface}{saskarni} \ref{lst:hexbytes}, kas tiek pārtraukta procesam
 nododot \lstinline!SIGINT! signālu, izmantojot \lstinline!Ctrl+C! klaviatūras
 spiedpogu kombināciju.
 
@@ -515,12 +543,13 @@ Success: Finished monitoring
 
 Grafiskā baitu līmeņa termināļa saskarne komandu rindas rīkā tiek dēvēta par
 \lstinline!buttonleds!, programmatiski tā funkcionē tāpat kā iepriekšminētā
-virtuālā saskarne, jo baiti tiek sūtīti uz aparatūru un baiti tiek saņemti no
-aparatūras, taču lietotājam šī mijiedarbība tiek pasniegta izmantojot grafisku
-saskarni, kurā ir 24 spiedpogas baitu vērtībā no \lstinline!0x00! līdz
-\lstinline!0x17! un 8 LED gaismas 8 bitu jeb baita vērtībā. Šīs virtuālās
-saskarnes izsaukums redzams tekstā \ref{lst:buttonleds} un saskarnes izskats
-attēlā \ref{fig:buttonleds}.
+virtuālā \glslink{vinterface}{saskarne}, jo baiti tiek sūtīti uz
+\glslink{board}{aparatūru} un baiti tiek saņemti no \glslink{board}{aparatūras},
+taču lietotājam šī mijiedarbība tiek pasniegta izmantojot grafisku saskarni,
+kurā ir 24 spiedpogas baitu vērtībā no \lstinline!0x00! līdz \lstinline!0x17! un
+8 LED gaismas 8 bitu jeb baita vērtībā. Šīs virtuālās
+\glslink{vinterface}{saskarnes} izsaukums redzams tekstā \ref{lst:buttonleds} un
+saskarnes izskats attēlā \ref{fig:buttonleds}.
 
 \begin{lstlisting}[caption={\lstinline!buttonleds! izsaukums no komandu rindas},label={lst:buttonleds},captionpos=b]
 $ dip_client hardware-serial-monitor \
@@ -537,34 +566,36 @@ Success: Finished monitoring
     \label{fig:buttonleds}
 \end{figure}
 
-Šādas baitu līmeņa saskarnes jau ir ļoti spējīgas, ar tām var piemēram,
+Šādas baitu līmeņa \glslink{vinterface}{saskarnes} jau ir ļoti spējīgas, ar tām var piemēram,
 projektēt galīgu stāvokļu automātus vai pat šādus automātus, kas veic darbības
 ar papildus reģistru atmiņu. Un spiedpogas var izmantot kā ievaddatus, lai
 darbinātu šādu automātu stāvokļu pārejas.
 
-Tomēr šādām saskarnēm ir trūkums - vienā sūtījumā ir pieejams tikai viens baits,
-kas patiesībā nav daudz, it īpaši, ja sūtījumā vēlas sūtīt dažāda veida datus.
-Ja nu ir nepieciešamība sūtīt 4 slēdžu aktuālos datus un spiedpogu ievaddatus?
-Tad izsūtītajā baitā 4 biti jāizmanto slēdžu vērtībām un pārējie 4 spiedpogu
-vērtībām. Bet ko darīt, ja jāizsūta 16 slēdžu vērtības? Tad ar baitu vairs
-nepietiek, nepieciešami vairāki baiti, tādēļ tika izstrādāta sarežģītāka
-virtuālā saskarne "MinOS" (no angl. minimal operating system), kas aprakstīta
-nodaļā \ref{sec:vinminos}.
+Tomēr šādām \glslink{vinterface}{saskarnēm} ir trūkums - vienā sūtījumā ir
+pieejams tikai viens baits, kas patiesībā nav daudz, it īpaši, ja sūtījumā vēlas
+sūtīt dažāda veida datus. Ja nu ir nepieciešamība sūtīt 4 slēdžu aktuālos datus
+un spiedpogu ievaddatus? Tad izsūtītajā baitā 4 biti jāizmanto slēdžu vērtībām
+un pārējie 4 spiedpogu vērtībām. Bet ko darīt, ja jāizsūta 16 slēdžu vērtības?
+Tad ar baitu vairs nepietiek, nepieciešami vairāki baiti, tādēļ tika izstrādāta
+sarežģītāka virtuālā saskarne "MinOS" (no angl. minimal operating system), kas
+aprakstīta nodaļā \ref{sec:vinminos}.
 
 \section{Multifunkcionāla virtuālā saskarne "MinOS"}
 \label{sec:vinminos}
 
-Multifunkcionālā virtuālā saskarne "MinOS" (no angl. minimal operating system),
-kas sastāv no vairākiem grafiskiem elementiem, ir virtuāla saskarne, lai
-vairākos veidos vienā saskarnē mijiedarbotos ar attīstītājrīku aparatūru, kas ir
+Multifunkcionālā virtuālā \glslink{vinterface}{saskarne} "MinOS" (no angl.
+minimal operating system), kas sastāv no vairākiem grafiskiem elementiem, ir
+virtuāla \glslink{vinterface}{saskarne}, lai vairākos veidos vienā
+\glslink{vinterface}{saskarnē} mijiedarbotos ar attīstītājrīku aparatūru, kas ir
 realizēta kā termināļa grafiskā saskarne, kas redzama attēlā \ref{fig:minosgui}
 un konceptuāli tā līdzinās tai pašai fiziskai saskarnei, kas pieejama uz Anvyl
 attīstītājrīka, kas redzama attēlā \ref{fig:anvyl}. 
 
-Skatoties attēla \ref{fig:minosgui} saskarnē, ir redzams 8x8 RGB displejs (skat.
-kreiso daļu), 8 sarkanas LED gaismas (skat. labās puses 1. rindu), 8 sarkani LED
-slēdži (skat. labās puses 2. rindu), 3x8 pelēkas spiedpogas (skat. labās puses
-3.-5. rindu), teksta lauki (skat. labās puses 6.-7. rindu). 
+Skatoties attēla \ref{fig:minosgui} \glslink{vinterface}{saskarnē}, ir redzams
+8x8 RGB displejs (skat. kreiso daļu), 8 sarkanas LED gaismas (skat. labās puses
+1. rindu), 8 sarkani LED slēdži (skat. labās puses 2. rindu), 3x8 pelēkas
+spiedpogas (skat. labās puses 3.-5. rindu), teksta lauki (skat. labās puses
+6.-7. rindu). 
 
 \begin{figure}[H]
     \includegraphics[width=1.0\linewidth]{assets/min-os-execution.png}
@@ -580,24 +611,27 @@ slēdži (skat. labās puses 2. rindu), 3x8 pelēkas spiedpogas (skat. labās pu
     \label{fig:anvyl}
 \end{figure}
 
-Lai realizētu MinOS virtuālo saskarni ir nepieciešams uz un no aparatūras sūtīt
-dažāda veida datus. Gana daudz, lai ar vienu baitu nepietiktu, jo lai izsūtītu
-64 pikseļu RGB displejam pat viena pikseļa datus ir nepieciešami 6 biti krāsai
-(\(2^2 * 3\)) un vēl 6 biti indeksam (\(\log_{2}64\)), tātad kopā 12 biti, kas
-ir vairāk par 8 bitiem jeb baitu, kas izmantots iepriekšminētās virtuālās
-saskarnēs. Un MinOS saskarnē vēlamo elementu ir vairāk nekā tikai RGB displejs,
-tādēļ nepieciešams protokols, lai sūtītu vairāku veidu baitu ziņas seriālajā
-komunikācijā.
+Lai realizētu MinOS virtuālo \glslink{vinterface}{saskarni} ir nepieciešams uz
+un no aparatūras sūtīt dažāda veida datus. Gana daudz, lai ar vienu baitu
+nepietiktu, jo lai izsūtītu 64 pikseļu RGB displejam pat viena pikseļa datus ir
+nepieciešami 6 biti krāsai (\(2^2 * 3\)) un vēl 6 biti indeksam
+(\(\log_{2}64\)), tātad kopā 12 biti, kas ir vairāk par 8 bitiem jeb baitu, kas
+izmantots iepriekšminētās virtuālās \glslink{vinterface}{saskarnēs}. Un MinOS
+\glslink{vinterface}{saskarnē} vēlamo elementu ir vairāk nekā tikai RGB
+displejs, tādēļ nepieciešams protokols, lai sūtītu vairāku veidu baitu ziņas
+seriālajā komunikācijā.
 
-MinOS saskarnes vairāku baitu ziņapmaiņai tika izplānots komunikācijas protokols
-starp \glslink{board}{aparatūru} un klientu. Protokols tika formāli definēts,
-izstrādājot BNF formāta sintaksi, kuru iespējams apskatīt pielikumā
-\ref{att:minosbnf}. Ņemot vērā, ka vēlamais protokols ir binārs, tad BNF formāts
-definē baitus kā heksidecimālu ciparu pārus tātad formātā \lstinline!0x??!.
+MinOS \glslink{vinterface}{saskarnes} vairāku baitu ziņapmaiņai tika izplānots
+komunikācijas protokols starp \glslink{board}{aparatūru} un klientu. Protokols
+tika formāli definēts, izstrādājot BNF formāta sintaksi, kuru iespējams apskatīt
+pielikumā \ref{att:minosbnf}. Ņemot vērā, ka vēlamais protokols ir binārs, tad
+BNF formāts definē baitus kā heksidecimālu ciparu pārus tātad formātā
+\lstinline!0x??!.
 
 Kā piemērs ziņai, kas atbilst pielikumā pieejamajam BNF formātam ir binārā ziņa
-\ref{lst:minosledchunk}, kas MinOS saskarnē tiek izmantota, lai sūtītu LED
-gaismas datus no aparatūras uz klientu grafiskai attēlošanai.
+\ref{lst:minosledchunk}, kas MinOS \glslink{vinterface}{saskarnē} tiek
+izmantota, lai sūtītu LED gaismas datus no \glslink{board}{aparatūras} uz
+klientu grafiskai attēlošanai.
 
 \begin{lstlisting}[caption={MinOS LED gaismu pakete},label={lst:minosledchunk},captionpos=b]
     0x00 0x02 0xFF 0x00 0x01 
@@ -624,8 +658,8 @@ MinOS ziņapmaiņas protokols rakstiskā valodā ir sekojošs.
 
 Ar šādu protokola definīciju ir iespējams sūtīt vairāku baitu ziņas, kur katrai
 ziņai piemīt tips, kas ir skaitlis vērtībā no \(0\) līdz \(2^8-2\). Šis
-protokols arī ir izmantots MinOS saskarnē, lai sūtītu ziņas no lietotāja
-aparatūrai un otrādi. 
+protokols arī ir izmantots MinOS \glslink{vinterface}{saskarnē}, lai sūtītu
+ziņas no lietotāja \glslink{board}{aparatūrai} un otrādi. 
 
 Kā piemēru skatoties iepriekšminēto LED gaismas ziņu \ref{lst:minosledchunk}
 varam redzēt, ka ziņa sākas ar \lstinline!0x00 0x02!, tātad LED gaismas ziņas
@@ -639,8 +673,8 @@ ziņa veiksmīgi iziet pārbaudi.
 
 Daļa no šāda protokola izstrādes sarežģītības nāk ne tikai no tā plānošanas, bet
 arī no tā realizācijas, jo jāatcerās, ka, lai gan realizēt parseri Python
-programmēšanas valodā ir triviāli, realizēt to Verilog programmaparatūrā ir
-mazliet grūtāk.
+programmēšanas valodā ir triviāli, realizēt to Verilog
+\glslink{firmware}{programmaparatūrā} ir grūtāk.
 
 Attēlā \ref{fig:chunkparser} redzams galīgs determinēts stāvokļu automāts, kas
 realizē pielikumā pieejamās BNF sintakses parsēšanu, nolasot ziņas tipu un
@@ -668,23 +702,23 @@ aktuālā baita indekss buferī \lstinline!buffer_index!.
 
 Lai gan lejupielādējot platformas klienta komandu rindas rīku uzreiz ir pieejama
 Python valodā programmētā grafiskā saskarne, tomēr attīstītājrīkā ir
-nepieciešama atbilstoša programmaparatūra, kas komunicē izmantojot MinOS
-protokolu, tādēļ projekta ietvaros Verilog valodā tika izstrādāts MinOS modulis,
-kas abstrahē seriālo komunikāciju un izstrādātājam izvērš tikai interesējošos
-virtuālās saskarnes elementus. Attēlā \ref{fig:minos} redzama šī Verilog moduļa
+nepieciešama atbilstoša \gls{firmware}, kas komunicē izmantojot MinOS protokolu,
+tādēļ projekta ietvaros Verilog valodā tika izstrādāts MinOS modulis, kas
+abstrahē seriālo komunikāciju un izstrādātājam izvērš tikai interesējošos
+virtuālās \glslink{vinterface}{saskarnes} elementus. Attēlā \ref{fig:minos} redzama šī Verilog moduļa
 grafiskā interpretācija. 
 
 \begin{figure}[H]
     \includegraphics[width=0.7\linewidth]{assets/min-os-grey.png}
     \centering
-    \caption{MinOS programmaparatūras modulis.}
+    \caption{MinOS \glslink{firmware}{programmaparatūras} modulis.}
     \label{fig:minos}
 \end{figure}
 
 Attēlā \ref{fig:minos} redzamais Verilog valodā izstrādātais modulis izvērš
 dažādus signālus, lai mijiedarbotos ar attālināto grafisko lietotāja MinOS
-saskarni. Tabulā \ref{table:minossignals} ir dokumentēti no moduļa izvērstie
-signāli un to būtība.
+\glslink{vinterface}{saskarni}. Tabulā \ref{table:minossignals} ir dokumentēti
+no moduļa izvērstie signāli un to būtība.
 
 \begin{table}[H]
     \newcounter{minossignalcounter}
@@ -726,15 +760,18 @@ signāli un to būtība.
     \label{table:minossignals}
 \end{table}
 
-Ar šādu virtuālu saskarni un tās Verilog realizāciju jau ir iespējams projektēt
+Ar šādu virtuālu \glslink{vinterface}{saskarni} un tās Verilog realizāciju jau ir iespējams projektēt
 daudz sarežģītākas digitālas iekārtas. Tehniski, ņemot vērā, ka ir pieejams 64
 RGB krāsu monitors un spiedpogas, būtu jābūt iespējai ar šādu abstrakciju
 attālināti projektēt, testēt un spēlēt datorspēli "Tetris" tikpat ārti kā esot
-fiziski klāt attīstītājrīku aparatūrai, kas ir cienījams sasniegums!
+fiziski klāt attīstītājrīku \glslink{board}{aparatūrai}, kas ir cienījams
+sasniegums!
 
-Būtu vērtīgi līdz galam definēt ziņas, kādas atbalsta MinOS saskarne. Kā jau
-iepriekš ilustrēts, MinOS saskarne atbalsta sūtīt ziņu par LED gaismu stāvokli.
-Visas MinOS atbalstītās ziņas, savukārt, aprakstītas tabulā \ref{table:minospackets}.
+Būtu vērtīgi līdz galam definēt ziņas, kādas atbalsta MinOS
+\glslink{vinterface}{saskarne}. Kā jau iepriekš ilustrēts, MinOS
+\glslink{vinterface}{saskarne} atbalsta sūtīt ziņu par LED gaismu stāvokli.
+Visas MinOS atbalstītās ziņas, savukārt, aprakstītas tabulā
+\ref{table:minospackets}.
 
 \begin{table}[H]
     \newcounter{minospacketcounter}
@@ -761,38 +798,39 @@ Visas MinOS atbalstītās ziņas, savukārt, aprakstītas tabulā \ref{table:min
 \end{table}
 
 Atsaucoties uz nodaļas sākumu, attēlā \ref{fig:minosgui}, ir ekrānuzņēmums no
-MinOS virtuālās saskarnes, kuru darbina attēlā \ref{fig:minosusage} redzamā demo
-jeb parauga programmaparatūra, kas tika izstrādāta, lai atrādītu MinOS darboties
-spēju.
+MinOS virtuālās \glslink{vinterface}{saskarnes}, kuru darbina attēlā
+\ref{fig:minosusage} redzamā demo jeb parauga \gls{firmware}, kas tika
+izstrādāta, lai atrādītu MinOS darboties spēju.
 
 \begin{figure}[H]
     \includegraphics[width=1.0\linewidth]{assets/min-os-usage-grey.png}
     \centering
-    \caption{MinOS programmaparatūras piemērs.}
+    \caption{MinOS \glslink{firmware}{programmaparatūras} piemērs.}
     \label{fig:minosusage}
 \end{figure}
 
-Attēlā \ref{fig:minosusage} redzamā programmaparatūra sastāv no četrām
-savienotām moduļu shēmām. 
+Attēlā \ref{fig:minosusage} redzamā \gls{firmware} sastāv no četrām savienotām
+moduļu shēmām. 
 
 Kreisajā apakšējā stūrī ir projektā izstrādātais MinOS protokola seriālās
-komunikācijas abstrakcijas modulis \lstinline!min_os!, attēla sānos ir FPGA
-porti \lstinline!CLK!, \lstinline!T19!, \lstinline!T20!, \lstinline!LD0-7!, kas
-aprakstīti arī tabulā \ref{table:minossignals}, izņemot \lstinline!LD0-7!, kas
-nav MinOS specifiski, bet ir vienkārši fiziskas gaismas diodes, kas ir pieejamas
-uz Anvyl attīstītājrīka, ko izstrādātā demo programmatūra izmanto papildus. 
+komunikācijas abstrakcijas modulis \lstinline!min_os!, attēla sānos ir
+\gls{fpga} porti \lstinline!CLK!, \lstinline!T19!, \lstinline!T20!,
+\lstinline!LD0-7!, kas aprakstīti arī tabulā \ref{table:minossignals}, izņemot
+\lstinline!LD0-7!, kas nav MinOS specifiski, bet ir vienkārši fiziskas gaismas
+diodes, kas ir pieejamas uz Anvyl attīstītājrīka, ko izstrādātā demo
+\gls{firmware} izmanto papildus. 
 
-Papildus šiem tipiskajiem moduļiem ir trīs demo programmaparatūrai specifiski
-moduļi. Pirmkārt, pa vidu augšā \lstinline!main_counter!, kas katru sekundi uz
-vienu tikšķi paceļ signālu \lstinline!tick!, katru sekundi maina vērtību
-signālam \lstinline!flipper!, katru sekundi pieskaita 8 bitu signālam
-\lstinline!counter! skaitli \lstinline!0x01!. Otrkārt, pa labi apakšā modulis
-\lstinline!main_echo_text! saņem no lietotāja saskarnes sūtītu tekstu un pārsūta
-to atpakaļ saskarnei. Treškārt, pa labi augšā modulis
-\lstinline!main_flashes_and_blocks! reaģē uz spiedpogu signāliem un funkcionē kā
-RGB displeja dzinis.
+Papildus šiem tipiskajiem moduļiem ir trīs demo
+\glslink{firmware}{programmaparatūrai} specifiski moduļi. Pirmkārt, pa vidu
+augšā \lstinline!main_counter!, kas katru sekundi uz vienu tikšķi paceļ signālu
+\lstinline!tick!, katru sekundi maina vērtību signālam \lstinline!flipper!,
+katru sekundi pieskaita 8 bitu signālam \lstinline!counter! skaitli
+\lstinline!0x01!. Otrkārt, pa labi apakšā modulis \lstinline!main_echo_text!
+saņem no lietotāja saskarnes sūtītu tekstu un pārsūta to atpakaļ saskarnei.
+Treškārt, pa labi augšā modulis \lstinline!main_flashes_and_blocks! reaģē uz
+spiedpogu signāliem un funkcionē kā RGB displeja dzinis.
 
-Rezultātē programmaparatūra nodrošina sekojošu saskarnes demo funkcionalitāti.
+Rezultātē \gls{firmware} nodrošina sekojošu \glslink{vinterface}{saskarnes} demo funkcionalitāti.
 \begin{enumerate}
     \item RGB monitorā katru sekundi trīs stūros mirkšķ sarkana, zaļa un zila
         gaisma
@@ -808,22 +846,24 @@ Rezultātē programmaparatūra nodrošina sekojošu saskarnes demo funkcionalit�
 
 Lai gan attēls \ref{fig:minosgui} ir statisks un nespēj šo funkcionalitāti
 atrādīt, eksistē arī publiski internetā, YouTube platformā, pieejams video ar
-šīs demo programmaparatūru un MinOS saskarni.
+šīs demo \glslink{firmware}{programmaparatūru} un MinOS
+\glslink{vinterface}{saskarni}.
 \cite{VeinbahsKrisjanisDemo} 
 
 \section{Infrastruktūras pārvaldība}
 \label{sec:ops}
 
 Attēlā \ref{fig:hwstream} redzama demo laboratorija, kas uzstādīta darba autora
-mājās, Kalnciema ielā. Lai gan nodaļā \ref{sec:dipplatform} redzamā 0. līmeņa DPD
-diagramma, šķietami, gana ilustrē platformas konceptuālo uzbūvi, iespējams ir
-vērtīgi aplūkot fiziskā līmenī izmantoto publisko testa platformu
+mājās, Kalnciema ielā. Lai gan nodaļā \ref{sec:dipplatform} redzamā 0. līmeņa
+DPD diagramma, šķietami, gana ilustrē platformas konceptuālo uzbūvi, iespējams
+ir vērtīgi aplūkot fiziskā līmenī izmantoto publisko testa platformu
 \cite{VeinbahsKrisjanisProduction}. Attēlā \ref{fig:production} redzama šāda
 testa platformas fiziskā līmeņa arhitektūra. Testa platformas serveris tika
 uzstādīts DigitalOcean mākoņpakalpojumu devēja virtuālmašīnā, kas atrodas datu
 centrā Frankfurtē jeb Vācijā. Savukārt, pati laboratorija ar platformas aģentu
-un aparatūru atradās Kalnciema ielā jeb Latvijā. Arī programmaparatūras
-izstrādātājs jeb darba autors, atradās Latvijā kafejnīcā ar bezvada tīklu.
+un \glslink{board}{aparatūru} atradās Kalnciema ielā jeb Latvijā. Arī
+\glslink{firmware}{programmaparatūras} izstrādātājs jeb darba autors, atradās
+Latvijā kafejnīcā ar bezvada tīklu.
 
 \begin{figure}[H]
     \includegraphics[width=0.8\linewidth]{assets/production.drawio.png}
@@ -832,14 +872,15 @@ izstrādātājs jeb darba autors, atradās Latvijā kafejnīcā ar bezvada tīkl
     \label{fig:production}
 \end{figure}
 
-Veicot attālinātu programmaparatūras izstrādi datu plūsma notika starp šo
-fizisko iekārtu tīklu. Tieši šajā arhitektūrā arī lielākoties notika platformas
-izstrāde un testēšana tai skaitā demo programmaparatūras izstrāde un testēšana.
-Darba izstrādes laikā tīkla latence starp šīm iekārtām nebija būtiski jūtama un
-būtiski neietekmēja darba izstrādi.
+Veicot attālinātu \glslink{firmware}{programmaparatūras} izstrādi datu plūsma
+notika starp šo fizisko iekārtu tīklu. Tieši šajā arhitektūrā arī lielākoties
+notika platformas izstrāde un testēšana tai skaitā demo
+\glslink{firmware}{programmaparatūras} izstrāde un testēšana. Darba izstrādes
+laikā tīkla latence starp šīm iekārtām nebija būtiski jūtama un būtiski
+neietekmēja darba izstrādi.
 
-Papildus jāmin, ka attēlā \ref{fig:production} redzama vairāk fiziska aparatūra
-nekā aprakstīta šajā darbā, taču oriģināli prototipējot darba arhitektūru, tika
-secināts, ka arī šādas ierīces ir iespējams pievienot platformai, taču laika
-ierobežojumu dēļ tām netika izstrādāts atbalsts platformas komandu rindas aģenta
-rīkā. 
+Papildus jāmin, ka attēlā \ref{fig:production} redzama vairāk fiziska
+\glslink{board}{aparatūra} nekā aprakstīta šajā darbā, taču oriģināli
+prototipējot darba arhitektūru, tika secināts, ka arī šādas ierīces ir iespējams
+pievienot platformai, taču laika ierobežojumu dēļ tām netika izstrādāts atbalsts
+platformas komandu rindas aģenta rīkā. 

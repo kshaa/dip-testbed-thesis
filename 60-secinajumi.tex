@@ -1,26 +1,36 @@
-Darba ietvaros ir izstrādāta digitālās aparatūras projektēšanas tiešsaistes
-platforma, kas iekļauj dažādus rīkus aparatūras izstrādātājiem un aparatūras
-laboratoriju īpašniekiem.
-
-Precīzāk, ir izstrādāta platforma, kas sastāv no klienta komandu rindas rīka
-izstrādātājiem, lai augšupielādētu un testētu platformā programmaparatūru,
-aģenta komandu rindas rīka laboratorijas īpašniekiem, lai attālināti pieslēgtu
-fizisku attīstītājrīku aparatūru platformai attālinātai programmēšanai un
-lietošanai. Papildus platformas ietvaros izstrādāts serveris, kurā pārvaldīt
-dažādus lietotāju, aparatūras un programmaparatūras datus un kas funkcionē kā
-vājas reāllaika komunikācijas starpnieks starp izstrādātājiem un attālināto
-aparatūru. Papildus platformas ietvaros izstrādātas dažādas virtuālas saskarnes,
-lai imitētu fizisku mijiedarbību ar aparatūru attālinātos apstākļos termināļa
-vidē. Tai skaitā arī izstrādāta MinOS grafiskā termināļa virtuālā saskarne,
-MinOS BNF formāta protokols, MinOS Verilog programmaparatūras modulis, lai
-abstrahētu attālināto komunikāciju starp aparatūru, platformu un lietotāju.
+Darba ietvaros ir izstrādāta digitālās \glslink{board}{aparatūras} projektēšanas
+tiešsaistes platforma, kas iekļauj dažādus rīkus \glslink{board}{aparatūras}
+izstrādātājiem un \glslink{board}{aparatūras} laboratoriju īpašniekiem.
 \cite{VeinbahsKrisjanisTestbed}
 
-Neskaitot visu iepriekšminēto programmaparatūru tika uzstādīta arī publiska
-testa vide, kurā lielākoties notika darba izstrāde. Testa vide sastāvēja no
-servera, kas atradās virtuālmašīnā publiski pieejama mākoņpakalpojumu devēja
-datu centrā, no laboratorijas, kas atradās darba autora mājās.
-\cite{VeinbahsKrisjanisProduction}
+Precīzāk, ir izstrādāta platforma, kas sastāv no klienta komandu rindas rīka
+izstrādātājiem, lai augšupielādētu un testētu platformā
+\glslink{firmware}{programmaparatūru}, aģenta komandu rindas rīka laboratorijas
+īpašniekiem, lai attālināti pieslēgtu fizisku attīstītājrīku
+\glslink{board}{aparatūru} platformai attālinātai programmēšanai un lietošanai.
+
+Papildus platformas ietvaros izstrādāts \glslink{server}{serveris}, kurā
+pārvaldīt dažādus lietotāju, \glslink{board}{aparatūras} un
+\glslink{firmware}{programmaparatūras} datus un kas funkcionē kā vājas reāllaika
+komunikācijas starpnieks starp izstrādātājiem un attālināto
+\glslink{board}{aparatūru}.
+
+Papildus platformas ietvaros izstrādātas dažādas virtuālas
+\glslink{vinterface}{saskarnes}, lai imitētu fizisku mijiedarbību ar
+\glslink{board}{aparatūru} attālinātos apstākļos termināļa vidē. Tai skaitā arī
+izstrādāta MinOS grafiskā termināļa virtuālā \glslink{vinterface}{saskarne},
+MinOS BNF formāta protokols, MinOS Verilog
+\glslink{firmware}{programmaparatūras} modulis, lai abstrahētu attālināto
+komunikāciju starp \glslink{board}{aparatūru}, platformu un lietotāju. MinOS
+programmaparatūra ir izveidota divās konfigurācijās: "A" ar 5932 \gls{lcs} un
+"B" ar 773 \gls{lcs} jeb loģiskajiem elementiem.
+
+Neskaitot visu iepriekšminēto \glslink{firmware}{programmaparatūru} un
+\glslink{software}{programmatūru} tika uzstādīta arī publiska testa vide, kurā
+lielākoties notika darba izstrāde. Testa vide sastāvēja no
+\glslink{server}{servera}, kas atradās virtuālmašīnā publiski pieejama
+mākoņpakalpojumu devēja datu centrā, un no laboratorijas, kas atradās darba autora
+mājās. \cite{VeinbahsKrisjanisProduction}
 
 Šī darba sākumā tika uzstādīts mērķis, kas pieminēts dokumenta ievadā, mēģināt
 uzlabot digitālu iekārtu projektēšanas procesu, pārveidojot fizisko tehnikas
@@ -29,25 +39,38 @@ tiešsaistes platformu šim nolūkam.
 
 Šī darbā sākumā paceltā problēma ir - vai ir iespējams virtualizēt fizisku
 digitālu iekārtu projektēšanu, izstrādājot tam paredzētu tiešsaistes platformu?
-Darba ietvaros šāda platforma ir izstrādāta, tajā tika pievienota aparatūra,
-kurā tika attālināti programmēta un testēta programmaparatūra, kas ļauj secināt,
-ka, jā, ir iespējams virtualizēt digitālu iekārtu projektēšanu, izstrādājot tam
-paredzētu tiešsaistes platformu.
+Darba ietvaros šāda platforma ir izstrādāta, tajā tika pievienota
+\glslink{board}{aparatūra}, kurā tika attālināti programmēta un testēta
+\gls{firmware}, kas ļauj secināt, ka, jā, ir iespējams virtualizēt digitālu
+iekārtu projektēšanu, izstrādājot tam paredzētu tiešsaistes platformu.
 
 Darba autors uzskata mērķi par sasniegtu un izpildītu, jo izstrādātajā platformā
-ir iespējams reģistrēt un attālināti pārvaldīt fizisku aparatūru laboratorijas
-īpašniekam. Ir iespējams šai aparatūrai dot attālinātu piekļuvi izstrādātājiem.
-Programmaparatūras izstrādātājiem ir iespējams izstrādāt, augšupielādēt un
-testēt programmaparatūru attālināti. 
+ir iespējams reģistrēt un attālināti pārvaldīt fizisku
+\glslink{board}{aparatūru} laboratorijas īpašniekam. Ir iespējams šai
+\glslink{board}{aparatūrai} dot attālinātu piekļuvi izstrādātājiem.
+\glslink{firmware}{Programmaparatūras} izstrādātājiem ir iespējams izstrādāt,
+augšupielādēt un testēt \glslink{firmware}{programmaparatūru} attālināti. 
+
+Darba autors uzskata, ka izstrādāto platformu varētu uzlabot, refaktorējot
+virtuālās saskarnes no termināļa saskarnēm par grafiskām, piemēram, tīmekļa
+pārlūka saskarnēm.
+
+Papildus izstrādāto platformu varētu uzlabot paplašinot to un ļaujot
+izstrādātājiem realizēt pašiem savas virtuālās saskarnes.
+
+Kā arī platformas izstrādi varētu paātrināt un atvieglot, rakstot platformas
+\glslink{software}{programmatūru} nevis Scala un Python valodās, bet tikai
+Scala, lai mazinātu koda duplicēšanos.
 
 Darba autors uzskata, ka darbā apskatītajam tematam ir iespējams arī
 turpinājums. Būtu vērtīgi apskatīt šādas platformas pārveidi, lai realizētu
-līdzīgu platformu "FPGA kā pakalpojums" (angl. "FPGA as a service"), kurā
-lietotājiem būtu nevis individuāla piekļuve aparatūrai, bet gan piekļuve ierīču
-fermai, kas sastāv no vairākām FPGA ierīcēm. Šādā platformā varētu, piemēram,
-veikt paralelizētu datu apstrādi vai testēšanu. Papildus eksistējošā platforma
-varētu tikt attīstīta dažādos veidos: 1) seriālās komunikācijas ierakstīšana un
-pēcāka lejupielāde un analīze, 2) ierīču labklājības monitorēšana (angl. health
-check), 3) automatizēta programmējama ierīču testēšana, piemēram, ar WASM
-pirmkodu, kas darbinās aģentā vai serverī, sūta un saņem signālus, un secina vai
-aparatūras programmaparatūra funkcionē kā paredzēts.
+līdzīgu platformu "\gls{fpga} kā pakalpojums" (angl. "\gls{fpga} as a service"),
+kurā lietotājiem būtu nevis individuāla piekļuve \glslink{board}{aparatūrai},
+bet gan piekļuve ierīču fermai, kas sastāv no vairākām \gls{fpga} ierīcēm. Šādā
+platformā varētu, piemēram, veikt paralelizētu datu apstrādi vai testēšanu.
+Papildus eksistējošā platforma varētu tikt attīstīta dažādos veidos: 1) seriālās
+komunikācijas ierakstīšana un pēcāka lejupielāde un analīze, 2) ierīču
+labklājības monitorēšana (angl. health check), 3) automatizēta programmējama
+ierīču testēšana, piemēram, ar WASM pirmkodu, kas darbinās aģentā vai serverī,
+sūta un saņem signālus, un secina vai \glslink{board}{aparatūras} \gls{firmware}
+funkcionē kā paredzēts.
