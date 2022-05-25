@@ -455,12 +455,13 @@ komandu rindas \glslink{actor}{aktiera} dzīvescikla loģika. Jāmin, ka brīžo
 kad jebkas noiet greizi, \glslink{actor}{aktieris} vienkārši izbeidz visus
 aktīvos savienojumus un beidz darbu.
 
-Savukārt, attēlos \ref{fig:mgmtpanelhw} un \ref{fig:hwstream} ir redzams
-pārvaldības paneļa \glslink{board}{aparatūras} pārvaldības skats, no kura
-iespējams sākt skatīties \glslink{board}{aparatūras} video straumi, kā arī
-piemērs kā izskatās šāda video straume pārlūkā, precīzāk, kā izskatās publiski
-pieejamā \cite{VeinbahsKrisjanisProduction} testa vides laboratorijas video
-straume, kas tiek raidīta no darba autora mājām, Kalnciema ielā.
+Savukārt, attēlā \ref{fig:mgmtpanelhw} ir redzams pārvaldības paneļa
+\glslink{board}{aparatūras} pārvaldības skats, no kura iespējams sākt skatīties
+\glslink{board}{aparatūras} video straumi. Attēlā \ref{fig:hwstream} redzama
+testa platformas laboratorijas konfigurācija, kas uzstādīta darba autora mājās,
+Kalnciema ielā. \cite{VeinbahsKrisjanisProduction} Protams, patiesā pārlūkā
+redzamā video straumes kvalitāte ir atkarīga no izmantotās tīmekļa kameras,
+straumētās izšķirtspējas, pieejamās tīkla caurlaidspējas. 
 
 \begin{figure}[H]
     \includegraphics[width=0.9\linewidth]{assets/mgmt-panel-hw-gray.png}
@@ -470,7 +471,7 @@ straume, kas tiek raidīta no darba autora mājām, Kalnciema ielā.
 \end{figure}
 
 \begin{figure}[H]
-    \includegraphics[width=0.9\linewidth]{assets/webcam-usage.png}
+    \includegraphics[width=0.9\linewidth]{assets/webcam-usage.jpg}
     \centering
     \caption{Pārvaldības paneļa aparatūras video straume.}
     \label{fig:hwstream}
@@ -849,38 +850,3 @@ atrādīt, eksistē arī publiski internetā, YouTube platformā, pieejams video
 šīs demo \glslink{firmware}{programmaparatūru} un MinOS
 \glslink{vinterface}{saskarni}.
 \cite{VeinbahsKrisjanisDemo} 
-
-\section{Infrastruktūras pārvaldība}
-\label{sec:ops}
-
-Attēlā \ref{fig:hwstream} redzama demo laboratorija, kas uzstādīta darba autora
-mājās, Kalnciema ielā. Lai gan nodaļā \ref{sec:dipplatform} redzamā 0. līmeņa
-DPD diagramma, šķietami, gana ilustrē platformas konceptuālo uzbūvi, iespējams
-ir vērtīgi aplūkot fiziskā līmenī izmantoto publisko testa platformu
-\cite{VeinbahsKrisjanisProduction}. Attēlā \ref{fig:production} redzama šāda
-testa platformas fiziskā līmeņa arhitektūra. Testa platformas serveris tika
-uzstādīts DigitalOcean mākoņpakalpojumu devēja virtuālmašīnā, kas atrodas datu
-centrā Frankfurtē jeb Vācijā. Savukārt, pati laboratorija ar platformas aģentu
-un \glslink{board}{aparatūru} atradās Kalnciema ielā jeb Latvijā. Arī
-\glslink{firmware}{programmaparatūras} izstrādātājs jeb darba autors, atradās
-Latvijā kafejnīcā ar bezvada tīklu.
-
-\begin{figure}[H]
-    \includegraphics[width=0.8\linewidth]{assets/production.drawio.png}
-    \centering
-    \caption{Platformas testa vides fiziskā līmeņa arhitektūra.}
-    \label{fig:production}
-\end{figure}
-
-Veicot attālinātu \glslink{firmware}{programmaparatūras} izstrādi datu plūsma
-notika starp šo fizisko iekārtu tīklu. Tieši šajā arhitektūrā arī lielākoties
-notika platformas izstrāde un testēšana tai skaitā demo
-\glslink{firmware}{programmaparatūras} izstrāde un testēšana. Darba izstrādes
-laikā tīkla latence starp šīm iekārtām nebija būtiski jūtama un būtiski
-neietekmēja darba izstrādi.
-
-Papildus jāmin, ka attēlā \ref{fig:production} redzama vairāk fiziska
-\glslink{board}{aparatūra} nekā aprakstīta šajā darbā, taču oriģināli
-prototipējot darba arhitektūru, tika secināts, ka arī šādas ierīces ir iespējams
-pievienot platformai, taču laika ierobežojumu dēļ tām netika izstrādāts atbalsts
-platformas komandu rindas aģenta rīkā. 

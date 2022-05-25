@@ -1,4 +1,4 @@
-# Digitālās aparatūras projektēšanas tiešsaistes platforma
+# Digitālās aparatūras projektēšanas un testēšanas tiešsaistes platforma
 
 Šis repozitorijs satur bakalaura darba rakstisko daļa.  
 Programmatūras pirmkodu skatīt [kshaa/dip-testbed](https://github.com/kshaa/dip-testbed).  
