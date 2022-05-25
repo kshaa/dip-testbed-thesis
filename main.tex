@@ -29,25 +29,28 @@
     projektējumu glabāšanai un šīs programmaparatūras attālinātai testēšanai
     platformā pieejamajos attīstītājrīkos.
 
-    Darbā tiek apskatīta platformas darbības mehānismu modelēšana, sarežģījumi
-    šādas platformas izstrādē, izstrādes laikā izmantotie risinājumi un to
-    arhitektūra.
+    Darbā tiek izstrādāta platforma, veikta platformas darbības mehānismu
+    modelēšana, apskatīti sarežģījumi šādas platformas izstrādē, izstrādes laikā
+    izmantotie risinājumi un to arhitektūra.
 
-    Precīzāk, darbā tiek apskatīta vāja reāllaika attālinātas mijiedarbības
-    realizācija starp platformas lietotājiem un digitālo aparatūru, tai skaitā
-    attālināta aparatūras programmēšana, attālināta testēšana un attālināta
-    izmantošana. Tiek apskatītas, analizētas un izstrādātas arī dažādas papildus
-    funkcionalitātes, kas uzlabo šo platformas pieredzi.
+    Precīzāk, darbā tiek izstrādāta un apskatīta vāja reāllaika attālinātas
+    mijiedarbības realizācija starp platformas lietotājiem un digitālo
+    aparatūru, tai skaitā attālināta aparatūras programmēšana, attālināta
+    testēšana un attālināta izmantošana. Tiek apskatītas, analizētas un
+    izstrādātas arī dažādas papildus funkcionalitātes, kas uzlabo šo platformas
+    lietošanas pieredzi.
 
-    Darba ietvaros tika izstrādāta platforma, kas sastāv no servera, kas
-    nodrošina aparatūras un lietotāju komunikācijas starpniecību, no komandu
-    rindas rīka jeb klienta, kas nodrošina lietotāja komunikāciju ar serveri un
-    aparatūru, no komandu rindas rīka jeb aģenta, kas nodrošina aparatūras
-    savienojumu ar serveri un lietotājiem. Papildus izstrādātā platforma tika
-    uzstādīta publiskā mākoņpakalpojumu serverī, darba autora mājās tika
-    uzstādīta testa laboratorija jeb FPGA Testbed ar attīstītājrīku, kas
-    pievienots publiski pieejamajai platformai, un tajā tika veiksmīgi
-    attālināti izstrādāta un attālināti testēta pārbaudes programmaparatūra.
+    Darba ietvaros tika izstrādāta platforma, kas sastāv 1) no servera, kas
+    nodrošina aparatūras un lietotāju komunikācijas starpniecību, 2) no komandu
+    rindas rīka jeb klienta, kas nodrošina lietotāja komunikāciju ar serveri, 3)
+    no komandu rindas rīka jeb aģenta, kas nodrošina aparatūras savienojumu ar
+    serveri, 4) no programmaparatūras, lai mijiedarbotos ar platformas aģentu,
+    5) pārvaldības paneļa, kas nodrošina platformas datu pārvaldību. Papildus
+    izstrādātā platforma tika uzstādīta publiskā mākoņpakalpojumu serverī, darba
+    autora mājās tika uzstādīta testa laboratorija jeb FPGA Testbed ar
+    attīstītājrīku, kas pievienots publiski pieejamajai platformai, un tajā tika
+    veiksmīgi attālināti izstrādāta un attālināti testēta pārbaudes
+    programmaparatūra.
 
     \textbf{Atslēgas vārdi}: FPGA, UART, reāllaiks, notikumu sistēma, aktieru modelis.
 \end{abstract}
@@ -67,23 +70,25 @@
     online platform for remotely managing digital hardware development boards
     and for remotely managing and testing prototype firmware on these boards.
 
-    Also this work encompasses process modelling of such a platform,
-    complications encountered in development and the solutions and architectures
-    used for solving these complications.  
+    Also this work encompasses development and process modelling of such a
+    platform, complications encountered in development and the solutions and
+    architectures used for solving these complications.  
 
-    More specifically this work describes a soft realtime system for remote
-    interaction between platform users and available digital hardware
-    development boards i.e. remote board programming, remote prototype firmware
-    testing and information exchange. In addition some extra features for better
-    user experience in the platform are implemented and described.  
+    More specifically a platform is developed and described containing a soft
+    realtime system for remote interaction between platform users and available
+    digital hardware development boards i.e. remote board programming, remote
+    prototype firmware testing and information exchange. In addition some extra
+    features for better user experience in the platform are implemented and
+    described.  
 
-    A platform was developed in the scope of this work which consists of a
-    server acting as a communication proxy, a client i.e. a command line tool
-    for connecting the user to the server and hardware, an agent i.e. a command
-    line tool for connecting the hardware to the server and users. Additionally
-    this platform was hosted in a public cloud platform. A test laboratory i.e.
-    an FPGA testbed was created in the author's home and connected to the public
-    cloud platform.
+    A platform was developed in the scope of this work which consists of 1) a
+    server acting as a communication proxy, 2) a client i.e. a command line tool
+    for connecting the user to the server, 3) an agent i.e. a command line tool
+    for connecting the hardware to the server, 4) firmware for connecting the
+    hardware to the agent, 5) a management panel for managing platform data.
+    Additionally this platform was hosted in a public cloud platform. A test
+    laboratory i.e. an FPGA testbed was created in the author's home and
+    connected to the public cloud platform.
 
     \textbf{Keywords}: FPGA, UART, realtime, event system, actor model.
 \end{abstract}
